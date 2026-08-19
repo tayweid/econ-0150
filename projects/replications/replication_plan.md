@@ -167,7 +167,7 @@ data = pd.read_csv('My Data File.csv')
 
 **After (replication):**
 ```python
-data_url = 'https://tayweid.github.io/econ-0150/projects/replication/replications/0037/data/glassdoor_gender_pay_gap.csv'
+data_url = 'https://econ-0150.tayweid.io/projects/replication/replications/0037/data/glassdoor_gender_pay_gap.csv'
 data = pd.read_csv(data_url)
 ```
 
@@ -228,7 +228,7 @@ Fill in metadata columns:
 
 4. **Data Loading Updated**:
    ```python
-   data_url = 'https://tayweid.github.io/econ-0150/projects/replication/replications/0037/data/glassdoor_gender_pay_gap.csv'
+   data_url = 'https://econ-0150.tayweid.io/projects/replication/replications/0037/data/glassdoor_gender_pay_gap.csv'
    data = pd.read_csv(data_url)
    ```
 
@@ -271,12 +271,12 @@ Options:
 
 All data files are accessible at:
 ```
-https://tayweid.github.io/econ-0150/projects/replication/replications/[ID]/data/[filename].csv
+https://econ-0150.tayweid.io/projects/replication/replications/[ID]/data/[filename].csv
 ```
 
 Example:
 ```
-https://tayweid.github.io/econ-0150/projects/replication/replications/0037/data/glassdoor_gender_pay_gap.csv
+https://econ-0150.tayweid.io/projects/replication/replications/0037/data/glassdoor_gender_pay_gap.csv
 ```
 
 ---

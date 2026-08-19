@@ -1,44 +1,55 @@
 #!/usr/bin/env bash
 # Switch the course site to econ-0150.tayweid.io.
-# Run only once DNS resolves — verified in step 1.
+# Rewrites both repos: the site and the authoring source next door.
 set -euo pipefail
 DOMAIN="econ-0150.tayweid.io"
 OLD="https://tayweid.github.io/econ-0150/"
 NEW="https://${DOMAIN}/"
 cd "$(dirname "$0")/.."
+SITE="$(pwd)"
+DEV="$(cd .. && pwd)/ECON_0150"
 
 echo "== 1. verify DNS =="
 if ! dig +short "$DOMAIN" | grep -q .; then
-  echo "   $DOMAIN does not resolve yet. Add this record at Squarespace:"
+  echo "   $DOMAIN does not resolve. Add at Squarespace:"
   echo "     Type: CNAME   Host: econ-0150   Value: tayweid.github.io."
   exit 1
 fi
 dig +short "$DOMAIN" | sed 's/^/   /'
 
 echo "== 2. CNAME file =="
-echo "$DOMAIN" > CNAME
+echo "$DOMAIN" > "$SITE/CNAME"
 echo "   wrote CNAME -> $DOMAIN"
 
-echo "== 3. repoint baked-in site URLs =="
-COUNT=$(grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' --include='*.md' . 2>/dev/null | wc -l | tr -d ' ')
-grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' --include='*.md' . 2>/dev/null \
-  | while IFS= read -r f; do sed -i '' "s|${OLD}|${NEW}|g" "$f"; done
-echo "   rewrote $COUNT files"
+echo "== 3. repoint baked-in URLs in both repos =="
+for repo in "$SITE" "$DEV"; do
+  [ -d "$repo" ] || continue
+  n=$( (cd "$repo" && grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' \
+        --include='*.md' --include='*.yml' . 2>/dev/null || true) | wc -l | tr -d ' ')
+  (cd "$repo" && grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' \
+        --include='*.md' --include='*.yml' . 2>/dev/null \
+     | while IFS= read -r f; do sed -i '' "s|${OLD}|${NEW}|g" "$f"; done)
+  echo "   $(basename "$repo"): rewrote $n files"
+done
 
 echo "== 4. verify =="
-left=$(grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' --include='*.md' . 2>/dev/null | wc -l | tr -d ' ')
-echo "   files still referencing the old base: $left"
-python3 - <<'PY'
-import glob, json
-bad=[f for f in glob.glob('parts/**/*.ipynb', recursive=True)
-     if not any(s in f for s in ('.virtual_documents','.ipynb_checkpoints'))]
-n=0
-for f in bad:
-    try: json.load(open(f))
-    except Exception: n+=1; print("   INVALID JSON:", f)
-print(f"   notebooks checked: {len(bad)}, invalid: {n}")
+for repo in "$SITE" "$DEV"; do
+  [ -d "$repo" ] || continue
+  left=$( (cd "$repo" && grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' \
+          --include='*.md' --include='*.yml' . 2>/dev/null || true) | wc -l | tr -d ' ')
+  echo "   $(basename "$repo"): $left files still on the old base"
+done
+python3 - "$SITE" "$DEV" <<'PY'
+import glob, json, sys, os
+bad=0; n=0
+for root in sys.argv[1:]:
+    for f in glob.glob(os.path.join(root,'**','*.ipynb'), recursive=True):
+        if any(s in f for s in ('.virtual_documents','.ipynb_checkpoints')): continue
+        n+=1
+        try: json.load(open(f))
+        except Exception: bad+=1; print("   INVALID JSON:", f)
+print(f"   notebooks checked {n}, invalid {bad}")
 PY
 
 echo
-echo "Next: commit, push, then Settings -> Pages -> Custom domain = $DOMAIN"
-echo "and enable 'Enforce HTTPS' once the cert is issued."
+echo "Next: commit and push BOTH repos, then Settings -> Pages -> Custom domain = $DOMAIN"
