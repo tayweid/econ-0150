@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ECON 0150 | Part 5</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- MODULAR CSS -->
+    <link rel="stylesheet" href="https://tayweid.github.io/course-assets/styles/main.css">
+
+</head>
+
+
+<body>
+
+    <div class="wrapper course-econ-0150">
+        <div class="left_div">
+            <nav>
+                <ul>
+                    <a href="econ-0150.html"
+                        style="text-decoration: none; color: inherit; font-weight: 300; margin-top: 5%; margin-bottom: 2%; font-size: 36px; display: block; line-height: 0.8; color: white;"><span
+                            style="font-weight: 300; font-size: 36px; display: block; line-height: 0.8; color: white;">ECONOMIC</span></a>
+                    <a href="econ-0150.html"
+                        style="text-decoration: none; color: inherit; font-weight: 300; margin-bottom: 2%; font-size: 36px; display: block; line-height: 0.8; color: white;"><span
+                            style="font-weight: 300; font-size: 36px; display: block; line-height: 0.8; color: white;">DATA</span></a>
+                    <a href="econ-0150.html"
+                        style="text-decoration: none; color: inherit; font-weight: 300; margin-bottom: 2%; font-size: 36px; display: block; line-height: 0.8; color: white;"><span
+                            style="font-weight: 300; font-size: 36px; display: block; line-height: 0.8; color: white;">ANALYSIS</span></a>
+                    <hr class="nav-hr">
+                    <li><a href="part-1.html">Part 1</a></li>
+                    <li><a href="part-2.html">Part 2</a></li>
+                    <li><a href="part-3.html">Part 3</a></li>
+                    <li><a href="part-4.html">Part 4</a></li>
+                    <li><a class="active" href="">Part 5</a></li>
+                    <li><a href="part-6.html">Part 6</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+
+            <div class="description">
+                <h1 class="title title-tight">Part 5 | Multivariate GLM</h1>
+                <i class="subtitle-text">> models with multiple predictors</i>
+                <p>
+                    In Part 4 we developed the basics of linear models, extending the hypothesis testing framework to
+                    slopes.
+                    In Part 5 we extend this same framework one step further.
+                    We'll develop models of relationships that vary across groups, effects that depend on context, and
+                    unobserved factors that confound your analysis.
+                    You'll learn advanced techniques like numerical controls, categorical controls, interactions, and
+                    model selection that let you handle these complexities systematically.
+                </p>
+            </div>
+
+            <!-- Part 5.1 -->
+            <div class="carousel-container" id="part-51">
+                <h1 class="subtitle">Part 5.1 | Categorical/Numerical</h1>
+                <p>Use fixed effects to control for unobserved group differences. Interpret coefficients in models with
+                    multiple categorical predictors.</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="U6u0cIP2dRM">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 5.1</h3>
+                                <p class="card-description">Class recording from Fall 2025</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="WgY80uUILoI">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 5.1 // Categorical/Numerical</h3>
+                                <p class="card-description">Models of multiple intercepts</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-1/concept_5_1.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-5-1/concept_5_1.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 5.1 // Gender Wage Gap</h3>
+                                <p class="card-description">Testing whether wages are different by gender</p>
+                                <div class="card-downloads">
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-1/Exercise_5_1.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-5-1/data/usa_00041_sample.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> Census Records
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 5.1 // Categorical Controls</h3>
+                                <p class="card-description">Due on Sunday April 12 at 11:59PM on Gradescope.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-1/HW_5_1.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-1/Homework_5_1.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-1/Homework_5_1_sols.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Solutions
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+
+            <!-- Part 5.2 -->
+            <div class="carousel-container" id="part-52">
+                <h1 class="subtitle">Part 5.2 | Interactions</h1>
+                <p>Test whether the relationship between variables varies by group.</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 5.2</h3>
+                                <p class="card-description">Class recording</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="DyuY2koYoGY">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 5.2 // Interactions</h3>
+                                <p class="card-description">Models of multiple slopes</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-2/concept_5_2.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-5-2/concept_5_2.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 5.2 // Gender Wage Gap</h3>
+                                <p class="card-description">Is the return to education different by gender?</p>
+                                <div class="card-downloads">
+                                    <p style="font-size: 14px; color: #888; margin: 0;">No notebook</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 5.2 // Interactions</h3>
+                                <p class="card-description">Due on Sunday April 12 at 11:59PM on Gradescope.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-2/HW_5_2.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-2/Homework_5_2.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-2/Homework_5_2_sols.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Solutions
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <!-- Part 5.3 -->
+            <div class="carousel-container" id="part-53">
+                <h1 class="subtitle">Part 5.3 | Numerical Controls</h1>
+                <p>Control for related variables.</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="w49fKn_3yLU">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 5.3</h3>
+                                <p class="card-description">Class recording from Fall 2025</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="pW8vBVp2Q4I">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 5.3 // Numerical Controls</h3>
+                                <p class="card-description">Adding numerical control variables</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-3/concept_5_3.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 5.3 // Pittsburgh Housing Prices</h3>
+                                <p class="card-description">Controlling for house age.</p>
+                                <div class="card-downloads">
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-3/Exercise_5_3.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-5-3/data/pgh_housing.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> PGH Properties
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 5.3 // Numerical Controls</h3>
+                                <p class="card-description">Due on Sunday April 19 at 11:59PM on Gradescope.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-3/HW_5_3.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-3/Homework_5_3.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <!-- Part 5.4 -->
+            <div class="carousel-container" id="part-54">
+                <h1 class="subtitle">Part 5.4 | Causation, Controls, and Model Selection</h1>
+                <p>Why controls matter, how to compare models, and how to choose the right one.</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 5.4</h3>
+                                <p class="card-description">Class recording</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 5.4 // Causation, Controls, and Model Selection</h3>
+                                <p class="card-description">Causation vs. correlation, R² and F-tests, choosing the right model</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-4/concept_5_4.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-5-4/concept_5_4.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 5.4 // Model Comparison with the F-Test</h3>
+                                <p class="card-description">Testing whether controls improve the model.</p>
+                                <div class="card-downloads">
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-4/Exercise_5_4.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 5.4 // Causation and Model Selection</h3>
+                                <p class="card-description">Due on Sunday April 19 at 11:59PM on Gradescope.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-5-4/HW_5_4.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-5-4/Homework_5_4.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <!-- MINIEXAMS -->
+            <div id="miniexams">
+                <h1 class="subtitle">MiniExam</h1>
+                <p>
+                    MiniExam 5 will be held on Thursday April 16 and will cover everything in Part 5: numerical controls, categorical controls, interactions.
+                </p>
+
+                <div class="carousel-card standalone-card" data-video-id="T2okITdU5-c">
+                    <div class="card-video">
+                        <img src="" alt="Video thumbnail" class="placeholder-bg">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">MiniExam 5 Demo</h3>
+                        <p class="card-description">This Demo is more challenging than what you can expect on the actual MiniExam. Try solving the demo then check your answers against the video.</p>
+                        <div class="card-downloads">
+                            <a href="ME/ME_5/ME_5_Demo.pdf" class="download-link" target="_blank">
+                                <i class="fa fa-file-pdf-o"></i> Demo
+                            </a>
+                            <a href="ME/ME_5/ME_5_Demo_sols.pdf" class="download-link" target="_blank">
+                                <i class="fa fa-file-pdf-o"></i> Solutions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-spacer"></div>
+
+        </div>
+
+        <!-- RIGHT NAVIGATION -->
+        <div class="right_div">
+            <nav>
+                <ul>
+                    <span>Contents</span>
+                    <hr class="nav-hr-right">
+                    <li class="nav-item-no-margin"><a href="#part-51" class="active nav-link-right">5.1 |
+                            Categorical</a></li>
+                    <li><a href="#part-52" class="nav-link-right">5.2 | Interactions</a></li>
+                    <li><a href="#part-53" class="nav-link-right">5.3 | Numerical</a></li>
+                    <li><a href="#part-54" class="nav-link-right">5.4 | Causation</a></li>
+                    <li><a href="#miniexams" class="nav-link-right">MiniExam</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div> <!-- Close wrapper -->
+
+    <!-- UNIFIED JAVASCRIPT (NO JQUERY) -->
+    <script src="https://tayweid.github.io/course-assets/scripts/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,513 @@
+---
+format:
+  revealjs:
+    css: custom.css
+    transition: none
+    aspect-ratio: "16:9"
+---
+
+## ECON 0150 | Economic Data Analysis {.center}
+<p class="subheader-center">The economist's data analysis skillset.</p>
+
+<br> 
+
+### *Part 3.1 | Data vs the Population*
+
+---
+
+## Inferences From Data
+<p class="subheader">What can we infer about those not in our data?</p>
+
+<br><br>
+
+- We've **summarized** data
+- But often we want to say something about the **population**, not just our **data**
+
+---
+
+## Data Question 1: Sleep Time in Two Samples
+<p class="subheader">Which sample sleeps longer?</p>
+
+![](i/c_01.png)
+
+. . .
+
+*> everyone in Group A sleeps longer than anyone in Group B*
+
+---
+
+## Data Question 2: Sleep Time in Two Samples
+<p class="subheader">Which sample sleeps longer?</p>
+
+![](i/c_02.png)
+
+. . .
+
+*> these distributions overlap... lets compare them more precisely*
+
+---
+
+## Measures of Location
+<p class="subheader">Where is the "center" of each sample group?</p>
+
+<br>
+
+**Sample (Data) Mean**: The average value
+$$\bar{x} = \frac{x_1 + x_2 + ... x_N}{N}$$
+
+---
+
+## Measures of Location
+<p class="subheader">Where is the "center" of each sample group?</p>
+
+<br>
+
+**Sample (Data) Mean**: The average value
+$$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i$$
+
+. . .
+
+```{.python}
+# Calculate means
+mean_A = group_A.mean()
+mean_B = group_B.mean()
+```
+
+. . .
+
+```{python}
+# Generate sleep data for two groups
+import numpy as np
+group_A = np.random.normal(7.2, 1.5, 50)  # Higher mean, higher variance
+group_B = np.random.normal(6.8, 0.8, 50)  # Lower mean, lower variance
+
+# Calculate means
+mean_A = group_A.mean()
+mean_B = group_B.mean()
+
+print(f"Group A mean: {mean_A:.2f} hours")
+print(f"Group B mean: {mean_B:.2f} hours")
+```
+
+---
+
+## Data Question 2: Sleep Time in Two Samples
+<p class="subheader">Which sample group sleeps longer?</p>
+
+![](i/c_03.png)
+
+
+```{python}
+print(f"Sample Group A mean: {mean_A:.2f} hours")
+print(f"Sample Group B mean: {mean_B:.2f} hours")
+```
+
+. . .
+
+*> Group A sleeps longer **on average*** in our sample
+
+. . .
+
+*> but some in Sample Group B sleep longer than most in Sample Group A!*
+
+---
+
+## Measures of Dispersion
+<p class="subheader"> How spread out is the data?</p>
+
+<br>
+
+**Range**: difference between the largest and smallest value in the data
+
+. . .
+
+- Simple but doesn't respond to changes near the middle of the distribution 
+
+
+---
+
+## Measures of Dispersion
+<p class="subheader"> How spread out is the data?</p>
+
+<br>
+
+**Mean Deviation**: difference between each value and the average
+
+$$ \sum \frac{x_i - \bar{x}}{n}$$
+
+. . .
+
+- Simple but the average of the difference is zero...
+
+---
+
+## Measures of Dispersion
+<p class="subheader"> How spread out is the data?</p>
+
+<br>
+
+**Mean Absolute Deviation**: absolute value of the difference from the average
+
+$$ \sum \frac{|x_i - \bar{x}|}{n}$$
+
+. . .
+
+- The mean isn't zero
+- A little more complex and isn't so nice mathematically
+
+---
+
+## Measures of Dispersion
+<p class="subheader"> How spread out is the data?</p>
+
+<br>
+
+**Variance**: average squared difference from the mean
+
+$$ Var_X = \sum \frac{(x_i - \bar{x})^2}{n}$$
+
+. . .
+
+- Treats negatives appropriately
+- The mean isn't zero
+- Mathematically nice
+- Units are uninformative
+
+---
+
+## Measures of Dispersion
+<p class="subheader">How spread out is the data?</p>
+
+<br>
+
+**Standard Deviation**: A measure of spread
+$$\begin{align}S_X = \sqrt{\sum \frac{(x_i - \bar{x})^2}{n}}\end{align}$$
+
+. . .
+
+- Treats negatives appropriately
+- The mean isn't zero
+- Mathematically nice
+- Units are roughly average deviation from the mean
+
+---
+
+## Measures of Dispersion
+<p class="subheader">How spread out is the data?</p>
+
+<br>
+
+**Standard Deviation**: A measure of spread
+$$S_X = \sqrt{\sum \frac{(x_i - \bar{x})^2}{n}}$$
+
+```{python}
+#| echo: true
+# Calculate standard deviations
+std_A = group_A.std()
+std_B = group_B.std()
+```
+
+. . .
+
+```{python}
+print(f"Group A std dev: {std_A:.2f} hours")
+print(f"Group B std dev: {std_B:.2f} hours")
+```
+
+. . .
+
+*> Group A has **more variability** - some sleep much less, some much more*
+
+---
+
+## Sample vs Population
+<p class="subheader">Both sample groups are 50 people selected from two different counties.</p>
+
+![](i/c_03.png)
+
+. . .
+
+Old question: "Which **sample group** sleeps longer?" *(about the **data**)*
+
+. . .
+
+New question: "Which **county** sleeps longer?" *(about the **population**)*
+
+---
+
+## Sample vs Population
+<p class="subheader">The data is a sample drawn from a population.</p>
+
+![](i/sample.png)
+
+. . .
+
+$\mu$ - population mean
+
+$\sigma$ - population standard deviation
+
+---
+
+## Sample vs Population
+<p class="subheader">We observe **samples**. We study **populations**.</p>
+
+<br>
+
+:::{.incremental}
+- **Data**: 50 individuals we happened to sample from both counties
+- **Population**: All people who could live in these counties
+    - Even if we surveyed everyone today, tomorrow would bring new residents
+    - The population is a theoretical concept - an infinite pool of possibilities
+:::
+
+<br><br>
+
+. . .
+
+***Fundamental Tension**: we observe data, which is drawn from a population, but is not the population itself, which is the object of our study.*
+
+---
+
+## Sample vs Population
+<p class="subheader"> What is data? A sample.</p>
+
+**Random Variable**: a random process about a population
+
+. . .
+
+- the random variable is like a deck of cards
+
+. . .
+
+**Probability (Mass/Density) Function**: a function that assigns probabilities to each possible outcome
+
+. . .
+
+- the probability function is like which cards are in the deck
+
+. . .
+
+**Observation**: a realization of a random variable
+. . .
+
+- the observation is the card you drew
+
+. . .
+
+**Sample**: a collection of observations
+
+. . .
+
+- the sample is the record of cards you've drawn
+
+---
+
+## Data is a Sample
+<p class="subheader">A random variable generates our data.</p>
+
+**Random Variable**: a random process about a population
+
+**Probability Function**: a function that assigns probabilities to each possibility
+
+. . .
+
+![](i/c_04.png)
+
+. . .
+
+*> **data** is a **sample** drawn from a **random variable***
+
+---
+
+## Probability Functions
+<p class="subheader">Random variables can have many kinds of probability functions.</p>
+
+![](i/distributions.png)
+
+---
+
+## Probability Density Function (PDF)
+<p class="subheader">The height of $f(x)$ at each value.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+import seaborn as sns
+
+x = np.linspace(2, 13, 1000)
+y = stats.norm.pdf(x, 7.2, 1.5)
+
+plt.figure(figsize=(9, 2.5))
+plt.plot(x, y, 'b-', linewidth=2)
+x_pt = 6.0
+y_pt = stats.norm.pdf(x_pt, 7.2, 1.5)
+plt.plot([x_pt, x_pt], [0, y_pt], 'r--', linewidth=1.5)
+plt.plot(x_pt, y_pt, 'ro', markersize=6)
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.yticks([])
+
+sns.despine(left=True, bottom=False, right=True, top=True, offset=0, trim=True)
+plt.tight_layout()
+plt.show()
+```
+
+::: {.incremental}
+1. **$f(x) \geq 0$**: probabilities are never negative.
+2. **$\int f(x)\,dx = 1$**: total probability sums to one.
+:::
+
+---
+
+## Cumulative Distribution Function (CDF)
+<p class="subheader">The area under $f(x)$ up to each value — $F(x) = P(X \leq x)$.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy import stats
+import seaborn as sns
+
+x = np.linspace(2, 13, 1000)
+y = stats.norm.pdf(x, 7.2, 1.5)
+
+plt.figure(figsize=(9, 2.5))
+plt.plot(x, y, 'b-', linewidth=2)
+x_pt = 6.0
+x_fill = x[x <= x_pt]
+y_fill = stats.norm.pdf(x_fill, 7.2, 1.5)
+plt.fill_between(x_fill, y_fill, alpha=0.3, color='red')
+plt.plot([x_pt, x_pt], [0, stats.norm.pdf(x_pt, 7.2, 1.5)], 'r--', linewidth=1.5)
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.yticks([])
+
+sns.despine(left=True, bottom=False, right=True, top=True, offset=0, trim=True)
+plt.tight_layout()
+plt.show()
+```
+
+::: {.incremental}
+1. **$F(x)$ is non-decreasing**: more area accumulates as $x$ increases.
+2. **$F(-\infty) = 0$, $F(\infty) = 1$**: ranges from 0 to 1.
+3. **$F(x)$ gives probability directly**: $P(X \leq 5) = F(5)$.
+:::
+
+---
+
+## Exercise 3.1 | Known Distribution
+<p class="subheader">We can answer **many** kinds of probability questions when we know the distribution.</p>
+
+County A's probability function:
+
+$$x_i \sim N(μ=7.2, σ=1.5)$$
+
+. . .
+
+1. What proportion of the population sleeps less than 5 hours?
+
+. . .
+
+![](i/c_05.png)
+
+. . .
+
+```{.python}
+stats.norm.cdf(5, loc=mu, scale=sigma).item()
+```
+
+---
+
+## Exercise 3.1 | Known Distribution
+<p class="subheader">We can answer **many** kinds of probability questions when we know the distribution.</p>
+
+County A's probability function:
+
+$$x_i \sim N(μ=7.2, σ=1.5)$$
+
+2. What proportion of the population sleeps more than 9 hours?
+
+. . .
+
+![](i/c_06.png)
+
+. . .
+
+```{.python}
+1 - stats.norm.cdf(9, loc=mu, scale=sigma).item()
+```
+
+---
+
+## Exercise 3.1 | Known Distribution
+<p class="subheader">We can answer **many** kinds of probability questions when we know the distribution.</p>
+
+County A's probability function:
+
+$$x_i \sim N(μ=7.2, σ=1.5)$$
+
+3. How much sleep does the middle 92% of the population get?
+
+. . .
+
+![](i/c_07.png)
+
+. . .
+
+```{.python}
+lower_bound = stats.norm.ppf(0.04, loc=mu, scale=sigma)
+upper_bound = stats.norm.ppf(0.96, loc=mu, scale=sigma)
+```
+
+---
+
+## Unknown Distributions
+<p class="subheader">What can we say about an unknown population if all see see is the sample?</p>
+
+**What we observe:**
+
+- Sample size: $n = 50$
+- Sample mean: $\bar{x} = 7.24$ hours
+- Sample standard deviation: $s = 1.48$ hours
+
+. . .
+
+**What we want to know:**
+
+- Population mean: $\mu = ?$
+- Population standard deviation: $\sigma = ?$
+- Population distribution: $f(x) = ?$
+
+---
+
+## Unknown Distributions
+<p class="subheader">What can we say about an unknown population if all see see is the sample?</p>
+
+The sample statistics ($\bar{x}, S$) are **not** the population parameters ($\mu, \sigma$).
+
+$$\bar{x} \neq \mu$$
+$$s \neq \sigma$$
+
+---
+
+## The Central Question
+<p class="subheader">What can we say about an unknown population if all see see is the sample?</p>
+
+<br><br>
+
+:::{.incremental}
+- Part 3.2 | **Central Limit Theorem** - the distribution of the sample mean
+- Part 3.3 | **Confidence Intervals** - the closeness of the sample mean to the truth
+- Part 3.4 | **Statiscial Modeling** - testing wrongness of hypothetical relationships
+:::
+
+. . .
+
+<br>
+
+*> we can answer questions about an unknown population using just a sample*

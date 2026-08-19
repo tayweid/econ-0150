@@ -1,0 +1,645 @@
+---
+format:
+  revealjs:
+    css: custom.css
+    transition: none
+    aspect-ratio: "16:9"
+---
+
+## ECON 0150 | Economic Data Analysis {.center}
+<p class="subheader">The economist's data analysis skillset.</p>
+
+<br>
+
+### *Part 4 | Review*
+
+---
+
+## Part 4: What we've learned
+<p class="subheader">The bivariate GLM in four parts.</p>
+
+<br>
+
+- **4.1** Numerical predictors: $y = \beta_0 + \beta_1 x + \varepsilon$
+- **4.2** Categorical predictors: same equation, $x$ is 0 or 1
+- **4.3** Model assumptions: linearity, homoskedasticity, independence, normality
+- **4.4** The problem of timeseries: autocorrelation and differencing
+
+. . .
+
+<br>
+
+*Today: practice problems in the style of the MiniExam.*
+
+---
+
+## Practice 1: Numerical predictor
+<p class="subheader">A city wants to know if neighborhoods with more parks have lower crime rates.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+np.random.seed(42)
+n = 80
+num_parks = np.round(np.random.uniform(0, 15, n), 0).astype(int)
+crime_rate = np.round(50 - 2 * num_parks + np.random.normal(0, 5, n), 1)
+crime_rate = np.maximum(0, crime_rate)
+
+data = pd.DataFrame({'num_parks': num_parks, 'crime_rate': crime_rate})
+data.head(5)
+```
+
+**a) How would you visualize the relationship between these two variables?**
+
+. . .
+
+*Scatterplot: num_parks on the x-axis, crime_rate on the y-axis.*
+
+. . .
+
+**b) Write down a model to test whether more parks means lower crime.**
+
+. . .
+
+$$\text{crime_rate} = \beta_0 + \beta_1 \cdot \text{num_parks} + \varepsilon$$
+
+---
+
+## Practice 1: Numerical predictor
+<p class="subheader">A city wants to know if neighborhoods with more parks have lower crime rates.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+np.random.seed(42)
+n = 80
+num_parks = np.round(np.random.uniform(0, 15, n), 0).astype(int)
+crime_rate = np.round(50 - 2 * num_parks + np.random.normal(0, 5, n), 1)
+crime_rate = np.maximum(0, crime_rate)
+
+slope, intercept, r_value, p_value, std_err = stats.linregress(num_parks, crime_rate)
+
+plt.figure(figsize=(11, 4))
+plt.scatter(num_parks, crime_rate, alpha=0.4, color='darkblue')
+x_line = np.array([min(num_parks), max(num_parks)])
+y_line = intercept + slope * x_line
+plt.plot(x_line, y_line, 'r-', linewidth=2)
+
+plt.xlabel('Number of Parks', fontsize=14)
+plt.ylabel('Crime Rate (per 1000)', fontsize=14)
+
+plt.text(0.5, intercept - 3, f'$\\beta_0$ = {intercept:.1f}', fontsize=12, va='center')
+plt.text(10, slope * 10 + intercept + 3, f'$\\beta_1$ = {slope:.2f}', fontsize=12, va='center')
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+**c) What part of your model would indicate a relationship exists?**
+
+. . .
+
+*If $\beta_1$ is significantly different from zero (small p-value), there is a relationship.*
+
+---
+
+## Practice 2: Binary predictor
+<p class="subheader">Same data. Now create a binary variable: `has_park` = 1 if `num_parks` > 0, else 0.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+np.random.seed(42)
+n = 80
+num_parks = np.round(np.random.uniform(0, 15, n), 0).astype(int)
+crime_rate = np.round(50 - 2 * num_parks + np.random.normal(0, 5, n), 1)
+crime_rate = np.maximum(0, crime_rate)
+num_parks[:12] = 0
+
+has_park = (num_parks > 0).astype(int)
+
+data = pd.DataFrame({'num_parks': num_parks, 'crime_rate': crime_rate, 'has_park': has_park})
+data.head()
+```
+
+**a) What is the variable type of `has_park`?**
+
+. . .
+
+*Binary categorical (0 or 1).*
+
+. . .
+
+**b) Visualize the relationship between `has_park` and `crime_rate`.**
+
+. . .
+
+*Strip plot or box plot with has_park on the x-axis and crime_rate on the y-axis.*
+
+---
+
+## Practice 2: Binary predictor
+<p class="subheader">Same data. Now create a binary variable: `has_park` = 1 if `num_parks` > 0, else 0.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+np.random.seed(42)
+n = 80
+num_parks = np.round(np.random.uniform(0, 15, n), 0).astype(int)
+crime_rate = np.round(50 - 2 * num_parks + np.random.normal(0, 5, n), 1)
+crime_rate = np.maximum(0, crime_rate)
+num_parks[:12] = 0
+
+has_park = (num_parks > 0).astype(int)
+crime_no_park = crime_rate[has_park == 0]
+crime_yes_park = crime_rate[has_park == 1]
+
+mean_no = np.mean(crime_no_park)
+mean_yes = np.mean(crime_yes_park)
+beta_1 = mean_yes - mean_no
+
+jitter = np.random.uniform(-0.15, 0.15, n)
+
+plt.figure(figsize=(11, 4))
+plt.scatter(has_park + jitter, crime_rate, alpha=0.4, color='darkblue')
+plt.plot([0, 1], [mean_no, mean_yes], 'r-', linewidth=2)
+
+plt.text(-0.35, mean_no, f'$\\beta_0$ = {mean_no:.1f}', fontsize=12, va='center')
+plt.text(1.15, mean_yes, f'$\\beta_0 + \\beta_1$ = {mean_yes:.1f}', fontsize=12, va='center')
+plt.text(0.5, (mean_no + mean_yes)/2 + 2, f'$\\beta_1$ = {beta_1:.1f}', fontsize=12, va='center', ha='center', rotation=-15)
+
+plt.xticks([0, 1], ['0\n(No Park)', '1\n(Has Park)'])
+plt.xlabel('Has Park', fontsize=14)
+plt.ylabel('Crime Rate (per 1000)', fontsize=14)
+plt.xlim(-0.5, 1.5)
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+**c) Write down the model. What does $\beta_0$ represent? What does $\beta_1$ represent?**
+
+. . .
+
+$$\text{crime_rate} = \beta_0 + \beta_1 \cdot \text{has_park} + \varepsilon$$
+
+*$\beta_0$ = Mean crime rate in neighborhoods without parks (x = 0).*
+
+*$\beta_1$ = Difference in mean crime rate (has park minus no park).*
+
+---
+
+## Practice 2: Binary predictor
+<p class="subheader">What if we flip the coding?</p>
+
+<br>
+
+**d) If we instead coded `no_park` = 1 for no park, 0 for has park, what changes?**
+
+. . .
+
+<br>
+
+- $\beta_0$ becomes the mean crime rate for neighborhoods **with** parks
+- $\beta_1$ flips sign (same magnitude, opposite direction)
+
+. . .
+
+<br>
+
+*$\beta_0$ is ALWAYS the mean of the group coded as 0.*
+
+*$\beta_1$ is ALWAYS the difference (group 1 minus group 0).*
+
+---
+
+## Practice 3: Reading regression output
+<p class="subheader">A researcher studies whether hours of sleep predict test scores using 150 students.</p>
+
+<br>
+
+$$\text{test_score} = \beta_0 + \beta_1 \cdot \text{hours_sleep} + \varepsilon$$
+
+```
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept       42.30      5.100      8.294      0.000      32.22      52.38
+hours_sleep      5.80      0.720      8.056      0.000       4.38       7.22
+------------------------------------------------------------------------------
+```
+
+. . .
+
+**a) Interpret the intercept (42.30) in context.**
+
+. . .
+
+*A student who sleeps 0 hours is predicted to score 42.3 points. (Not meaningful.)*
+
+. . .
+
+**b) Interpret the slope (5.80) in context.**
+
+. . .
+
+*Each additional hour of sleep is associated with a 5.8 point increase in test score.*
+
+---
+
+## Practice 3: Reading regression output
+<p class="subheader">A researcher studies whether hours of sleep predict test scores using 150 students.</p>
+
+<br>
+
+$$\text{test_score} = \beta_0 + \beta_1 \cdot \text{hours_sleep} + \varepsilon$$
+
+```
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept       42.30      5.100      8.294      0.000      32.22      52.38
+hours_sleep      5.80      0.720      8.056      0.000       4.38       7.22
+------------------------------------------------------------------------------
+```
+
+**c) What is the null hypothesis for the slope coefficient?**
+
+. . .
+
+*$H_0: \beta_1 = 0$ or hours of sleep has no effect on test scores.*
+
+. . .
+
+**d) What test score would the model predict for a student who sleeps 8 hours?**
+
+. . .
+
+*$\hat{y} = 42.3 + 5.8 \times 8 = 88.7$ points.*
+
+---
+
+## Practice 4: Drawing the sampling distribution
+<p class="subheader">Now consider the experience and wages example from the MiniExam demo.</p>
+
+```
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept       12.50      1.200     10.417      0.000      10.13      14.87
+experience       0.75      0.478      1.570      0.120      -0.20       1.70
+------------------------------------------------------------------------------
+```
+
+**a) Draw the sampling distribution of $\beta_1$ under the null hypothesis.**
+
+. . .
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+sample_slope = 0.75
+se = 0.478
+null = 0
+df = 198
+
+x_pdf = np.linspace(-2, 2, 1000)
+y_pdf = stats.t.pdf(x_pdf, df=df, loc=null, scale=se)
+
+plt.figure(figsize=(10, 4))
+
+# T-distribution centered on null
+plt.plot(x_pdf, y_pdf, color='green', linestyle='--', linewidth=2, label='Sampling Dist. under $H_0$')
+
+# Null line
+plt.axvline(null, color='black', linestyle='-', linewidth=2, label='Null: $\\beta_1 = 0$')
+
+# Sample slope
+plt.axvline(sample_slope, color='red', linestyle='--', linewidth=2, label=f'Sample: $\\hat\\beta_1$ = {sample_slope}')
+plt.axvline(-sample_slope, color='red', linestyle='--', linewidth=2, alpha=0.3, label='Equally extreme')
+
+# Shade p-value tails
+x_left = x_pdf[x_pdf <= -sample_slope]
+y_left = stats.t.pdf(x_left, df=df, loc=null, scale=se)
+plt.fill_between(x_left, 0, y_left, alpha=0.3, color='blue', label='p-value = 0.120')
+
+x_right = x_pdf[x_pdf >= sample_slope]
+y_right = stats.t.pdf(x_right, df=df, loc=null, scale=se)
+plt.fill_between(x_right, 0, y_right, alpha=0.3, color='blue')
+
+plt.xlabel('Slope Coefficient: $\\beta_1$', fontsize=16)
+plt.legend(fontsize=10)
+plt.yticks([])
+sns.despine(left=True, bottom=False, right=True, top=True, trim=True)
+plt.tight_layout()
+```
+
+---
+
+## Practice 4: Drawing the sampling distribution
+<p class="subheader">Step by step: how to draw this on the exam.</p>
+
+<br>
+
+1. Draw a bell curve centered at **0** (the null hypothesis)
+
+. . .
+
+2. Label the x-axis: "Slope Coefficient: $\beta_1$"
+
+. . .
+
+3. Mark where **0** is (the null) with a solid line
+
+. . .
+
+4. Mark where your **observed slope** is with a dashed line
+
+. . .
+
+5. Shade the area **beyond** your observed slope (both tails) is the p-value
+
+---
+
+## Practice 5: Binary predictor
+<p class="subheader">A researcher collects GPA data from 100 students.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import pandas as pd
+
+np.random.seed(42)
+n = 100
+on_campus = np.concatenate([np.ones(50), np.zeros(50)]).astype(int)
+gpa = np.where(on_campus == 1,
+               np.round(np.random.normal(3.2, 0.4, n), 2),
+               np.round(np.random.normal(2.9, 0.4, n), 2))
+gpa = np.clip(gpa, 0, 4.0)
+
+data = pd.DataFrame({'on_campus': on_campus, 'gpa': gpa})
+data = data.sample(frac=1, random_state=42).reset_index(drop=True)
+data.head()
+```
+
+. . .
+
+**a) If we code `on_campus` = 1 for yes, 0 for no, what does $\beta_0$ represent?**
+
+. . .
+
+*Mean GPA for off-campus students (the x = 0 group).*
+
+. . .
+
+**b) What does $\beta_1$ represent?**
+
+. . .
+
+*Difference in mean GPA: on-campus minus off-campus.*
+
+---
+
+## Practice 5: Binary predictor
+<p class="subheader">What if we flip the coding?</p>
+
+<br>
+
+**c) Now code `off_campus` = 1 for off-campus, 0 for on-campus. What changes?**
+
+. . .
+
+<br>
+
+- $\beta_0$ becomes the mean GPA for **on-campus** students
+
+. . .
+
+- $\beta_1$ flips sign (same magnitude, opposite direction)
+
+. . .
+
+<br>
+
+*$\beta_0$ is ALWAYS the mean of the group coded as 0.*
+
+*$\beta_1$ is ALWAYS the difference (group 1 minus group 0).*
+
+---
+
+## Practice 6: Reading a residual plot
+<p class="subheader">Which model assumption does each pattern suggest is violated?</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+np.random.seed(42)
+n = 100
+
+fig, axes = plt.subplots(1, 3, figsize=(11, 3.5))
+
+# Panel 1: U-shaped (non-linearity)
+x1 = np.linspace(-3, 3, n)
+resid1 = 0.5 * x1**2 - 1.5 + np.random.normal(0, 0.5, n)
+axes[0].scatter(x1, resid1, alpha=0.4, color='green', s=30)
+axes[0].axhline(0, color='red', linestyle='--')
+axes[0].set_xlabel('Predicted', fontsize=11)
+axes[0].set_ylabel('Residual', fontsize=11)
+axes[0].set_title('Pattern A', fontsize=13)
+
+# Panel 2: Fan shape (heteroskedasticity)
+x2 = np.linspace(1, 10, n)
+resid2 = np.random.normal(0, 0.3 * x2, n)
+axes[1].scatter(x2, resid2, alpha=0.4, color='green', s=30)
+axes[1].axhline(0, color='red', linestyle='--')
+axes[1].set_xlabel('Predicted', fontsize=11)
+axes[1].set_ylabel('Residual', fontsize=11)
+axes[1].set_title('Pattern B', fontsize=13)
+
+# Panel 3: Random (good)
+x3 = np.linspace(-3, 3, n)
+resid3 = np.random.normal(0, 1, n)
+axes[2].scatter(x3, resid3, alpha=0.4, color='green', s=30)
+axes[2].axhline(0, color='red', linestyle='--')
+axes[2].set_xlabel('Predicted', fontsize=11)
+axes[2].set_ylabel('Residual', fontsize=11)
+axes[2].set_title('Pattern C', fontsize=13)
+
+for ax in axes:
+    sns.despine(ax=ax, trim=True)
+
+plt.tight_layout()
+```
+
+. . .
+
+- **Pattern A**: U-shaped residuals $\rightarrow$ **linearity** violated (relationship is curved)
+
+. . .
+
+- **Pattern B**: Fan shape $\rightarrow$ **homoskedasticity** violated (variance increases)
+
+. . .
+
+- **Pattern C**: Random scatter $\rightarrow$ assumptions look fine
+
+---
+
+## Practice 7: Lagged residual plots
+<p class="subheader">Which lag plot shows autocorrelation?</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+np.random.seed(42)
+n = 100
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Panel 1: Strong autocorrelation
+rho = 0.85
+resid_auto = np.zeros(n)
+resid_auto[0] = np.random.normal()
+for t in range(1, n):
+    resid_auto[t] = rho * resid_auto[t-1] + np.random.normal(0, 0.5)
+
+ax1.scatter(resid_auto[:-1], resid_auto[1:], alpha=0.4, color='green', s=30)
+ax1.axhline(0, color='black', linestyle='--', alpha=0.3)
+ax1.axvline(0, color='black', linestyle='--', alpha=0.3)
+ax1.set_xlabel('Residual(t-1)', fontsize=12)
+ax1.set_ylabel('Residual(t)', fontsize=12)
+ax1.set_title('Model A', fontsize=13)
+
+# Panel 2: No autocorrelation
+resid_indep = np.random.normal(0, 1, n)
+ax2.scatter(resid_indep[:-1], resid_indep[1:], alpha=0.4, color='green', s=30)
+ax2.axhline(0, color='black', linestyle='--', alpha=0.3)
+ax2.axvline(0, color='black', linestyle='--', alpha=0.3)
+ax2.set_xlabel('Residual(t-1)', fontsize=12)
+ax2.set_ylabel('Residual(t)', fontsize=12)
+ax2.set_title('Model B', fontsize=13)
+
+for ax in [ax1, ax2]:
+    sns.despine(ax=ax, trim=True)
+
+plt.tight_layout()
+```
+
+. . .
+
+- **Model A**: Strong positive slope $\rightarrow$ residuals are **autocorrelated** (independence violated)
+
+. . .
+
+- **Model B**: Random cloud $\rightarrow$ residuals are **independent** (assumption satisfied)
+
+. . .
+
+*Autocorrelation means the model's errors follow a pattern over time. Standard errors become unreliable.*
+
+---
+
+## Quick reference: what to know for the MiniExam
+<p class="subheader">The core skills.</p>
+
+<br>
+
+1. **Write the model**: $y = \beta_0 + \beta_1 x + \varepsilon$ (works for numerical AND binary $x$)
+
+. . .
+
+2. **Interpret $\beta_0$**: predicted $y$ when $x = 0$ (baseline/reference group)
+
+. . .
+
+3. **Interpret $\beta_1$**: change in $y$ for a one-unit increase in $x$ (or difference between groups)
+
+. . .
+
+4. **Sampling distribution**: bell curve centered on null, shade tails beyond observed slope
+
+. . .
+
+5. **P-value**: probability of observing a slope as extreme as ours if $\beta_1 = 0$
+
+. . .
+
+6. **Residual plots**: random = good; U-shape = non-linearity; fan = heteroskedasticity
+
+. . .
+
+7. **Lag plots**: slope = autocorrelation (independence violated)

@@ -1,0 +1,16 @@
+# junk
+.DS_Store
+.ipynb_checkpoints/
+.ipynb_checkpoints*/
+.virtual_documents/
+.virtual_documents*/
+__pycache__/
+.jupyter/
+*.jupyterlab-workspace
+Icon
+
+# local-only: nested archive/ folders of old versions (kept on disk, not published)
+archive/
+
+# over GitHub's 100MB hard file limit
+data/usa_00043_formatted.csv

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ECON 0150 | Part 4</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- MODULAR CSS -->
+    <link rel="stylesheet" href="https://tayweid.github.io/course-assets/styles/main.css">
+
+</head>
+
+
+<body>
+
+    <div class="wrapper course-econ-0150">
+        <div class="left_div">
+            <nav>
+                <ul>
+                    <a href="econ-0150.html"
+                        style="text-decoration: none; color: inherit; font-weight: 300; margin-top: 5%; margin-bottom: 2%; font-size: 36px; display: block; line-height: 0.8; color: white;"><span
+                            style="font-weight: 300; font-size: 36px; display: block; line-height: 0.8; color: white;">ECONOMIC</span></a>
+                    <a href="econ-0150.html"
+                        style="text-decoration: none; color: inherit; font-weight: 300; margin-bottom: 2%; font-size: 36px; display: block; line-height: 0.8; color: white;"><span
+                            style="font-weight: 300; font-size: 36px; display: block; line-height: 0.8; color: white;">DATA</span></a>
+                    <a href="econ-0150.html"
+                        style="text-decoration: none; color: inherit; font-weight: 300; margin-bottom: 2%; font-size: 36px; display: block; line-height: 0.8; color: white;"><span
+                            style="font-weight: 300; font-size: 36px; display: block; line-height: 0.8; color: white;">ANALYSIS</span></a>
+                    <hr class="nav-hr">
+                    <li><a href="part-1.html">Part 1</a></li>
+                    <li><a href="part-2.html">Part 2</a></li>
+                    <li><a href="part-3.html">Part 3</a></li>
+                    <li><a class="active" href="">Part 4</a></li>
+                    <li><a href="part-5.html">Part 5</a></li>
+                    <li><a href="part-6.html">Part 6</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="content">
+
+            <div class="description">
+                <h1 class="title title-tight">Part 4 | Bivariate GLM</h1>
+                <i class="subtitle-text">> models with one predictor</i>
+
+                <p>
+                    Part 4 introduces the workhorse of empirical economics: regression analysis.
+                    In Part 3, we developed the simplest statistical model of samples with unknown population
+                    parameters.
+                    This model allowed us to test simple hypotheses about the population parameters.
+                    But economic relationships are rarely so simple.
+                    The General Linear Model not only lets us test simple hypotheses, but also lets us handle
+                    relationships between variables of different types - continuous, categorical, and their interactions
+                    - while maintaining our core tools of visualization and residual analysis.
+                    These tools are the foundation of modern science.
+                </p>
+            </div>
+
+            <!-- Part 4.1 -->
+            <div class="carousel-container" id="part-41">
+                <h1 class="subtitle">Part 4.1 | Numerical Predictors</h1>
+                <p>Finding relationships between numerical variables.</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="yZPUiFxOSko">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 4.1</h3>
+                                <p class="card-description">Class recording from Fall 2025</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="d16_GOJBxTE">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 4.1 // Numerical Predictors</h3>
+                                <p class="card-description">The slope parameters follow a normal distribution.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-1/concept_4_1.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-4-1/concept_4_1.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 4.1 // Numerical Predictors</h3>
+                                <p class="card-description">Relationship between happiness and GDP per capita.</p>
+                                <div class="card-downloads">
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-1/Exercise_4_1.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-1/data/Life_Evaluation_GDP_PerCap.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> Happiness/GDP
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 4.1</h3>
+                                <p class="card-description">Due on Sunday March 29 at 11:59PM on Gradescope</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-1/HW_4_1.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-1/Homework_4_1.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-1/data/BRFSS_cleaned.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> BRFSS Data
+                                    </a>
+                                    <!-- <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-1/Homework_4_1_sols.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Solutions
+                                    </a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <!-- Part 4.2 -->
+            <div class="carousel-container" id="part-42">
+                <h1 class="subtitle">Part 4.2 | Categorical Predictors</h1>
+                <p>Comparing group means using binary indicator variables (two-sample t-test).</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 4.2</h3>
+                                <p class="card-description">Coming soon</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="oDgC5RwZjME">
+                            <div class="card-video">
+                                <img src="https://img.youtube.com/vi/oDgC5RwZjME/maxresdefault.jpg" alt="Video thumbnail">
+                                <div class="play-button">▶</div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 4.2 // Categorical Predictors</h3>
+                                <p class="card-description">Binary predictors turn group comparisons into regression.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-2/concept_4_2.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-4-2/concept_4_2.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 4.2 // Categorical Predictors</h3>
+                                <p class="card-description">Income and mental health using BRFSS data.</p>
+                                <div class="card-downloads">
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-2/Exercise_4_2.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-2/data/BRFSS_cleaned.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> BRFSS Data
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 4.2</h3>
+                                <p class="card-description">Due on Sunday March 29 at 11:59PM on Gradescope</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-2/HW_4_2.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-2/Homework_4_2.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-2/data/BRFSS_cleaned.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> BRFSS Data
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <!-- Part 4.3 -->
+            <div class="carousel-container" id="part-43">
+                <h1 class="subtitle">Part 4.3 | Model Diagnostics</h1>
+                <p>Checking whether our model's assumptions hold and what to do when they don't.</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 4.3</h3>
+                                <p class="card-description">Coming soon</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="pvi_ovxsdSg">
+                            <div class="card-video">
+                                <img src="https://img.youtube.com/vi/pvi_ovxsdSg/maxresdefault.jpg" alt="Video thumbnail">
+                                <div class="play-button">▶</div>
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 4.3 // Model Assumptions</h3>
+                                <p class="card-description">Residual plots check linearity, homoskedasticity, independence, and normality.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-3/concept_4_3.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-4-3/concept_4_3.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 4.3 // Model Assumptions</h3>
+                                <p class="card-description">Diagnosing the fit of the happiness and GDP model.</p>
+                                <div class="card-downloads">
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-3/Exercise_4_3.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-3/data/Life_Evaluation_GDP_PerCap.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> Data
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 4.3</h3>
+                                <p class="card-description">Due on Sunday April 5 at 11:59PM on Gradescope</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-3/HW_4_3.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-3/Homework_4_3.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-3/data/Life_Evaluation_GDP_PerCap.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> Happiness/GDP Data
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <!-- Part 4.4 -->
+            <div class="carousel-container" id="part-44">
+                <h1 class="subtitle">Part 4.4 | The Problem of Timeseries</h1>
+                <p>Autocorrelation violates independence. Differencing and growth rates can mitigate the problem.</p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <!-- Livestream (hidden to left, no indicator) -->
+                        <div class="carousel-card livestream-card" data-video-id="">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Livestream 4.4</h3>
+                                <p class="card-description">Coming soon</p>
+                                <div class="card-downloads">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card concept-card" data-video-id="wP6KMAV8XkA">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Concept 4.4 // The Problem of Timeseries</h3>
+                                <p class="card-description">Levels, first differences, and growth rates for time series data.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-4/concept_4_4.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-4-4/concept_4_4.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Exercise 4.4 // The Problem of Timeseries</h3>
+                                <p class="card-description">GDP and unemployment across model specifications.</p>
+                                <div class="card-downloads">
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-4/Exercise_4_4.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-4/data/okun.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> Okun Data
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card homework-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Homework 4.4</h3>
+                                <p class="card-description">Due on Sunday April 5 at 11:59PM on Gradescope</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-4/HW_4_4.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Assignment
+                                    </a>
+                                    <a href="https://colab.research.google.com/github/tayweid/tayweid.github.io/blob/master/econ-0150/parts/part-4-4/Homework_4_4.ipynb"
+                                        class="download-link" target="_blank">
+                                        <i class="fa fa-external-link"></i> Notebook
+                                    </a>
+                                    <a href="parts/part-4-4/data/okun.csv" class="download-link"
+                                        target="_blank">
+                                        <i class="fa fa-file-text-o"></i> Okun Data
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <!-- MINIEXAMS -->
+            <div class="carousel-container" id="miniexams">
+                <h1 class="subtitle">MiniExam 4</h1>
+                <p>
+                    MiniExam 4 will test your understanding of everything in
+                    Part 4: numerical predictors, categorical predictors, model diagnostics, and timeseries.
+                </p>
+                <div class="carousel">
+                    <button class="carousel-arrow carousel-arrow-left" aria-label="Previous">
+                        <span>‹</span>
+                    </button>
+                    <div class="carousel-track">
+
+                        <div class="carousel-card concept-card">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">Part 4 Review</h3>
+                                <p class="card-description">Practice problems in the style of the MiniExam.</p>
+                                <div class="card-downloads">
+                                    <a href="parts/part-4-review/concept_4_review.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Slides
+                                    </a>
+                                    <a href="parts/part-4-review/concept_4_review.html" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Interactive
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="carousel-card exercise-card" data-video-id="NgEffN3TOtw">
+                            <div class="card-video">
+                                <img src="" alt="Video thumbnail" class="placeholder-bg">
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">MiniExam 4 Demo</h3>
+                                <p class="card-description">Try solving the demo then check your answers against the video.</p>
+                                <div class="card-downloads">
+                                    <a href="ME/ME_4/ME_4_Demo.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> ME 4 Demo
+                                    </a>
+                                    <a href="ME/ME_4/ME_4_Demo_sols.pdf" class="download-link" target="_blank">
+                                        <i class="fa fa-file-pdf-o"></i> Solutions
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-right" aria-label="Next">
+                        <span>›</span>
+                    </button>
+                    <div class="carousel-indicator"></div>
+                </div>
+            </div>
+
+            <div class="bottom-spacer"></div>
+
+        </div>
+
+        <!-- RIGHT NAVIGATION -->
+        <div class="right_div">
+            <nav>
+                <ul>
+                    <span>Contents</span>
+                    <hr class="nav-hr-right">
+                    <li class="nav-item-no-margin"><a href="#part-41" class="active nav-link-right">4.1 | Numerical</a>
+                    </li>
+                    <li><a href="#part-42" class="nav-link-right">4.2 | Categorical</a></li>
+                    <li><a href="#part-43" class="nav-link-right">4.3 | Diagnostics</a></li>
+                    <li><a href="#part-44" class="nav-link-right">4.4 | Timeseries</a></li>
+                    <li><a href="#miniexams" class="nav-link-right">MiniExams</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div> <!-- Close wrapper -->
+
+    <!-- UNIFIED JAVASCRIPT (NO JQUERY) -->
+    <script src="https://tayweid.github.io/course-assets/scripts/main.js"></script>
+
+</body>
+
+</html>

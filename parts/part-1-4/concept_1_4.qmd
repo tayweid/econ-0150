@@ -1,0 +1,401 @@
+---
+format:
+  revealjs:
+    css: custom.css
+    transition: none
+---
+
+## ECON 0150 | Economic Data Analysis {.center}
+<p class="subheader-center">The economist's data analysis skillset.</p>
+
+<br>
+
+### *Part 1.4 | Panel Data (Long Format)*
+
+---
+
+## Part 0 | Minimum Wage Study
+<p class="subheader">NJ raised its minimum wage. Employment did not fall.</p>
+
+![](i/fig_employment_changes.png)
+
+---
+
+## They Measured Changes
+<p class="subheader">The same 410 stores, surveyed twice</p>
+
+| Store | Wave | State | FTE |
+|-------|------|-------|-----|
+| 1 | 1 | NJ | 20.5 |
+| 1 | 2 | NJ | 24.0 |
+| 2 | 1 | PA | 18.0 |
+| 2 | 2 | PA | 17.5 |
+| ... | ... | ... | ... |
+
+. . .
+
+*> same stores, two time periods, tracking each store's change*
+
+---
+
+## Panel Data
+<p class="subheader">Data with repeated observations across entities AND time</p>
+
+<br>
+
+::: {.incremental}
+- **Panel data** tracks the same units (people, countries, stores) over time
+- Examples: Card & Krueger's minimum wage study, GDP by country by year, sales by store by hour
+- Can be stored in two formats: **Long** or **Wide**
+:::
+
+---
+
+## Long Format Panel Data
+<p class="subheader">Each observation is a separate row</p>
+
+| Shop | Hours | Quantity |
+|------|-------|----------|
+| Shop A | 12 | 1 |
+| Shop A | 15 | 2 |
+| Shop A | 14 | 2 |
+| Shop A | 16 | 2 |
+| Shop A | 19 | 1 |
+| ... | ... | ... |
+
+. . .
+
+*> Shop ($i$) and Hours ($t$) are indexes; Quantity ($x$) is the variable*
+
+---
+
+## Labor Demand: Hiring a Barista
+<p class="subheader">Use Coffee_Sales_Receips.csv to help understand where to hire a new barista.</p>
+
+<br>
+
+- You manage three coffee shops and are considering where to hire a new barista.
+- You have a dataset containing information about the transactions taking place at all three coffee shops throughout the day.
+- Lets consider how to use this data to inform our decision.
+
+---
+
+## Hiring a Barista
+<p class="subheader">Q. Which coffee shop is the busiest?</p>
+
+| Shop | Hours | Quantity |
+|------|-------|----------|
+| Shop A | 12 | 1 |
+| Shop A | 15 | 2 |
+| Shop A | 14 | 2 |
+| Shop A | 16 | 2 |
+| Shop A | 19 | 1 |
+| ... | ... | ... |
+
+. . . 
+
+*> as is usually the case, it's difficult to know without summarization*
+
+---
+
+## Hiring a Barista: Bar Graphs Compare Shops
+<p class="subheader">Q. Which coffee shop is the busiest?</p>
+
+![](i/i_01.png)
+
+. . .
+
+*> a bar chart makes it easy to compare shops' busyness*
+
+---
+
+## Hiring a Barista
+<p class="subheader">Q. What time of day is the busiest?</p>
+
+---
+
+## Hiring a Barista: Histograms Can Compare Times
+<p class="subheader">Q. What time of day is the busiest?</p>
+
+![](i/i_02.png)
+
+. . .
+
+*> a histogram makes it easy to compare transactions by time of day*
+
+. . .
+
+*> does this mean the morning shift at Shop A is the busiest?*
+
+---
+
+## Hiring a Barista
+<p class="subheader">Q. Which shift is the busiest?</p>
+
+---
+
+## Hiring a Barista: Transactions by Shop
+<p class="subheader">Q. Which shift is the busiest?</p>
+
+![](i/i_03.png)
+
+*> an overlaid histogram can show all three groups*
+
+. . .
+
+*> does this show the data clearly?*
+
+---
+
+## Hiring a Barista: Faceting
+<p class="subheader">Each shop gets its own panel</p>
+
+![](i/f_01.png)
+
+. . .
+
+*> same data, but now each shop has its own histogram*
+
+---
+
+## Hiring a Barista: Faceting
+<p class="subheader">Q. Which shop has the most consistent traffic throughout the day?</p>
+
+![](i/f_01.png)
+
+. . .
+
+*> Shop A — the distribution is relatively flat*
+
+---
+
+## Hiring a Barista: Faceting
+<p class="subheader">Q. Which shop is busiest during the morning rush?</p>
+
+![](i/f_01.png)
+
+. . .
+
+*> Shop C — compare the 8-10am peaks across panels*
+
+*> but since the histograms are separated it's not as easy to make the comparison*
+
+---
+
+## Hiring a Barista: Line Graphs
+<p class="subheader">Q. Which shop is busiest during the morning rush?</p>
+
+![](i/i_05.png)
+
+. . .
+
+*> line graphs can also show comparisons between groups clearly*
+
+. . .
+
+*> Shop C — easier to see the 8-10am peak across shops*
+
+---
+
+## Part 1.4 | Panel Data (Long Format)
+
+<br><br>
+
+#### Summary
+
+::: {.incremental}
+- **Panel data** tracks repeated observations across groups or time
+- **Long format:** Each observation is a row; a column identifies the group
+- **Faceting** separates each group into its own panel for comparison
+- **Line graphs** simplify multiple categories on a single plot
+:::
+
+---
+
+## S-T-E for Panel Data (Long Format)
+<p class="subheader">What we just did</p>
+
+<br><br>
+
+| Step | Action |
+|------|--------|
+| SELECT | All transactions from three coffee shops |
+| TRANSFORM | Group by shop and hour; count transactions |
+| ENCODE | Hour → x-position; Count → y-position; Shop → color/facet |
+
+---
+
+## Building Blocks
+<p class="subheader">What this unit adds to your toolkit</p>
+
+| Block | Part 1.4 |
+|-------|----------|
+| Variables | Numerical |
+| Structures | Panel (long format) |
+| Operations | Groupby |
+| Visualizations | Multi-line, Facets |
+
+. . .
+
+<br>
+
+*> Next: **Wide format** panel data for comparing time periods*
+
+---
+
+## Exercise 1.4 | Coffee Shop Transactions
+<p class="subheader">Use Coffee_Sales_Receips.csv to help inform where to hire a barista.</p>
+
+. . .
+
+```{.python}
+# Load Dataset
+sales = pd.read_csv(file_path + 'Coffee_Sales_Reciepts.csv')
+sales.head()
+```
+
+. . .
+
+| Shop | Hours | Quantity |
+|------|-------|----------|
+| Shop A | 12 | 1 |
+| Shop A | 15 | 2 |
+| Shop A | 14 | 2 |
+| Shop A | 16 | 2 |
+| Shop A | 19 | 1 |
+| ... | ... | ... |
+
+*> Shop ($i$) and Hours ($t$) are indexes; Quantity ($x$) is the variable*
+
+. . .
+
+*> this is **Long-Format Panel Data**: transactions are all in the same column*
+
+---
+
+## Exercise 1.4 | Bar Chart
+<p class="subheader">Use Coffee_Sales_Receips.csv to help inform where to hire a barista.</p>
+
+```{.python}
+# Bar graph
+sns.countplot(sales, x='Shop', hue='Shop')
+```
+
+. . .
+
+![](i/i_01.png)
+
+---
+
+## Exercise 1.4 | Histogram
+<p class="subheader">Use Coffee_Sales_Receips.csv to help inform where to hire a barista.</p>
+
+```{.python}
+# Create a histogram
+sns.histplot(sales, x='Hours', bins=range(0,24,1))
+```
+
+. . .
+
+![](i/i_02.png)
+
+---
+
+## Exercise 1.4 | Multi-Histogram
+<p class="subheader">Use Coffee_Sales_Receips.csv to help inform where to hire a barista.</p>
+
+```{.python}
+# Create a multi-histogram
+sns.histplot(sales, x='Hours', hue='Shop', bins=range(0,24,1))
+```
+
+. . .
+
+![](i/i_03.png)
+
+---
+
+## Exercise 1.4 | Faceted Histogram
+<p class="subheader">Use faceting to give each shop its own panel.</p>
+
+```{.python}
+# Create a faceted histogram
+sns.displot(sales, x='Hours', col='Shop', bins=range(0,24,1))
+```
+
+. . .
+
+![](i/f_01.png)
+
+---
+
+## Exercise 1.4 | Multiple Line Graph
+<p class="subheader">The Groupby Approach: Create a summary table, then plot</p>
+
+```{.python}
+# Create a summary table
+counts = sales.groupby(['Shop', 'Hours']).size().reset_index(name='Count')
+counts.head()
+```
+
+. . .
+
+| Shop | Hours | Count |
+|------|-------|-------|
+| Shop A | 6 | 12 |
+| Shop A | 7 | 45 |
+| Shop A | 8 | 67 |
+| Shop A | 9 | 58 |
+| Shop A | 10 | 42 |
+| ... | ... | ... |
+
+---
+
+## Exercise 1.4 | Multiple Line Graph
+<p class="subheader">The Groupby Approach: Create a summary table, then plot</p>
+
+```{.python}
+# Multiple-Line Graph using lineplot
+sns.lineplot(counts, x='Hours', y='Count', hue='Shop')
+```
+
+. . .
+
+![](i/i_05.png)
+
+---
+
+## Exercise 1.4 | Multiple Line Graph (Shortcut)
+<p class="subheader">The Shortcut: Let histplot do the counting for you</p>
+
+```{.python}
+# Multiple-Line Graph using histplot shortcut
+sns.histplot(sales, x='Hours', hue='Shop', bins=range(0,24,1), element='poly', fill=False)
+```
+
+. . .
+
+![](i/i_05.png)
+
+---
+
+## Looking Ahead: Part 1.5
+<p class="subheader">Sometimes we need data in a different shape</p>
+
+<br>
+
+| Shop | Hours | Quantity |
+|------|-------|----------|
+| Shop A | 12 | 1 |
+| Shop A | 15 | 2 |
+| Shop A | 14 | 2 |
+| Shop A | 16 | 2 |
+| Shop A | 19 | 1 |
+| ... | ... | ... |
+
+::: {.incremental}
+- What if we want to compare Hour 10 to Hour 26?
+- Long format makes this awkward - we'd need to filter and merge
+- **Wide format** makes this easy by using a column for each time period
+:::
+

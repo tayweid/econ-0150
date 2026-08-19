@@ -1,0 +1,1091 @@
+---
+format:
+  revealjs:
+    css: custom.css
+    transition: none
+    aspect-ratio: "16:9"
+---
+
+## ECON 0150 | Economic Data Analysis {.center}
+<p class="subheader">The economist's data analysis skillset.</p>
+
+<br> 
+
+### *Part 4.3 | Model Assumptions*
+
+---
+
+## GLM (so far)
+<p class="subheader">We've built three models. Can we trust them?</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+import pandas as pd
+
+# Update Matplotlib parameters
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+# Create a figure with three subplots
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 4))
+
+# --- Panel 1: Paired differences (3.4) ---
+wait_difference = [1.3, 2.4, 2.2, 1.3, 3.0, 2.3, 0.8, 2.7, 2.0, 2.9, 1.7, 1.9, 2.2,
+                   2.1, 2.4, 1.7, 1.7, 1.9, 1.7, 2.5, 2.4, 2.2, 1.9, 1.9, 2.7, 1.8,
+                   1.8, 2.0, 1.9, 2.1]
+n_diff = len(wait_difference)
+mean_diff = np.mean(wait_difference)
+
+np.random.seed(42)
+jitter_x = np.random.uniform(-0.3, 0.3, n_diff)
+ax1.scatter(jitter_x, wait_difference, alpha=0.6, color='darkblue', s=30)
+ax1.axhline(mean_diff, color='r', linestyle='-', linewidth=2)
+ax1.set_xlim(-1, 1)
+ax1.set_xticks([])
+ax1.set_ylabel('Wait Difference (min)', fontsize=12)
+ax1.set_title('Part 3.4: Paired\n$d = \\beta_0 + \\varepsilon$', fontsize=13)
+
+# --- Panel 2: Continuous predictor (4.1) ---
+np.random.seed(42)
+n = 60
+minutes_after_open = np.linspace(0, 600, n)
+wait_times = 5 + 0.01 * minutes_after_open + np.random.normal(0, 2, n)
+wait_times = np.maximum(0, wait_times)
+slope, intercept, r_value, p_value, std_err = stats.linregress(minutes_after_open, wait_times)
+
+ax2.scatter(minutes_after_open, wait_times, alpha=0.6, color='darkblue', s=30)
+x_line = np.array([min(minutes_after_open), max(minutes_after_open)])
+y_line = intercept + slope * x_line
+ax2.plot(x_line, y_line, 'r-', linewidth=2)
+ax2.set_xlabel('Minutes After Opening', fontsize=12)
+ax2.set_ylabel('Wait Time (min)', fontsize=12)
+ax2.set_title('Part 4.1: Numerical\n$y = \\beta_0 + \\beta_1 x + \\varepsilon$', fontsize=13)
+
+# --- Panel 3: Categorical predictor (4.2) ---
+np.random.seed(42)
+n_g = 50
+low_green = 22 + np.random.normal(0, 1.5, n_g)
+high_green = 19 + np.random.normal(0, 1.5, n_g)
+jitter_g = np.random.uniform(-0.15, 0.15, 2*n_g)
+x_groups = np.concatenate([np.zeros(n_g), np.ones(n_g)])
+y_groups = np.concatenate([low_green, high_green])
+
+ax3.scatter(x_groups + jitter_g, y_groups, alpha=0.4, color='darkblue', s=30)
+mean_low = np.mean(low_green)
+mean_high = np.mean(high_green)
+ax3.plot([0, 1], [mean_low, mean_high], 'r-', linewidth=2)
+ax3.set_xticks([0, 1])
+ax3.set_xticklabels(['0\n(No)', '1\n(Yes)'])
+ax3.set_xlabel('High Greenspace', fontsize=12)
+ax3.set_ylabel('Temperature (°C)', fontsize=12)
+ax3.set_xlim(-0.5, 1.5)
+ax3.set_title('Part 4.2: Categorical\n$y = \\beta_0 + \\beta_1 x + \\varepsilon$', fontsize=13)
+
+sns.despine(ax=ax1, left=False, bottom=True, right=True, top=True, trim=True)
+sns.despine(ax=ax2, left=False, bottom=False, right=True, top=True, trim=True)
+sns.despine(ax=ax3, left=False, bottom=False, right=True, top=True, trim=True)
+plt.tight_layout()
+```
+
+<br>
+
+. . .
+
+1. Each model produces coefficients, standard errors, and p-values.
+2. Sometimes a linear model isn't appropriate.
+
+---
+
+## GLM Assumptions
+<p class="subheader">Which model do you think offers better predictions?</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Sample data
+x = np.linspace(0, 10, 50)
+y_linear = 2 + 0.5 * x + np.random.normal(0, 1, 50)
+y_nonlinear = 2 + (np.exp(x*0.36) + np.random.normal(0, 3, 50))/4
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Linear relationship (well-specified)
+slope1, intercept1, r1, p1, se1 = stats.linregress(x, y_linear)
+y_pred1 = intercept1 + slope1 * x
+
+ax1.scatter(x, y_linear, alpha=0.7, label='Observed data')
+ax1.plot(x, y_pred1, 'r-', linewidth=2, label='Linear fit')
+ax1.set_xlabel('Predictor Variable (x)')
+ax1.set_ylabel('Outcome Variable (y)')
+ax1.set_title('Model 1', fontsize=20)
+ax1.legend(frameon=False)
+
+# Nonlinear relationship (mis-specified with linear fit)
+slope2, intercept2, r2, p2, se2 = stats.linregress(x, y_nonlinear)
+y_pred2 = intercept2 + slope2 * x
+
+ax2.scatter(x, y_nonlinear, alpha=0.7, label='Observed data')
+ax2.plot(x, y_pred2, 'r-', linewidth=2, label='Linear fit')
+ax2.set_xlabel('Predictor Variable (x)')
+ax2.set_ylabel('Outcome Variable (y)')
+ax2.set_title('Model 2', fontsize=20)
+ax2.legend(frameon=False)
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+---
+
+## GLM Assumptions
+<p class="subheader">Which model do you think offers better predictions?</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Sample data
+x = np.linspace(0, 10, 50)
+y_linear = 2 + 0.5 * x + np.random.normal(0, 1, 50)
+y_nonlinear = 2 + (np.exp(x*0.36) + np.random.normal(0, 3, 50))/4
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Linear relationship (well-specified)
+slope1, intercept1, r1, p1, se1 = stats.linregress(x, y_linear)
+y_pred1 = intercept1 + slope1 * x
+
+x_target = 9.7
+near = np.abs(x - x_target) < 1.0
+
+ax1.scatter(x[~near], y_linear[~near], alpha=0.15, color='#1f77b4')
+ax1.scatter(x[near], y_linear[near], alpha=0.9, color='#1f77b4')
+ax1.plot(x, y_pred1, 'r-', linewidth=2, label='Linear fit')
+ax1.set_xlabel('Predictor Variable (x)')
+ax1.set_ylabel('Outcome Variable (y)')
+ax1.set_title('Model 1', fontsize=20)
+ax1.legend(frameon=False)
+
+# Add vertical line and predicted point at x = 9.7
+y_hat1 = intercept1 + slope1 * x_target
+ax1.axvline(x_target, color='gray', linestyle=':', alpha=0.5)
+ax1.plot(x_target, y_hat1, 'ro', markersize=10, zorder=5)
+ax1.text(x_target - 0.3, y_hat1 + 0.5, f'$\\hat{{y}}$ = {y_hat1:.1f}', fontsize=11, ha='right', color='red')
+
+# Nonlinear relationship (mis-specified with linear fit)
+slope2, intercept2, r2, p2, se2 = stats.linregress(x, y_nonlinear)
+y_pred2 = intercept2 + slope2 * x
+
+ax2.scatter(x[~near], y_nonlinear[~near], alpha=0.15, color='#1f77b4')
+ax2.scatter(x[near], y_nonlinear[near], alpha=0.9, color='#1f77b4')
+ax2.plot(x, y_pred2, 'r-', linewidth=2, label='Linear fit')
+ax2.set_xlabel('Predictor Variable (x)')
+ax2.set_ylabel('Outcome Variable (y)')
+ax2.set_title('Model 2', fontsize=20)
+ax2.legend(frameon=False)
+
+# Add vertical line and predicted point at x = 9.7
+y_hat2 = intercept2 + slope2 * x_target
+ax2.axvline(x_target, color='gray', linestyle=':', alpha=0.5)
+ax2.plot(x_target, y_hat2, 'ro', markersize=10, zorder=5)
+ax2.text(x_target - 0.3, y_hat2 + 0.5, f'$\\hat{{y}}$ = {y_hat2:.1f}', fontsize=11, ha='right', color='red')
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+***Model 1** has predictions close to the average data for all predictor values.*
+
+***Model 2** will offer inaccurate predictions for large predictor variables!*
+
+---
+
+## GLM Assumptions
+<p class="subheader">Our test results are only valid when the model assumptions are valid.</p>
+
+<br>
+
+::: {.incremental}
+1. **Linearity**: The relationship between X and Y is linear
+2. **Homoskedasticity**: Equal error variance across all values of X
+3. **Independence**: Observations are independent from each other
+4. **Normality**: Errors are normally distributed
+:::
+
+
+---
+
+## GLM Assumptions: why check?
+<p class="subheader">Assumption violations affect our inferences</p>
+
+<br>
+
+**If assumptions are violated:**
+
+- Coefficient estimates may be biased
+- Standard errors may be wrong
+- p-values may be misleading
+- Predictions may be unreliable
+
+. . .
+
+<br><br>
+
+*We use **residuals** ($\epsilon$) and **estimates** ($\hat{y}$) to check if a model is 'specified'.*
+
+---
+
+## Model Fit
+<p class="subheader">We use residuals ($\varepsilon$) and estimates ($\hat{y}$) to check if a model is 'specified'.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Update Matplotlib parameters
+plt.rcParams.update({
+    'font.family': 'serif',
+    'font.serif': ['Times New Roman'],
+    'font.style': 'italic',
+})
+
+# Set a seed for reproducibility
+np.random.seed(42)
+
+# Generate wait times dataset
+n = 60
+minutes_after_open = np.linspace(0, 600, n)
+wait_times = 5 + 0.01 * minutes_after_open + np.random.normal(0, 2, n)
+wait_times = np.maximum(0, wait_times)
+
+# Fit regression model
+slope, intercept, r_value, p_value, std_err = stats.linregress(minutes_after_open, wait_times)
+y_predicted = intercept + slope * minutes_after_open
+
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 3))
+
+# --- Left panel: Residuals ---
+ax1.scatter(minutes_after_open, wait_times, alpha=0.1)
+x_line = np.array([min(minutes_after_open), max(minutes_after_open)])
+y_line = intercept + slope * x_line
+ax1.plot(x_line, y_line, 'r-', linewidth=2, alpha=0.1)
+for i in range(n):
+    ax1.plot([minutes_after_open[i], minutes_after_open[i]],
+             [wait_times[i], y_predicted[i]], 'green', linestyle=':', alpha=1)
+ax1.set_title('Residuals ($\\varepsilon$)', fontsize=14)
+
+# --- Right panel: Estimates ---
+ax2.scatter(minutes_after_open, wait_times, alpha=0.1)
+ax2.plot(x_line, y_line, 'r-', linewidth=2, alpha=0.15)
+for i in range(n):
+    ax2.plot([minutes_after_open[i], minutes_after_open[i]],
+             [wait_times[i], y_predicted[i]], 'green', linestyle=':', alpha=0.1)
+ax2.scatter(minutes_after_open, y_predicted, color='red', s=30, zorder=5)
+ax2.set_title('Estimates ($\\hat{y}$)', fontsize=14)
+
+sns.despine(ax=ax1, left=False, bottom=False, right=True, top=True, trim=True)
+sns.despine(ax=ax2, left=False, bottom=False, right=True, top=True, trim=True)
+plt.tight_layout()
+```
+
+**Residuals** ($\varepsilon$): the error of each prediction; how far off the model is.
+    
+**Estimates** ($\hat{y}$): the model's predicted value for each observation.
+
+---
+
+## Exercise 4.3 | Happiness and GDP
+<p class="subheader">Use a residual plot to visualize the error for the model.</p>
+
+<br>
+
+```python
+# Calculate residuals and predictions
+residuals = model.resid
+predictions = model.predict()
+```
+
+<br>
+
+```python
+# Residual Plot: predictions against residuals
+plt.scatter(predictions, residuals)
+```
+
+---
+
+## Assumption 1: Linearity
+<p class="subheader">The error term should be unrelated to the fitted value.</p>
+
+
+***Q**. Which model appears to violate the Linearity Assumption?*
+
+<br>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate education data (years)
+education = np.concatenate([np.random.randint(10, 13, 50), 
+                           np.random.randint(13, 17, 70),
+                           np.random.randint(17, 22, 30)])
+
+# Generate wage data with more pronounced heteroskedasticity
+base_wage = 20000
+education_effect = 2000
+error_scale = 3000 * np.power(education/10, 2)  # More dramatic increase in variance
+wages = base_wage + education_effect * education + np.random.normal(0, error_scale, len(education))
+
+# Sample data
+np.random.seed(42)
+x = np.linspace(0, 10, 50)
+y_linear = 2 + 0.5 * x + np.random.normal(0, 1, 50)
+y_nonlinear = 2 + 0.5 * x + 0.2 * x**2 + np.random.normal(0, 1, 50)
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Linear model
+from scipy import stats
+slope1, intercept1, r1, p1, se1 = stats.linregress(x, y_linear)
+y_pred1 = intercept1 + slope1 * x
+residuals1 = y_linear - y_pred1
+
+ax1.scatter(y_pred1, residuals1, alpha=0.7)
+ax1.axhline(y=0, color='r', linestyle='-')
+ax1.set_xlabel('Fitted Values ($\hat{y}$)')
+ax1.set_ylabel('Residuals ($\hat{\\varepsilon}$)')
+ax1.set_title('Model 1', fontsize=20)
+
+# Nonlinear model fitted with linear regression
+slope2, intercept2, r2, p2, se2 = stats.linregress(x, y_nonlinear)
+y_pred2 = intercept2 + slope2 * x
+residuals2 = y_nonlinear - y_pred2
+
+ax2.scatter(y_pred2, residuals2, alpha=0.7)
+ax2.axhline(y=0, color='r', linestyle='-')
+ax2.set_xlabel('Fitted Values ($\hat{y}$)')
+ax2.set_title('Model 2', fontsize=20)
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+---
+
+## Assumption 1: Linearity
+<p class="subheader">The error term should be unrelated to the fitted value.</p>
+
+***Q**. Which model appears to violate the Linearity Assumption?*
+
+<br>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate education data (years) — keep seed in sync with first slide
+education = np.concatenate([np.random.randint(10, 13, 50),
+                           np.random.randint(13, 17, 70),
+                           np.random.randint(17, 22, 30)])
+base_wage = 20000
+education_effect = 2000
+error_scale = 3000 * np.power(education/10, 2)
+wages = base_wage + education_effect * education + np.random.normal(0, error_scale, len(education))
+
+# Sample data
+np.random.seed(42)
+x = np.linspace(0, 10, 50)
+y_linear = 2 + 0.5 * x + np.random.normal(0, 1, 50)
+y_nonlinear = 2 + 0.5 * x + 0.2 * x**2 + np.random.normal(0, 1, 50)
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Linear model
+slope1, intercept1, r1, p1, se1 = stats.linregress(x, y_linear)
+y_pred1 = intercept1 + slope1 * x
+residuals1 = y_linear - y_pred1
+
+ax1.scatter(y_pred1, residuals1, alpha=0.7)
+ax1.axhline(y=0, color='r', linestyle='-')
+for i in range(len(y_pred1)):
+    ax1.plot([y_pred1[i], y_pred1[i]], [residuals1[i], 0], 'green', linestyle=':', alpha=0.6)
+ax1.set_xlabel('Fitted Values ($\hat{y}$)')
+ax1.set_ylabel('Residuals ($\hat{\\varepsilon}$)')
+ax1.set_title('Model 1', fontsize=20)
+
+# Nonlinear model fitted with linear regression
+slope2, intercept2, r2, p2, se2 = stats.linregress(x, y_nonlinear)
+y_pred2 = intercept2 + slope2 * x
+residuals2 = y_nonlinear - y_pred2
+
+ax2.scatter(y_pred2, residuals2, alpha=0.7)
+ax2.axhline(y=0, color='r', linestyle='-')
+for i in range(len(y_pred2)):
+    ax2.plot([y_pred2[i], y_pred2[i]], [residuals2[i], 0], 'green', linestyle=':', alpha=0.6)
+ax2.set_xlabel('Fitted Values ($\hat{y}$)')
+ax2.set_title('Model 2', fontsize=20)
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+***Model 1** is equally wrong everywhere. **Model 2** has larger errors at the extremes.*
+
+---
+
+## Assumption 1: Linearity
+<p class="subheader">A non-linear relationship will produce non-linear residuals.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+import pandas as pd
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate age data
+age = np.random.uniform(18, 65, 150)
+
+# Generate income with a STRONGLY non-linear relationship to age
+# Income follows a pronounced inverted U shape with age
+true_income = 20000 + 4000 * age - 70 * (age-40)**2
+noise = np.random.normal(0, 15000, len(age))
+income = true_income + noise
+
+# Create DataFrame
+data = pd.DataFrame({
+    'age': age,
+    'income': income
+})
+
+# Fit linear model
+X_linear = sm.add_constant(age)
+linear_model = sm.OLS(income, X_linear).fit()
+
+# Fit quadratic model
+age_squared = age**2
+X_quadratic = sm.add_constant(np.column_stack((age, age_squared)))
+quadratic_model = sm.OLS(income, X_quadratic).fit()
+
+# Predictions for plotting
+age_range = np.linspace(18, 65, 100)
+X_linear_pred = sm.add_constant(age_range)
+linear_predictions = linear_model.predict(X_linear_pred)
+
+age_range_squared = age_range**2
+X_quadratic_pred = sm.add_constant(np.column_stack((age_range, age_range_squared)))
+quadratic_predictions = quadratic_model.predict(X_quadratic_pred)
+
+# Create the plot
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
+
+# Linear regression plot
+ax1.scatter(age, income, alpha=0.6, color='#4C72B0')
+ax1.plot(age_range, linear_predictions, color='red', linewidth=2, 
+         label=f'Linear: R² = {linear_model.rsquared:.2f}')
+ax1.set_title('Linear Regression: Age vs. Income', fontsize=14)
+ax1.set_xlabel('Age (years)', fontsize=12)
+ax1.set_ylabel('Annual Income ($)', fontsize=12)
+ax1.legend()
+
+# Add true curve to highlight the actual relationship
+ax1.plot(age_range, 20000 + 4000 * age_range - 70 * (age_range-40)**2, 
+         color='green', linestyle='--', linewidth=2, label='True relationship')
+ax1.legend()
+
+# Residuals of linear model
+fitted_values = linear_model.predict(X_linear)  # Get fitted values
+residuals = income - fitted_values
+
+sns.regplot(x=fitted_values, y=residuals, lowess=True, scatter_kws={'alpha': 0.4}, 
+            line_kws={'color': 'green', 'linestyle':'--'}, ax=ax2)
+ax2.axhline(y=0, color='black', linestyle='--')
+ax2.set_title('Residuals vs. Fitted Values (Linear Model)', fontsize=14)
+ax2.set_xlabel('Fitted Values ($)', fontsize=12)
+ax2.set_ylabel('Residuals ($)', fontsize=12)
+
+# Add annotation highlighting the pattern
+ax2.annotate('Clear U-shaped pattern\nin residuals', xy=(175000, -20000), xytext=(100000, -60000),
+            arrowprops=dict(facecolor='black', shrink=0.05, width=1), fontsize=12)
+
+sns.despine()
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+*The linear model misses the true curvature leading to systematic errors.*
+
+---
+
+## Handling Non-Linear Relationships
+<p class="subheader">Transform variables to become linear</p>
+
+Adding a square term or performing a log transformation can fix the problem.
+
+. . .
+
+<br>
+
+*instead of*
+
+$$\text{income} = \beta_0 + \beta_1 \text{age} + \varepsilon$$
+
+. . .
+
+*we could use*
+
+$$\text{income} = \beta_0 + \beta_1 \text{age} + \beta_2 \text{age}^2 + \varepsilon$$
+
+. . .
+
+It's also common to log transform either the $x$ or $y$ variable. 
+
+---
+
+## Assumption 2: Homoskedasticity
+<p class="subheader">Residuals should be spread out the same everywhere.</p>
+
+***Q.** Which one of these figures shows homoskedasticity?*
+
+<br>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Sample data
+np.random.seed(42)
+x = np.linspace(0, 10, 50)
+
+# Homoskedastic errors
+y_homo = 2 + 0.5 * x + np.random.normal(0, 1, 50)
+
+# Heteroskedastic errors (variance increases with x)
+y_hetero = 2 + 0.5 * x + np.random.normal(0, 0.2 + 0.3 * x, 50)
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Homoskedastic model
+slope1, intercept1, r1, p1, se1 = stats.linregress(x, y_homo)
+y_pred1 = intercept1 + slope1 * x
+residuals1 = y_homo - y_pred1
+
+ax1.scatter(y_pred1, residuals1, alpha=0.7)
+ax1.axhline(y=0, color='r', linestyle='-')
+ax1.set_xlabel('Fitted Values ($\hat{y}$)')
+ax1.set_ylabel('Residuals ($\hat{\\varepsilon}$)')
+ax1.set_title('Model 1', fontsize=20)
+
+# Heteroskedastic model
+slope2, intercept2, r2, p2, se2 = stats.linregress(x, y_hetero)
+y_pred2 = intercept2 + slope2 * x
+residuals2 = y_hetero - y_pred2
+
+ax2.scatter(y_pred2, residuals2, alpha=0.7)
+ax2.axhline(y=0, color='r', linestyle='-')
+ax2.set_xlabel('Fitted Values ($\hat{y}$)')
+ax2.set_title('Model 2', fontsize=20)
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+---
+
+## Assumption 2: Homoskedasticity
+<p class="subheader">Residuals should be spread out the same everywhere.</p>
+
+***Q.** Which one of these figures shows homoskedasticity?*
+
+<br>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Sample data
+np.random.seed(42)
+x = np.linspace(0, 10, 50)
+
+# Homoskedastic errors
+y_homo = 2 + 0.5 * x + np.random.normal(0, 1, 50)
+
+# Heteroskedastic errors (variance increases with x)
+y_hetero = 2 + 0.5 * x + np.random.normal(0, 0.2 + 0.3 * x, 50)
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Homoskedastic model
+slope1, intercept1, r1, p1, se1 = stats.linregress(x, y_homo)
+y_pred1 = intercept1 + slope1 * x
+residuals1 = y_homo - y_pred1
+
+ax1.scatter(y_pred1, residuals1, alpha=0.7)
+ax1.axhline(y=0, color='r', linestyle='-')
+for i in range(len(y_pred1)):
+    ax1.plot([y_pred1[i], y_pred1[i]], [residuals1[i], 0], 'green', linestyle=':', alpha=0.6)
+ax1.set_xlabel('Fitted Values ($\hat{y}$)')
+ax1.set_ylabel('Residuals ($\hat{\\varepsilon}$)')
+ax1.set_title('Model 1', fontsize=20)
+
+# Heteroskedastic model
+slope2, intercept2, r2, p2, se2 = stats.linregress(x, y_hetero)
+y_pred2 = intercept2 + slope2 * x
+residuals2 = y_hetero - y_pred2
+
+ax2.scatter(y_pred2, residuals2, alpha=0.7)
+ax2.axhline(y=0, color='r', linestyle='-')
+for i in range(len(y_pred2)):
+    ax2.plot([y_pred2[i], y_pred2[i]], [residuals2[i], 0], 'green', linestyle=':', alpha=0.6)
+ax2.set_xlabel('Fitted Values ($\hat{y}$)')
+ax2.set_title('Model 2', fontsize=20)
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+***Model 1** is equally wrong everywhere. **Model 2** has errors that grow with the fitted value.*
+
+---
+
+## Assumption 2: Homoskedasticity
+<p class="subheader">The spread of residuals should not change across values of X.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate education data (years)
+education = np.concatenate([np.random.randint(10, 13, 50), 
+                           np.random.randint(13, 17, 70),
+                           np.random.randint(17, 22, 30)])
+
+# Generate wage data with more pronounced heteroskedasticity
+base_wage = 20000
+education_effect = 2000
+error_scale = 3000 * np.power(education/10, 2)  # More dramatic increase in variance
+wages = base_wage + education_effect * education + np.random.normal(0, error_scale, len(education))
+
+# Fit regression line
+slope, intercept, r_value, p_value, std_err = stats.linregress(education, wages)
+
+# Add regression line
+x_line = np.array([min(education), max(education)])
+y_line = intercept + slope * x_line
+
+# Calculate residuals
+predictions = intercept + slope * education
+residuals = wages - predictions
+
+# Create figure with two panels
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 5))
+
+# Left panel: Scatter with regression line and spread highlighted
+ax1.scatter(education, wages, alpha=0.6, color='#4C72B0')
+ax1.plot(x_line, y_line, color='red', linewidth=2)
+
+# Add shaded regions to show increasing spread
+x_regions = [12, 16, 20]
+for i in range(len(x_regions)):
+    x = x_regions[i]
+    y_pred = intercept + slope * x
+    spread = 4 * 2000 * np.sqrt(x) / 3
+    ax1.fill_between([x-0.5, x+0.5], 
+                     [y_pred-spread, y_pred-spread],
+                     [y_pred+spread, y_pred+spread],
+                     color='gray', alpha=0.3)
+    
+ax1.set_title('Education vs. Wages: Increasing Spread', fontsize=14)
+ax1.set_xlabel('Years of Education', fontsize=12)
+ax1.set_ylabel('Annual Wage ($)', fontsize=12)
+
+# Add annotations for different education levels
+ax1.annotate('High school\n(less spread)', xy=(11.5, 60000), fontsize=10)
+ax1.annotate('Bachelor\'s\n(medium spread)', xy=(15.5, 68000), fontsize=10)
+ax1.annotate('PhD\n(more spread)', xy=(19.5, 76000), fontsize=10)
+
+# Right panel: Residuals plot showing heteroskedasticity
+ax2.scatter(predictions, residuals, alpha=0.6, color='#4C72B0')
+ax2.axhline(y=0, color='red', linestyle='-', linewidth=2)
+
+# Add visual guides to show increasing spread
+fitted_smooth = np.linspace(predictions.min(), predictions.max(), 100)
+education_equiv = (fitted_smooth - intercept) / slope
+upper_bound = 2000 * np.power(education_equiv/10, 2.2)
+lower_bound = -2000 * np.power(education_equiv/10, 2.2)
+
+ax2.plot(fitted_smooth, upper_bound, '--', color='gray', alpha=0.5, linewidth=1.5)
+ax2.plot(fitted_smooth, lower_bound, '--', color='gray', alpha=0.5, linewidth=1.5)
+
+# Add shaded region to emphasize the pattern
+ax2.fill_between(fitted_smooth, lower_bound, upper_bound, alpha=0.1, color='gray')
+
+ax2.set_title('Residuals vs. Fitted Values: Heteroskedasticity', fontsize=14)
+ax2.set_xlabel('Fitted Values (Predicted Wage)', fontsize=12)
+ax2.set_ylabel('Residuals ($)', fontsize=12)
+
+# Add text annotations for smaller/larger errors
+ax2.text(43000, -8000, 'Smaller errors', 
+        fontsize=11, ha='center', color='darkgreen', fontweight='bold')
+ax2.text(60000, -15000, 'Larger errors', 
+        fontsize=11, ha='center', color='darkred', fontweight='bold')
+
+# Add arrow annotations for spread
+ax2.annotate('', xy=(60000, 12000), xytext=(60000, -12000),
+            arrowprops=dict(arrowstyle='<->', color='darkred', lw=2))
+
+ax2.annotate('', xy=(43000, 5000), xytext=(43000, -5000),
+            arrowprops=dict(arrowstyle='<->', color='darkgreen', lw=2))
+
+sns.despine()
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+*The spread of points increases as education increases!*
+
+---
+
+## Handling Heteroskedasticity
+<p class="subheader">Robust standard errors give more accurate measures of uncertainty</p>
+
+<br><br>
+
+*Use Robust Standard Errors which adjust for the changing spread, giving more accurate p-values.*
+
+. . .
+
+<br><br>
+
+```python
+# Fit the model with robust standard errors (HC3: heteroskedastic-constant)
+robust_model = smf.ols('wages ~ education', data=df).fit(cov_type='HC3')
+```
+
+---
+
+## Assumption 3: Independence
+<p class="subheader">Each error should be unrelated to previous errors.</p>
+
+***Q**. Which of these residual lag plots shows independence?*
+
+<br>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+
+np.random.seed(42)
+
+# --- Left panel: independent residuals (cross-sectional) ---
+n = 100
+x_cross = np.random.normal(0, 1, n)
+y_cross = 2 + 0.5 * x_cross + np.random.normal(0, 1, n)
+X_cross = sm.add_constant(x_cross)
+model_cross = sm.OLS(y_cross, X_cross).fit()
+resid_cross = model_cross.resid
+
+# Shuffle to simulate no ordering — lag plot of random pairs
+lagged_cross = resid_cross[:-1]
+current_cross = resid_cross[1:]
+
+# --- Right panel: autocorrelated residuals (time series) ---
+time = np.arange(n)
+x_random = np.random.normal(0, 1, n)
+x_ts = np.zeros(n)
+x_ts[0] = x_random[0]
+for t in range(1, n):
+    x_ts[t] = 0.8 * x_ts[t-1] + x_random[t]
+x_ts += 0.03 * time
+
+y_random = np.random.normal(0, 1, n)
+y_ts = np.zeros(n)
+y_ts[0] = y_random[0]
+for t in range(1, n):
+    y_ts[t] = 0.75 * y_ts[t-1] + 0.4 * x_ts[t] + y_random[t]
+y_ts += 0.02 * time
+
+X_ts = sm.add_constant(x_ts)
+model_ts = sm.OLS(y_ts, X_ts).fit()
+resid_ts = model_ts.resid
+
+lagged_ts = resid_ts[:-1]
+current_ts = resid_ts[1:]
+
+# --- Plot ---
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Left: independent
+ax1.scatter(lagged_cross, current_cross, alpha=0.5)
+ax1.axhline(y=0, color='black', linestyle='--', alpha=0.3)
+ax1.axvline(x=0, color='black', linestyle='--', alpha=0.3)
+ax1.set_xlabel('Residual(t-1)')
+ax1.set_ylabel('Residual(t)')
+ax1.set_title('Model 1', fontsize=20)
+
+# Right: autocorrelated
+ax2.scatter(lagged_ts, current_ts, alpha=0.5)
+ax2.axhline(y=0, color='black', linestyle='--', alpha=0.3)
+ax2.axvline(x=0, color='black', linestyle='--', alpha=0.3)
+ax2.set_xlabel('Residual(t-1)')
+ax2.set_title('Model 2', fontsize=20)
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+---
+
+## Assumption 3: Independence
+<p class="subheader">Each error should be unrelated to previous errors.</p>
+
+***Q**. Which of these residual lag plots shows independence?*
+
+<br>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import statsmodels.api as sm
+
+np.random.seed(42)
+
+# --- Left panel: independent residuals (cross-sectional) ---
+n = 100
+x_cross = np.random.normal(0, 1, n)
+y_cross = 2 + 0.5 * x_cross + np.random.normal(0, 1, n)
+X_cross = sm.add_constant(x_cross)
+model_cross = sm.OLS(y_cross, X_cross).fit()
+resid_cross = model_cross.resid
+
+lagged_cross = resid_cross[:-1]
+current_cross = resid_cross[1:]
+
+# --- Right panel: autocorrelated residuals (time series) ---
+time = np.arange(n)
+x_random = np.random.normal(0, 1, n)
+x_ts = np.zeros(n)
+x_ts[0] = x_random[0]
+for t in range(1, n):
+    x_ts[t] = 0.8 * x_ts[t-1] + x_random[t]
+x_ts += 0.03 * time
+
+y_random = np.random.normal(0, 1, n)
+y_ts = np.zeros(n)
+y_ts[0] = y_random[0]
+for t in range(1, n):
+    y_ts[t] = 0.75 * y_ts[t-1] + 0.4 * x_ts[t] + y_random[t]
+y_ts += 0.02 * time
+
+X_ts = sm.add_constant(x_ts)
+model_ts = sm.OLS(y_ts, X_ts).fit()
+resid_ts = model_ts.resid
+
+lagged_ts = resid_ts[:-1]
+current_ts = resid_ts[1:]
+
+# --- Plot ---
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+
+# Left: independent + regression line
+ax1.scatter(lagged_cross, current_cross, alpha=0.5)
+ax1.axhline(y=0, color='black', linestyle='--', alpha=0.3)
+ax1.axvline(x=0, color='black', linestyle='--', alpha=0.3)
+X_lag_cross = sm.add_constant(lagged_cross)
+lag_model_cross = sm.OLS(current_cross, X_lag_cross).fit()
+pred_lag_cross = lag_model_cross.predict(X_lag_cross)
+sort_idx_cross = np.argsort(lagged_cross)
+ax1.plot(lagged_cross[sort_idx_cross], pred_lag_cross[sort_idx_cross], color='red', linestyle='--', linewidth=2)
+ax1.set_xlabel('Residual(t-1)')
+ax1.set_ylabel('Residual(t)')
+ax1.set_title('Model 1', fontsize=20)
+
+# Right: autocorrelated + regression line
+ax2.scatter(lagged_ts, current_ts, alpha=0.5)
+ax2.axhline(y=0, color='black', linestyle='--', alpha=0.3)
+ax2.axvline(x=0, color='black', linestyle='--', alpha=0.3)
+X_lag_ts = sm.add_constant(lagged_ts)
+lag_model_ts = sm.OLS(current_ts, X_lag_ts).fit()
+pred_lag_ts = lag_model_ts.predict(X_lag_ts)
+sort_idx_ts = np.argsort(lagged_ts)
+ax2.plot(lagged_ts[sort_idx_ts], pred_lag_ts[sort_idx_ts], color='red', linestyle='--', linewidth=2)
+ax2.set_xlabel('Residual(t-1)')
+ax2.set_title('Model 2', fontsize=20)
+
+sns.despine(trim=True)
+plt.tight_layout()
+```
+
+***Model 1** has no (meaningful) relationship between consecutive residuals.*
+
+***Model 2** shows a positive relationship (autocorrelation).*
+
+---
+
+## Checking Independence
+<p class="subheader">Use a lagged residual plot to check for autocorrelation.</p>
+
+<br>
+
+```python
+# Create lagged residuals
+lagged_residuals = residuals[:-1]
+current_residuals = residuals[1:]
+
+# Lag plot
+plt.scatter(lagged_residuals, current_residuals)
+```
+
+---
+
+## Assumption 4: Normality
+<p class="subheader">Residuals should be normally distributed.</p>
+
+*By the CLT we can still use GLM without this **so long as** the sample is large.*
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import scipy.stats as stats
+
+# Sample data
+np.random.seed(42)
+n = 1000
+# Normal errors
+normal_residuals = np.random.normal(0, 1, n)
+# Skewed errors
+skewed_residuals = stats.skewnorm.rvs(5, size=n)
+skewed_residuals = skewed_residuals - skewed_residuals.mean()  # Center at 0
+
+# Create subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 3))
+
+# Normal histogram with curve
+sns.histplot(normal_residuals, kde=True, ax=ax1)
+ax1.set_xlabel('Residuals ($\hat{\\varepsilon}$)')
+ax1.set_yticks([])
+ax1.set_ylabel('')
+ax1.set_title('Roughly Normal')
+
+# Skewed histogram with curve
+sns.histplot(skewed_residuals, kde=True, ax=ax2)
+ax2.set_xlabel('Residuals ($\hat{\\varepsilon}$)')
+ax2.set_yticks([])
+ax2.set_ylabel('')
+ax2.set_title('Not Normal')
+
+sns.despine(left=True, bottom=False, right=True, top=True, trim=True)
+
+plt.tight_layout()
+```
+
+---
+
+## Looking Forward
+<p class="subheader">Extending the GLM framework</p>
+
+. . .
+
+**Next Up:**
+
+- Part 4.4 | The Problem of Timeseries
+
+. . .
+
+**Later:**
+
+- Part 5.1 | Numerical Controls
+- Part 5.2 | Categorical Controls
+- Part 5.3 | Interactions
+- Part 5.4 | Model Selection
+
+. . .
+
+*> all built on the same statistical foundation*

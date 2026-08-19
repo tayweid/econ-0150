@@ -1,0 +1,540 @@
+---
+format:
+  revealjs:
+    css: custom.css
+    transition: none
+    aspect-ratio: "16:9"
+---
+
+## ECON 0150 | Economic Data Analysis {.center}
+<p class="subheader-center">The economist's data analysis skillset.</p>
+
+<br> 
+
+### *Part 5.1 | Categorical Controls*
+
+---
+
+## Two Hospitals
+<p class="subheader">Which hospital would you choose?</p>
+
+![](i/s_01.png)
+
+. . .
+
+*Hospital A has a higher survival rate, seems like the obvious choice.*
+
+---
+
+## Two Hospitals
+<p class="subheader">Hospital A looks better...</p>
+
+![](i/s_02.png)
+
+*But is this the whole story?*
+
+---
+
+## Two Hospitals
+<p class="subheader">Which hospital would you choose?</p>
+
+![](i/s_03.png)
+
+*What if we break down survival rate by case severity?*
+
+---
+
+## Two Hospitals
+<p class="subheader">Hospital B is better in **both** groups!</p>
+
+![](i/s_04.png)
+
+*Mild cases: B has 98% vs A has 95%*
+
+*Severe cases: B has 60% vs A has 50%*
+
+---
+
+## The Hidden Variable
+<p class="subheader">Why does this happen?</p>
+
+*Hospital A treats mostly mild cases, Hospital B treats mostly severe cases.*
+
+![](i/s_05.png)
+
+---
+
+## Simpson's Paradox
+<p class="subheader">A trend in aggregated data reverses when the data is split into groups.</p>
+
+<br><br>
+
+::: {.incremental}
+- Hospital A appears better overall (86% vs 68%)
+- But Hospital B is better for **both** mild AND severe cases
+- The **confounding variable** (patient severity) drives the reversal
+- The hospitals serve different patient populations
+:::
+
+---
+
+## The Lesson
+<p class="subheader">Why we need to control for other variables</p>
+
+<br><br>
+
+::: {.incremental}
+- Aggregate statistics can be misleading
+- Hidden variables can confound relationships
+- To understand true effects, we need to **control** for confounders
+- That's what Part 5 is about: adding controls to our models
+:::
+
+---
+
+## GLM: The Gender Wage Gap
+<p class="subheader">Lets use the general linear model to test for differences in wages by gender.</p>
+
+<br>
+
+**Questions:**
+
+:::{.incremental}
+- Is there a wage gap between male / female?
+- Are returns to education different between male / female?
+:::
+
+---
+
+## Model 1: Basic Gender Wage Gap
+<p class="subheader">The simplest model with just a gender indicator.</p>
+
+. . .
+
+```{python}
+# Create a visualization for Model 1
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate sample data
+n = 200
+gender = np.random.binomial(1, 0.5, n)  # 0 = female, 1 = male
+
+# Parameters
+base_wage_female = 40000  # base wage for females (β₀)
+gender_gap = 10000        # male premium (β₁)
+
+# Generate wages with gender gap and noise
+wages = base_wage_female + gender_gap * gender + np.random.normal(0, 5000, n)
+
+# Create figure
+fig, ax = plt.subplots(figsize=(11, 5))
+
+# Plot data points
+female_x = np.random.normal(0, 0.05, sum(gender==0))
+male_x = np.random.normal(1, 0.05, sum(gender==1))
+
+ax.scatter(female_x, wages[gender==0], alpha=0.15, color='blue')
+ax.scatter(male_x, wages[gender==1], alpha=0.15, color='green')
+
+# Styling
+ax.set_xlim([-1,2])
+ax.set_xticks([0, 1])
+ax.set_xticklabels(['Female', 'Male'])
+ax.set_ylabel('')
+ax.set_ylim(0,80000)
+ax.set_yticks([])
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+sns.despine(left=True, trim=True)
+plt.tight_layout()
+plt.show()
+```
+
+---
+
+## Model 1: Basic Gender Wage Gap
+<p class="subheader">The simplest model with just a gender indicator.</p>
+
+```{python}
+# Create a visualization for Model 1
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate sample data
+n = 200
+gender = np.random.binomial(1, 0.5, n)  # 0 = female, 1 = male
+
+# Parameters
+base_wage_female = 40000  # base wage for females (β₀)
+gender_gap = 10000        # male premium (β₁)
+
+# Generate wages with gender gap and noise
+wages = base_wage_female + gender_gap * gender + np.random.normal(0, 5000, n)
+
+# Create figure
+fig, ax = plt.subplots(figsize=(11, 5))
+
+# Plot data points
+female_x = np.random.normal(0, 0.05, sum(gender==0))
+male_x = np.random.normal(1, 0.05, sum(gender==1))
+
+ax.scatter(female_x, wages[gender==0], alpha=0.15, color='blue')
+ax.scatter(male_x, wages[gender==1], alpha=0.15, color='green')
+
+# Add horizontal lines for average wages
+female_avg = base_wage_female
+male_avg = base_wage_female + gender_gap
+
+# Female horizontal line
+ax.plot([0, 1], [female_avg, female_avg], 
+        color='blue', linestyle='-', linewidth=3, label='Female', alpha=0.5)
+
+# Male horizontal line
+ax.plot([0, 1], [male_avg, male_avg], 
+        color='green', linestyle='-', linewidth=3, label='Male')
+
+# Annotate β₀ and β₁
+ax.annotate('', xy=(-0.2, base_wage_female), xytext=(-0.2, 0),
+            arrowprops=dict(arrowstyle='|-|', color='blue', alpha=0.4, lw=2))
+ax.annotate('$\\beta_0$ (Base wage)', xy=(-0.2, base_wage_female/2), 
+            xytext=(-0.7, base_wage_female*0.5), fontsize=12,
+            arrowprops=dict(arrowstyle='->', color='black'))
+
+ax.annotate('', xy=(-0.2, base_wage_female+gender_gap), xytext=(-0.2, base_wage_female),
+            arrowprops=dict(arrowstyle='|-|', color='green', alpha=0.4, lw=2))
+ax.annotate('$\\beta_1$ (Gender Gap)', xy=(-0.2, base_wage_female+gender_gap/2), 
+            xytext=(-0.7, base_wage_female+gender_gap/2), fontsize=12,
+            arrowprops=dict(arrowstyle='->', color='black'))
+
+# Styling
+ax.set_xlim([-1,2])
+ax.set_xticks([0, 1])
+ax.set_xticklabels(['Female', 'Male'])
+ax.set_ylabel('')
+ax.set_ylim(0,80000)
+ax.set_yticks([])
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.legend(fontsize=11)
+
+sns.despine(left=True, trim=True)
+plt.tight_layout()
+plt.show()
+```
+
+. . .
+
+$$\text{Wage} = \beta_0 + \beta_1 \times \text{Male} + \varepsilon$$
+
+
+---
+
+## Model 1: Basic Gender Wage Gap
+<p class="subheader">The simplest model with just a gender indicator.</p>
+
+$$\text{Wage} = \beta_0 + \beta_1 \times \text{Male} + \varepsilon$$
+
+:::{.incremental}
+- β₀ is the average wage for female
+- β₁ represents the gender wage gap, the additional wage for male
+- We often call a Categorical Control variable like this a "Fixed Effect"
+:::
+
+---
+
+## Model 1: The Code
+<p class="subheader">Implementing the basic gender gap model</p>
+
+```python
+import statsmodels.formula.api as smf
+
+# Fit the model with just the male indicator
+model1 = smf.ols('INCLOG10 ~ MALE', data=data).fit()
+print(model1.summary().tables[1])
+```
+
+<br>
+
+:::{.incremental}
+- If β₁ > 0, this is evidence of a difference in income by gender
+- There are many possible explainations for this gap
+- What if the gap is related to some other factor (eg. education)?
+:::
+
+---
+
+## Model 2: Education + Gender Wage Gap
+<p class="subheader">Adding education as a control variable.</p>
+
+. . .
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+from scipy import stats
+import matplotlib.patches as patches
+from matplotlib.lines import Line2D
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate education data as "years after middle school" (starting at 0)
+n = 200
+education_after_ms = np.random.normal(6, 2, n)  # years after middle school (8th grade)
+education_after_ms = np.clip(education_after_ms, 0, 14)  # 0-14 years after middle school
+
+# Create gender indicator (0 = female, 1 = male)
+gender = np.random.binomial(1, 0.5, n)
+
+# Generate wages with gender gap
+base_wage_female = 25000  # female base wage (β₀)
+education_effect = 3000   # return to education (β₁)
+gender_gap = 8000         # male premium (β₂)
+
+wages = (base_wage_female + 
+         education_effect * education_after_ms + 
+         gender_gap * gender + 
+         np.random.normal(0, 4000, n))  # smaller error for clearer visualization
+
+# Create figure
+fig, ax = plt.subplots(figsize=(11, 5))
+
+# Plot data points with low alpha for clarity
+ax.scatter(education_after_ms[gender==0], wages[gender==0], 
+           alpha=0.15, color='blue')
+ax.scatter(education_after_ms[gender==1], wages[gender==1], 
+           alpha=0.15, color='blue')
+
+# Styling
+ax.set_xlabel('Years of Education', fontsize=12)
+ax.set_ylabel('')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.set_xlim(-3, 16)
+ax.set_xticks([0,13])
+ax.set_ylim(0, 80000)
+ax.set_yticks([])
+ax.set_yticklabels([])
+
+sns.despine(left=True, trim=True)
+
+plt.tight_layout()
+```
+
+---
+
+## Model 2: Education + Gender Wage Gap
+<p class="subheader">Adding education as a control variable.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+from scipy import stats
+import matplotlib.patches as patches
+from matplotlib.lines import Line2D
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate education data as "years after middle school" (starting at 0)
+n = 200
+education_after_ms = np.random.normal(6, 2, n)  # years after middle school (8th grade)
+education_after_ms = np.clip(education_after_ms, 0, 14)  # 0-14 years after middle school
+
+# Create gender indicator (0 = female, 1 = male)
+gender = np.random.binomial(1, 0.5, n)
+
+# Generate wages with gender gap
+base_wage_female = 25000  # female base wage (β₀)
+education_effect = 3000   # return to education (β₁)
+gender_gap = 8000         # male premium (β₂)
+
+wages = (base_wage_female + 
+         education_effect * education_after_ms + 
+         gender_gap * gender + 
+         np.random.normal(0, 4000, n))  # smaller error for clearer visualization
+
+# Create figure
+fig, ax = plt.subplots(figsize=(11, 5))
+
+# Plot data points with low alpha for clarity
+ax.scatter(education_after_ms[gender==0], wages[gender==0], 
+           alpha=0.15, color='blue')
+ax.scatter(education_after_ms[gender==1], wages[gender==1], 
+           alpha=0.15, color='green')
+
+# Styling
+ax.set_xlabel('Years of Education', fontsize=12)
+ax.set_ylabel('')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.set_xlim(-3, 16)
+ax.set_xticks([0,13])
+ax.set_ylim(0, 80000)
+ax.set_yticks([])
+ax.set_yticklabels([])
+
+sns.despine(left=True, trim=True)
+
+plt.tight_layout()
+```
+
+---
+
+## Model 2: Education + Gender Wage Gap
+<p class="subheader">Adding education as a control variable.</p>
+
+```{python}
+#| echo: false
+#| fig-align: center
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pandas as pd
+from scipy import stats
+import matplotlib.patches as patches
+from matplotlib.lines import Line2D
+
+# Set seed for reproducibility
+np.random.seed(42)
+
+# Generate education data as "years after middle school" (starting at 0)
+n = 200
+education_after_ms = np.random.normal(6, 2, n)  # years after middle school (8th grade)
+education_after_ms = np.clip(education_after_ms, 0, 14)  # 0-14 years after middle school
+
+# Create gender indicator (0 = female, 1 = male)
+gender = np.random.binomial(1, 0.5, n)
+
+# Generate wages with gender gap
+base_wage_female = 25000  # female base wage (β₀)
+education_effect = 3000   # return to education (β₁)
+gender_gap = 8000         # male premium (β₂)
+
+wages = (base_wage_female + 
+         education_effect * education_after_ms + 
+         gender_gap * gender + 
+         np.random.normal(0, 4000, n))  # smaller error for clearer visualization
+
+# Create figure
+fig, ax = plt.subplots(figsize=(11, 5))
+
+# Plot data points with low alpha for clarity
+ax.scatter(education_after_ms[gender==0], wages[gender==0], 
+           alpha=0.15, color='blue')
+ax.scatter(education_after_ms[gender==1], wages[gender==1], 
+           alpha=0.15, color='green')
+
+# Create stylized regression lines
+x_line = np.linspace(0, 13, 100)
+y_female = base_wage_female + education_effect * x_line
+y_male = base_wage_female + gender_gap + education_effect * x_line
+
+# Plot regression lines
+ax.plot(x_line, y_male, color='green', linewidth=3, label='Male')
+ax.plot(x_line, y_female, color='blue', linewidth=3, label='Female')
+
+# β₀ (female intercept) - using a bracket
+ax.annotate('', xy=(-0.4, base_wage_female), xytext=(-0.4, 0),
+            arrowprops=dict(arrowstyle='|-|', color='blue', alpha=0.4, lw=2))
+ax.annotate('$\\beta_0$ (Base wage)', xy=(-0.4, base_wage_female/2), 
+            xytext=(-3, base_wage_female*0.5), fontsize=12,
+            arrowprops=dict(arrowstyle='->', color='black'))
+
+# β₂ (male premium) - using a bracket
+ax.annotate('', xy=(-0.4, base_wage_female+gender_gap), xytext=(-0.4, base_wage_female),
+            arrowprops=dict(arrowstyle='|-|', color='green', alpha=0.4, lw=2))
+ax.annotate('$\\beta_2$ (Wage Gap)', xy=(-0.4, base_wage_female+gender_gap/2), 
+            xytext=(-3, base_wage_female + gender_gap*0.5), fontsize=12,
+            arrowprops=dict(arrowstyle='->', color='black'))
+
+# Styling
+ax.set_xlabel('Years of Education', fontsize=12)
+ax.set_ylabel('')
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.set_xlim(-3, 16)
+ax.set_xticks([0,13])
+ax.set_ylim(0, 80000)
+ax.set_yticks([])
+ax.set_yticklabels([])
+
+ax.legend(fontsize=11)
+
+sns.despine(left=True, trim=True)
+
+plt.tight_layout()
+```
+
+. . .
+
+$$\text{Wage} = \beta_0 + \beta_1 \times \text{Education} + \beta_2 \times \text{Male} + \varepsilon$$
+
+---
+
+## Model 2: Education + Gender Wage Gap
+<p class="subheader">Adding education as a control variable.</p>
+
+$$\text{Wage} = \beta_0 + \beta_1 \times \text{Education} + \beta_2 \times \text{Male} + \varepsilon$$
+
+*> β₀ is the base wage for those with no post-middle school education*
+
+. . .
+
+*> β₂ represents the gender wage gap, added to the intercept for male only*
+
+. . .
+
+*> model assumes parallel lines, same returns to education (β₁) for everyone*
+
+---
+
+## Model 2: The Code
+<p class="subheader">Implementing the gender fixed effect model</p>
+
+```python
+import statsmodels.formula.api as smf
+
+# Fit the model with male indicator
+model2 = smf.ols('INCLOG10 ~ EDU + MALE', data=data).fit()
+print(model2.summary().tables[1])
+```
+
+<br>
+
+. . .
+
+- If β₂ > 0, there is evidence of a gender wage gap.
+
+---
+
+## Summary: Categorical Controls
+<p class="subheader">What we learned in Part 5.1</p>
+
+<br><br>
+
+::: {.incremental}
+- **Simpson's Paradox** shows why we need to control for confounding variables
+- **Categorical controls** (fixed effects) capture level differences between groups
+- Model 1: Just the indicator: tests for differences
+- Model 2: Indicator + continuous variable: parallel lines with different intercepts
+- **Next:** What if the *slopes* differ between groups?: Part 5.2 Interactions
+:::
