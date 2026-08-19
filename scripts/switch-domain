@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Switch the course site to econ-0150.tayweid.io.
+# Run only once DNS resolves — verified in step 1.
+set -euo pipefail
+DOMAIN="econ-0150.tayweid.io"
+OLD="https://tayweid.github.io/econ-0150/"
+NEW="https://${DOMAIN}/"
+cd "$(dirname "$0")/.."
+
+echo "== 1. verify DNS =="
+if ! dig +short "$DOMAIN" | grep -q .; then
+  echo "   $DOMAIN does not resolve yet. Add this record at Squarespace:"
+  echo "     Type: CNAME   Host: econ-0150   Value: tayweid.github.io."
+  exit 1
+fi
+dig +short "$DOMAIN" | sed 's/^/   /'
+
+echo "== 2. CNAME file =="
+echo "$DOMAIN" > CNAME
+echo "   wrote CNAME -> $DOMAIN"
+
+echo "== 3. repoint baked-in site URLs =="
+COUNT=$(grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' --include='*.md' . 2>/dev/null | wc -l | tr -d ' ')
+grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' --include='*.md' . 2>/dev/null \
+  | while IFS= read -r f; do sed -i '' "s|${OLD}|${NEW}|g" "$f"; done
+echo "   rewrote $COUNT files"
+
+echo "== 4. verify =="
+left=$(grep -rl "$OLD" --include='*.ipynb' --include='*.qmd' --include='*.html' --include='*.md' . 2>/dev/null | wc -l | tr -d ' ')
+echo "   files still referencing the old base: $left"
+python3 - <<'PY'
+import glob, json
+bad=[f for f in glob.glob('parts/**/*.ipynb', recursive=True)
+     if not any(s in f for s in ('.virtual_documents','.ipynb_checkpoints'))]
+n=0
+for f in bad:
+    try: json.load(open(f))
+    except Exception: n+=1; print("   INVALID JSON:", f)
+print(f"   notebooks checked: {len(bad)}, invalid: {n}")
+PY
+
+echo
+echo "Next: commit, push, then Settings -> Pages -> Custom domain = $DOMAIN"
+echo "and enable 'Enforce HTTPS' once the cert is issued."
