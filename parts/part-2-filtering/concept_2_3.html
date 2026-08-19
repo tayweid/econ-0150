@@ -198,10 +198,96 @@
 <section id="econ-0150-economic-data-analysis" class="slide level2 center">
 <h2>ECON 0150 | Economic Data Analysis</h2>
 <p class="subheader-center">
-The economist’s data analysis pipeline.
+The economist’s data analysis skillset.
 </p>
 <p><br></p>
-<h3 id="part-2.3-filtering-data"><em>Part 2.3 | Filtering Data</em></h3>
+<h3 id="part-2.3-numerical-numerical-categorical"><em>Part 2.3 | Numerical × Numerical × Categorical</em></h3>
+</section>
+<section id="cross-sectional-relationships" class="slide level2">
+<h2>Cross-Sectional Relationships</h2>
+<p class="subheader">
+How does GDP relate to coffee production in the Americas?
+</p>
+
+<img data-src="../part-2-1/i/c_13.png" class="r-stretch"><div class="fragment">
+<p><em>&gt; lets use a filter with this data</em></p>
+</div>
+</section>
+<section id="cross-sectional-relationships-1" class="slide level2">
+<h2>Cross-Sectional Relationships</h2>
+<p class="subheader">
+How does GDP relate to coffee production in the Americas?
+</p>
+
+<img data-src="../part-2-1/i/c_14.png" class="r-stretch"><div class="fragment">
+<p><em>&gt; looks positive, but we’ll formally test this in Part 4</em></p>
+</div>
+</section>
+<section id="cross-sectional-relationships-2" class="slide level2">
+<h2>Cross-Sectional Relationships</h2>
+<p class="subheader">
+Which country in the Americas produces the most coffee?
+</p>
+
+<img data-src="../part-2-1/i/c_14.png" class="r-stretch"><p><em>&gt; looks positive, but we’ll formally test this in Part 4</em></p>
+</section>
+<section id="cross-sectional-relationships-3" class="slide level2">
+<h2>Cross-Sectional Relationships</h2>
+<p class="subheader">
+Which country in the Americas produces the most coffee?
+</p>
+
+<img data-src="../part-2-1/i/c_15.png" class="r-stretch"><p><em>&gt; </em></p>
+</section>
+<section id="cross-sectional-relationships-4" class="slide level2">
+<h2>Cross-Sectional Relationships</h2>
+<p class="subheader">
+Which country’s GDP is closest to Brazil’s GDP?
+</p>
+
+<img data-src="../part-2-1/i/c_15.png" class="r-stretch"><p><em>&gt; we can use the horizontal axis</em></p>
+</section>
+<section id="cross-sectional-relationships-5" class="slide level2">
+<h2>Cross-Sectional Relationships</h2>
+<p class="subheader">
+Which country’s GDP is closest to Brazil’s GDP?
+</p>
+
+<img data-src="../part-2-1/i/c_16.png" class="r-stretch"><p><em>&gt; we can use a vertical line here to find the closest on the horizontal axis</em></p>
+</section>
+<section id="encoding-categories" class="slide level2">
+<h2>Encoding Categories</h2>
+<p class="subheader">
+We can use color and shape to distinguish categorical groups
+</p>
+<p><br></p>
+<div>
+<ul>
+<li class="fragment"><strong>Color encoding</strong> maps categories to different colors</li>
+<li class="fragment"><strong>Shape encoding</strong> maps categories to different shapes</li>
+<li class="fragment">Useful for comparing groups within a scatterplot</li>
+</ul>
+</div>
+</section>
+<section id="color-encoding" class="slide level2">
+<h2>Color Encoding</h2>
+<p class="subheader">
+Each COLOR represents a continent
+</p>
+
+<img data-src="../part-2-1/i/e_09.png" class="r-stretch"><div class="fragment">
+<p><em>&gt; different colors = different continents</em></p>
+</div>
+</section>
+<section id="shape-encoding" class="slide level2">
+<h2>Shape Encoding</h2>
+<p class="subheader">
+Each SHAPE represents a continent
+</p>
+
+<img data-src="../part-2-1/i/e_04.png" class="r-stretch"><div class="fragment">
+<p><em>&gt; circles = Americas, squares = Africa, triangles = Asia</em></p>
+</div>
 </section>
 <section id="a-new-us-coffee-shop" class="slide level2">
 <h2>A New US Coffee Shop</h2>
@@ -221,8 +307,8 @@ Lets use Starbucks_Location_Hours.csv to inform a new shop’s hours.
 Q. When might be a good time for the coffee shop to open?
 </p>
 <div class="fragment">
-<div id="d3d0873f" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="71">
+<div id="6656ea14" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -243,7 +329,7 @@ Q. When might be a good time for the coffee shop to open?
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">storeNumber</th>
-<th data-quarto-table-cell-role="th">COUNTRY_CODE</th>
+<th data-quarto-table-cell-role="th">country</th>
 <th data-quarto-table-cell-role="th">open</th>
 <th data-quarto-table-cell-role="th">close</th>
 <th data-quarto-table-cell-role="th">duration_hr</th>
@@ -495,7 +581,7 @@ Filtering categorical data requires logical operations.
 Q. When might be a good time for the coffee shop to open?
 </p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="co"># Decide whether each row's country code is 'US'</span></span>
-<span id="cb2-2"><a href=""></a>us_codes <span class="op">=</span> (hours[<span class="st">'COUNTRY_CODE'</span>] <span class="op">==</span> <span class="st">'US'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href=""></a>us_codes <span class="op">=</span> (hours[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'US'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="coffee-shop-hours-filter-for-us-locations-1" class="slide level2">
 <h2>Coffee Shop Hours: filter for US locations</h2>
@@ -503,7 +589,7 @@ Q. When might be a good time for the coffee shop to open?
 Q. When might be a good time for the coffee shop to open?
 </p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="co"># Decide whether each row's country code is 'US'</span></span>
-<span id="cb3-2"><a href=""></a>us_codes <span class="op">=</span> (hours[<span class="st">'COUNTRY_CODE'</span>] <span class="op">==</span> <span class="st">'US'</span>)</span>
+<span id="cb3-2"><a href=""></a>us_codes <span class="op">=</span> (hours[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'US'</span>)</span>
 <span id="cb3-3"><a href=""></a></span>
 <span id="cb3-4"><a href=""></a><span class="co"># Select the rows with True</span></span>
 <span id="cb3-5"><a href=""></a>us_hours <span class="op">=</span> hours[us_codes]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -514,7 +600,7 @@ Q. When might be a good time for the coffee shop to open?
 Q. When might be a good time for the coffee shop to open?
 </p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># Select the rows with country code equal to 'US'</span></span>
-<span id="cb4-2"><a href=""></a>us_hours <span class="op">=</span> hours[hours[<span class="st">'COUNTRY_CODE'</span>] <span class="op">==</span> <span class="st">'US'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href=""></a>us_hours <span class="op">=</span> hours[hours[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'US'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="coffee-shop-hours-filter-for-us-locations-3" class="slide level2">
 <h2>Coffee Shop Hours: filter for US locations</h2>
@@ -532,7 +618,7 @@ Q. When might be a good time for a US coffee shop to open?
 </p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># Find the data in either the US or in Canada (CA)</span></span>
 <span id="cb6-2"><a href=""></a><span class="co"># Method 1: Using OR operator |</span></span>
-<span id="cb6-3"><a href=""></a>us_ca <span class="op">=</span> hours[(hours[<span class="st">'COUNTRY_CODE'</span>] <span class="op">==</span> <span class="st">'US'</span>) <span class="op">|</span> (hours[<span class="st">'COUNTRY_CODE'</span>] <span class="op">==</span> <span class="st">'CA'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-3"><a href=""></a>us_ca <span class="op">=</span> hours[(hours[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'US'</span>) <span class="op">|</span> (hours[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'CA'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="coffee-shop-hours-shops-in-either-us-or-ca-1" class="slide level2">
 <h2>Coffee Shop Hours: shops in either US or CA</h2>
@@ -541,7 +627,7 @@ Q. When might be a good time for a US coffee shop to open?
 </p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># Find the data in either the US or in Canada (CA)</span></span>
 <span id="cb7-2"><a href=""></a><span class="co"># Method 2: Using isin()</span></span>
-<span id="cb7-3"><a href=""></a>us_ca <span class="op">=</span> hours[hours[<span class="st">'COUNTRY_CODE'</span>].isin([<span class="st">'US'</span>, <span class="st">'CA'</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href=""></a>us_ca <span class="op">=</span> hours[hours[<span class="st">'country'</span>].isin([<span class="st">'US'</span>, <span class="st">'CA'</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="coffee-shop-hours-shops-in-either-us-or-ca-2" class="slide level2">
 <h2>Coffee Shop Hours: shops in either US or CA</h2>
@@ -558,7 +644,7 @@ Q. When might be a good time for a US coffee shop to open?
 Q. When might be a good time for a US coffee shop to open?
 </p>
 <p>What would this dataset look like?</p>
-<div class="sourceCode" id="cb9" data-code-line-numbers="4,7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>hours[(hours[<span class="st">'COUNTRY_CODE'</span>] <span class="op">==</span> <span class="st">'US'</span>) <span class="op">&amp;</span> (hours[<span class="st">'COUNTRY_CODE'</span>] <span class="op">==</span> <span class="st">'CN'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9" data-code-line-numbers="4,7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a>hours[(hours[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'US'</span>) <span class="op">&amp;</span> (hours[<span class="st">'country'</span>] <span class="op">==</span> <span class="st">'CN'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <p><em>&gt; it would contain no data!</em></p>
 <p><img data-src="i/i_03_answer.png"></p>
@@ -575,8 +661,8 @@ Q. How long might be good for the coffee shop to stay open?
 <li>How long should we stay open?</li>
 </ul>
 <div class="fragment">
-<div id="d084038a" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="72">
+<div id="ce0816de" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -597,7 +683,7 @@ Q. How long might be good for the coffee shop to stay open?
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">storeNumber</th>
-<th data-quarto-table-cell-role="th">COUNTRY_CODE</th>
+<th data-quarto-table-cell-role="th">country</th>
 <th data-quarto-table-cell-role="th">open</th>
 <th data-quarto-table-cell-role="th">close</th>
 <th data-quarto-table-cell-role="th">duration_hr</th>
@@ -720,8 +806,8 @@ Q. How long might be good for the coffee shop to stay open?
 </p>
 <p>How would we filter for coffee shops that open before 7 AM?</p>
 <p><br></p>
-<div id="51041644" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="73">
+<div id="b76a32db" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -742,7 +828,7 @@ Q. How long might be good for the coffee shop to stay open?
 <tr class="header" style="text-align: right;">
 <th data-quarto-table-cell-role="th"></th>
 <th data-quarto-table-cell-role="th">storeNumber</th>
-<th data-quarto-table-cell-role="th">COUNTRY_CODE</th>
+<th data-quarto-table-cell-role="th">country</th>
 <th data-quarto-table-cell-role="th">open</th>
 <th data-quarto-table-cell-role="th">close</th>
 <th data-quarto-table-cell-role="th">duration_hr</th>
@@ -944,7 +1030,7 @@ Q. How long might be good for the coffee shop to stay open?
 Q. How long might be good for the coffee shop to stay open?
 </p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href=""></a><span class="co"># Filter for shops that open early AND are in US or Canada</span></span>
-<span id="cb12-2"><a href=""></a>early_us_ca <span class="op">=</span> hours[(hours[<span class="st">'open'</span>] <span class="op">&lt;</span> <span class="dv">7</span>) <span class="op">&amp;</span> (hours[<span class="st">'COUNTRY_CODE'</span>].isin([<span class="st">'US'</span>, <span class="st">'CA'</span>]))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-2"><a href=""></a>early_us_ca <span class="op">=</span> hours[(hours[<span class="st">'open'</span>] <span class="op">&lt;</span> <span class="dv">7</span>) <span class="op">&amp;</span> (hours[<span class="st">'country'</span>].isin([<span class="st">'US'</span>, <span class="st">'CA'</span>]))]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="coffee-shop-hours-combine-filters-1" class="slide level2">
 <h2>Coffee Shop Hours: combine filters</h2>
