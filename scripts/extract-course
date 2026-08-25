@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""One-off: parse the committed part-*.html pages into course-content.yml.
+
+Kept for provenance; after the initial extraction, course-content.yml is the
+source of truth and scripts/build-course regenerates the pages from it.
+"""
+import re, yaml, sys
+
+def infer_icon(href):
+    if 'colab.research.google.com' in href: return 'fa-external-link'
+    if href.startswith('data/'): return 'fa-file-text-o'
+    return 'fa-file-pdf-o'
+
+def links(html):
+    out = []
+    for m in re.finditer(r'<a href="([^"]*)" class="download-link" target="_blank"><i class="fa (fa-[a-z-]+)"></i> ([^<]*)</a>', html):
+        link = {'label': m.group(3), 'href': m.group(1)}
+        if m.group(2) != infer_icon(m.group(1)): link['icon'] = m.group(2)
+        out.append(link)
+    return out
+
+course = {
+    'code': 'ECON 0150',
+    'title': 'Economic Data Analysis',
+    'brand': ['ECONOMIC', 'DATA', 'ANALYSIS'],
+    'home': 'econ-0150.html',
+    'extra_nav': [{'label': 'Projects', 'href': 'projects.html'}],
+    'stylesheet': 'https://tayweid.github.io/course-assets/course.css',
+    'script': 'https://tayweid.github.io/course-assets/course.js',
+    'parts': {},
+}
+
+for n in range(1, 7):
+    t = open(f'part-{n}.html').read()
+    part = {}
+    m = re.search(r'<h1 class="title title-tight">Part \d+ \| ([^<]*)</h1>\s*<i class="subtitle-text">([^<]*)</i>', t)
+    part['title'], part['tagline'] = m.group(1), m.group(2)
+    m = re.search(r'<hr class="title-rule">\s*<p>\s*(.*?)\s*</p>', t, re.S)
+    part['introduction'] = ' '.join(m.group(1).split())
+    navs = dict(re.findall(r'<li><a href="#part-(\d+)" class="nav-link-right">[\d.]+ \| ([^<]*)</a></li>', t))
+    part['blocks'] = []
+    for bm in re.finditer(r'<div class="block" id="part-(\d+)">(.*?)\n            </div>\n', t, re.S):
+        bid, bh = bm.group(1), bm.group(2)
+        blk = {'id': f"{bid[0]}.{bid[1:]}", 'nav': navs.get(bid, '')}
+        hm = re.search(r'<h1 class="subtitle">Block [\d.]+ \| ([^<]*)</h1>\s*<p class="block-description">([^<]*)</p>', bh)
+        blk['title'], blk['description'] = hm.group(1), hm.group(2)
+        em = re.search(r'<div class="path-episode"(?: data-video-id="([^"]*)")?>.*?<p class="path-name">([^<]*)<span class="path-desc">([^<]*)</span></p>(?:\s*<div class="path-links">(.*?)</div>)?\s*</div>', bh, re.S)
+        ep = {'name': em.group(2).rstrip(), 'desc': em.group(3)}
+        if em.group(1): ep['video'] = em.group(1)
+        if em.group(4): ep['links'] = links(em.group(4))
+        blk['episode'] = ep
+        blk['steps'] = []
+        for sm in re.finditer(r'<li class="path-step([^"]*)"(?: data-video-id="([^"]*)")?>\s*<span class="path-dot[^"]*"[^>]*></span>\s*<div>\s*<p class="path-name">([^<]*)<span class="path-where">([^<]*)</span></p>(.*?)</div>\s*(?:<a class="path-thumb" href="https://www\.youtube\.com/watch\?v=([^"]*)"[^>]*><img[^>]*></a>\s*)?</li>', bh, re.S):
+            cls, dv, name, where, inner, thumb = sm.groups()
+            st = {'name': name.rstrip()}
+            if 'path-step-extra' in cls:
+                st['kind'] = 'livestream'
+                st['video'] = dv or thumb
+            else:
+                st['kind'] = 'exercise' if where == 'in class' else 'homework'
+                sub = re.search(r'<p class="path-sub">([^<]*)</p>', inner)
+                if sub: st['sub'] = sub.group(1)
+                lk = re.search(r'<div class="path-links">(.*?)</div>', inner, re.S)
+                if lk: st['links'] = links(lk.group(1))
+                due = re.search(r'<p class="path-due">([^<]*)</p>', inner)
+                if due: st['due'] = due.group(1)
+                if thumb: st['video'] = thumb
+            blk['steps'].append(st)
+        part['blocks'].append(blk)
+    mm = re.search(r'(<div class="block checkpoint" id="[^"]*">.*?\n            </div>)\n', t, re.S)
+    if mm:
+        mh = mm.group(1)
+        std = re.search(r'id="miniexam">\s*<h1 class="subtitle">MiniExam (\d+)</h1>\s*<p class="block-description">([^<]*)</p>.*?<div class="path-episode" data-video-id="([^"]*)">.*?<p class="path-name">([^<]*)<span class="path-desc">([^<]*)</span></p>\s*</div>\s*<ol class="path-steps path-checkpoint">\s*<li class="path-step">\s*<span class="path-dot"[^>]*></span>\s*<div>\s*<p class="path-name">(Demo \d+) <span class="path-where">home</span></p>\s*<div class="path-links">(.*?)</div>\s*</div>\s*</li>', mh, re.S)
+        if std:
+            me = {'number': std.group(1), 'description': std.group(2),
+                  'demo': {'video': std.group(3), 'name': std.group(4).rstrip(), 'desc': std.group(5)},
+                  'demo_links': links(std.group(7))}
+            nx = re.search(r'path-step-next.*?<p class="path-name">Part (\d+)</p>', mh, re.S)
+            if nx: me['next'] = int(nx.group(1))
+            part['checkpoint'] = me
+        else:
+            part['checkpoint_raw'] = mh
+    course['parts'][str(n)] = part
+    print(f"part {n}: {len(part['blocks'])} blocks, checkpoint: {'std' if 'checkpoint' in part else ('raw' if 'checkpoint_raw' in part else 'none')}", file=sys.stderr)
+
+class D(yaml.SafeDumper): pass
+def rep(dumper, data):
+    if '\n' in data:
+        return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|')
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data)
+D.add_representer(str, rep)
+open('course-content.yml', 'w').write(yaml.dump(course, Dumper=D, sort_keys=False, allow_unicode=True, width=100000))
+print("wrote course-content.yml", file=sys.stderr)
