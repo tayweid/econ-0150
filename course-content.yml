@@ -52,7 +52,6 @@ parts:
           href: data/S26.csv
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-1/Homework_1_1_sols.ipynb
-        due: Due Friday, January 23 at 5PM on Gradescope
     - id: '1.2'
       nav: Numerical
       title: Cross-Sectional (Numerical) Data
@@ -89,7 +88,6 @@ parts:
           href: data/S26.csv
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-2/Homework_1_2_sols.ipynb
-        due: Due Friday, January 30 (not Jan 23!) at 5PM on Gradescope
     - id: '1.3'
       nav: Timeseries
       title: Timeseries Data
@@ -131,7 +129,6 @@ parts:
           href: data/Monthly_Coffee_Prices_dated.csv
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-3/Homework_1_3_sols.ipynb
-        due: Due Friday, January 30 at 5PM on Gradescope
         video: C3QyJ6ORnoo
     - id: '1.4'
       nav: Panel (Long)
@@ -171,7 +168,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-4/Homework_1_4.ipynb
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-4/Homework_1_4_sols.ipynb
-        due: Due Friday Feb 6 at 5PM on Gradescope
     - id: '1.5'
       nav: Panel (Wide)
       title: Panel Data (Wide Format)
@@ -207,7 +203,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5.ipynb
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5_sols.ipynb
-        due: Due Friday Feb 6 at 5PM on Gradescope
     checkpoint:
       number: '1'
       description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts we've developed. If you understand the concepts and feel comfortable with the exercises and homework, you'll be well prepared.
@@ -260,7 +255,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Homework_2_1.ipynb
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Homework_2_1_sols.ipynb
-        due: Due on Gradescope on Friday February 13 at 5PM
     - id: '2.2'
       nav: N × C
       title: Numerical × Categorical
@@ -295,7 +289,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Homework_2_2.ipynb
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Homework_2_2_sols.ipynb
-        due: Due on Gradescope on Friday February 20 at 5PM
     - id: '2.3'
       nav: N × N × C
       title: Numerical × Numerical × Categorical
@@ -330,7 +323,6 @@ parts:
           href: parts/part-2-filtering/HW_2_3.pdf
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-3/Homework_2_3_sols.ipynb
-        due: Due on Gradescope on Tuesday (instead of Friday!) February 24 at Midnight
     checkpoint:
       number: '2'
       description: 'MiniExam 2 will be held on Februrary 24 and covers everything in Part 2: numerical relationships, grouped comparisons, and conditional analysis. Practice with the exercises and homework to prepare.'
@@ -378,7 +370,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Homework_3_1.ipynb
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Homework_3_1_sols.ipynb
-        due: Due on Friday, February 27th at 5PM on Gradescope
     - id: '3.2'
       nav: Sampling &amp; CLT
       title: Sampling and Central Limit Theorem
@@ -406,7 +397,6 @@ parts:
           href: parts/part-3-2/HW_3_2.pdf
         - label: Notebook
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-2/Homework_3_2.ipynb
-        due: Due on Friday, March 6 at 5PM on Gradescope
     - id: '3.3'
       nav: Uncertainty
       title: Quantifying Uncertainty
@@ -434,7 +424,6 @@ parts:
           href: parts/part-3-3/HW_3_3.pdf
         - label: Notebook
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-3/Homework_3_3.ipynb
-        due: Due on Friday, March 20 at 5PM on Gradescope
     - id: '3.4'
       nav: Simplest GLM
       title: The Simplest Linear Model
@@ -462,7 +451,6 @@ parts:
           href: parts/part-3-4/HW_3_4.pdf
         - label: Notebook
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-4/Homework_3_4.ipynb
-        due: Due on Friday, March 20 at 5PM on Gradescope
     checkpoint:
       number: '3'
       description: MiniExam 3 covers everything in Part 3, focussing on testing your understanding of statistical concepts including random variables, sampling theory, confidence intervals, and hypothesis testing. MiniExams focuses on the application of the concepts we've developed. Practice with Homework and Exercises to prepare effectively.
@@ -517,7 +505,6 @@ parts:
           href: data/BRFSS_cleaned.csv
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Homework_4_1_sols.ipynb
-        due: Due on Sunday March 29 at 11:59PM on Gradescope
     - id: '4.2'
       nav: Categorical
       title: Categorical Predictors
@@ -549,7 +536,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Homework_4_2.ipynb
         - label: BRFSS Data
           href: data/BRFSS_cleaned.csv
-        due: Due on Sunday March 29 at 11:59PM on Gradescope
     - id: '4.3'
       nav: Diagnostics
       title: Model Diagnostics
@@ -581,7 +567,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Homework_4_3.ipynb
         - label: Happiness/GDP Data
           href: data/Life_Evaluation_GDP_PerCap.csv
-        due: Due on Sunday April 5 at 11:59PM on Gradescope
     - id: '4.4'
       nav: Timeseries
       title: The Problem of Timeseries
@@ -613,7 +598,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Homework_4_4.ipynb
         - label: Okun Data
           href: data/okun.csv
-        due: Due on Sunday April 5 at 11:59PM on Gradescope
     checkpoint:
       number: '4'
       description: 'MiniExam 4 will test your understanding of everything in Part 4: numerical predictors, categorical predictors, model diagnostics, and timeseries.'
@@ -670,7 +654,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-1/Homework_5_1.ipynb
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-1/Homework_5_1_sols.ipynb
-        due: Due on Sunday April 12 at 11:59PM on Gradescope.
     - id: '5.2'
       nav: Interactions
       title: Interactions
@@ -697,7 +680,6 @@ parts:
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-2/Homework_5_2.ipynb
         - label: Solutions
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-2/Homework_5_2_sols.ipynb
-        due: Due on Sunday April 12 at 11:59PM on Gradescope.
     - id: '5.3'
       nav: Numerical
       title: Numerical Controls
@@ -728,7 +710,6 @@ parts:
           href: parts/part-5-3/HW_5_3.pdf
         - label: Notebook
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-3/Homework_5_3.ipynb
-        due: Due on Sunday April 19 at 11:59PM on Gradescope.
     - id: '5.4'
       nav: Causation
       title: Causation, Controls, and Model Selection
@@ -755,7 +736,6 @@ parts:
           href: parts/part-5-4/HW_5_4.pdf
         - label: Notebook
           href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-4/Homework_5_4.ipynb
-        due: Due on Sunday April 19 at 11:59PM on Gradescope.
     checkpoint:
       number: '5'
       description: ''
