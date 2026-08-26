@@ -189,7 +189,7 @@ def render_part(num, part)
         <!-- MODULAR CSS -->
         <link rel="stylesheet" href="#{COURSE['stylesheet']}">
 
-            <script>if (window.self !== window.top) document.documentElement.classList.add('embedded');</script>
+            <script>if (window.self !== window.top) { document.documentElement.classList.add('embedded'); var fitEmbed = function () { var w = window.innerWidth; document.documentElement.style.zoom = w < 1240 ? w / 1240 : ""; }; window.addEventListener("resize", fitEmbed); fitEmbed(); }</script>
     </head>
 
 
