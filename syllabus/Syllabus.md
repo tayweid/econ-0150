@@ -3,7 +3,8 @@
 #text(size: 18pt, style: "italic")[Introduction to the economist's data analysis skillset] \
 #line(length: 20%)
 #text(size: 15pt)[Taylor J. Weidman] \
-#text(size: 13pt)[4702 Posvar | taylorjweidman\@pitt.edu] \
+#text(size: 13pt)[Office Hours: 2:30 - 3:30 Wed/Thurs] \ 
+#text(size: 13pt)[4702 Posvar | taylorjweidman\@pitt.edu]
 #line(length: 20%)
 ```
 
