@@ -35,23 +35,9 @@ parts:
       - name: Exercise 1.1
         kind: exercise
         sub: Coffee Shop Locations
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-1/Exercise_1_1.ipynb
-        - label: Coffee Shops
-          href: data/Coffee_Shops.csv
         video: fWk7LBDcfY8
       - name: Homework 1.1
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-1-1/HW_1_1.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-1/Homework_1_1.ipynb
-        - label: Spring 26 Survey
-          href: data/S26.csv
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-1/Homework_1_1_sols.ipynb
     - id: '1.2'
       nav: Numerical
       title: Cross-Sectional (Numerical) Data
@@ -71,23 +57,9 @@ parts:
       - name: Exercise 1.2
         kind: exercise
         sub: Customer Profiles
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-2/Exercise_1_2.ipynb
-        - label: Customer Profiles
-          href: data/Starbucks_Customer_Profiles_40k.csv
         video: 9lcLcB6k4dk
       - name: Homework 1.2
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-1-2/HW_1_2.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-2/Homework_1_2.ipynb
-        - label: Spring 26 Survey
-          href: data/S26.csv
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-2/Homework_1_2_sols.ipynb
     - id: '1.3'
       nav: Timeseries
       title: Timeseries Data
@@ -110,25 +82,9 @@ parts:
       - name: Exercise 1.3
         kind: exercise
         sub: Coffee Prices Over Time
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-3/Exercise_1_3.ipynb
-        - label: Coffee Prices
-          href: data/Monthly_Coffee_Prices_dated.csv
         video: VYKmhv_yTQc
       - name: Homework 1.3
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-1-3/HW_1_3.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-3/Homework_1_3.ipynb
-        - label: US Real GDP
-          href: data/us_real_gdp.csv
-        - label: Coffee Prices
-          href: data/Monthly_Coffee_Prices_dated.csv
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-3/Homework_1_3_sols.ipynb
         video: C3QyJ6ORnoo
     - id: '1.4'
       nav: Panel (Long)
@@ -155,19 +111,9 @@ parts:
       - name: Exercise 1.4
         kind: exercise
         sub: Coffee Shop Transactions
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-4/Exercise_1_4.ipynb
         video: EXJ4KGV3xnA
       - name: Homework 1.4
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-1-4/HW_1_4.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-4/Homework_1_4.ipynb
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-4/Homework_1_4_sols.ipynb
     - id: '1.5'
       nav: Panel (Wide)
       title: Panel Data (Wide Format)
@@ -190,19 +136,9 @@ parts:
       - name: Exercise 1.5
         kind: exercise
         sub: Coffee Consumption Per Capita
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Exercise_1_5.ipynb
         video: ummv01FLpmk
       - name: Homework 1.5
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-1-5/HW_1_5.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5.ipynb
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5_sols.ipynb
     checkpoint:
       number: '1'
       description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts we've developed. If you understand the concepts and feel comfortable with the exercises and homework, you'll be well prepared.
@@ -243,18 +179,8 @@ parts:
       - name: Exercise 2.1
         kind: exercise
         sub: Bivariate Relationships
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Exercise_2_1.ipynb
       - name: Homework 2.1
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-2-1/HW_2_1.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Homework_2_1.ipynb
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Homework_2_1_sols.ipynb
     - id: '2.2'
       nav: N × C
       title: Numerical × Categorical
@@ -277,18 +203,8 @@ parts:
       - name: Exercise 2.2
         kind: exercise
         sub: Grouped Comparisons
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Exercise_2_2.ipynb
       - name: Homework 2.2
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-2-2/HW_2_2.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Homework_2_2.ipynb
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Homework_2_2_sols.ipynb
     - id: '2.3'
       nav: N × N × C
       title: Numerical × Numerical × Categorical
@@ -311,18 +227,8 @@ parts:
       - name: Exercise 2.3
         kind: exercise
         sub: Conditional Analysis
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-3/Exercise_2_3.ipynb
       - name: Homework 2.3
         kind: homework
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-3/Homework_2_3.ipynb
-        - label: Assignment
-          href: parts/part-2-filtering/HW_2_3.pdf
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-3/Homework_2_3_sols.ipynb
     checkpoint:
       number: '2'
       description: 'MiniExam 2 will be held on Februrary 24 and covers everything in Part 2: numerical relationships, grouped comparisons, and conditional analysis. Practice with the exercises and homework to prepare.'
@@ -358,18 +264,8 @@ parts:
       - name: Exercise 3.1
         kind: exercise
         sub: Random Variables
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Exercise_3_1.ipynb
       - name: Homework 3.1
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-3-1/HW_3_1.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Homework_3_1.ipynb
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Homework_3_1_sols.ipynb
     - id: '3.2'
       nav: Sampling &amp; CLT
       title: Sampling and Central Limit Theorem
@@ -387,16 +283,8 @@ parts:
       - name: Exercise 3.2
         kind: exercise
         sub: CLT Demonstration
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-2/Exercise_3_2.ipynb
       - name: Homework 3.2
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-3-2/HW_3_2.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-2/Homework_3_2.ipynb
     - id: '3.3'
       nav: Uncertainty
       title: Quantifying Uncertainty
@@ -414,16 +302,8 @@ parts:
       - name: Exercise 3.3
         kind: exercise
         sub: Interactive Confidence Intervals
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-3/Exercise_3_3.ipynb
       - name: Homework 3.3
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-3-3/HW_3_3.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-3/Homework_3_3.ipynb
     - id: '3.4'
       nav: Simplest GLM
       title: The Simplest Linear Model
@@ -441,16 +321,8 @@ parts:
       - name: Exercise 3.4
         kind: exercise
         sub: The Simplest GLM
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-4/Exercise_3_4.ipynb
       - name: Homework 3.4
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-3-4/HW_3_4.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-4/Homework_3_4.ipynb
     checkpoint:
       number: '3'
       description: MiniExam 3 covers everything in Part 3, focussing on testing your understanding of statistical concepts including random variables, sampling theory, confidence intervals, and hypothesis testing. MiniExams focuses on the application of the concepts we've developed. Practice with Homework and Exercises to prepare effectively.
@@ -489,22 +361,8 @@ parts:
       - name: Exercise 4.1
         kind: exercise
         sub: Numerical Predictors
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Exercise_4_1.ipynb
-        - label: Happiness/GDP
-          href: data/Life_Evaluation_GDP_PerCap.csv
       - name: Homework 4.1
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-4-1/HW_4_1.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Homework_4_1.ipynb
-        - label: BRFSS Data
-          href: data/BRFSS_cleaned.csv
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Homework_4_1_sols.ipynb
     - id: '4.2'
       nav: Categorical
       title: Categorical Predictors
@@ -522,20 +380,8 @@ parts:
       - name: Exercise 4.2
         kind: exercise
         sub: Categorical Predictors
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Exercise_4_2.ipynb
-        - label: BRFSS Data
-          href: data/BRFSS_cleaned.csv
       - name: Homework 4.2
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-4-2/HW_4_2.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Homework_4_2.ipynb
-        - label: BRFSS Data
-          href: data/BRFSS_cleaned.csv
     - id: '4.3'
       nav: Diagnostics
       title: Model Diagnostics
@@ -553,20 +399,8 @@ parts:
       - name: Exercise 4.3
         kind: exercise
         sub: Model Assumptions
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Exercise_4_3.ipynb
-        - label: Data
-          href: data/Life_Evaluation_GDP_PerCap.csv
       - name: Homework 4.3
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-4-3/HW_4_3.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Homework_4_3.ipynb
-        - label: Happiness/GDP Data
-          href: data/Life_Evaluation_GDP_PerCap.csv
     - id: '4.4'
       nav: Timeseries
       title: The Problem of Timeseries
@@ -584,20 +418,8 @@ parts:
       - name: Exercise 4.4
         kind: exercise
         sub: The Problem of Timeseries
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Exercise_4_4.ipynb
-        - label: Okun Data
-          href: data/okun.csv
       - name: Homework 4.4
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-4-4/HW_4_4.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Homework_4_4.ipynb
-        - label: Okun Data
-          href: data/okun.csv
     checkpoint:
       number: '4'
       description: 'MiniExam 4 will test your understanding of everything in Part 4: numerical predictors, categorical predictors, model diagnostics, and timeseries.'
@@ -640,20 +462,8 @@ parts:
       - name: Exercise 5.1
         kind: exercise
         sub: Gender Wage Gap
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-1/Exercise_5_1.ipynb
-        - label: Census Records
-          href: data/usa_00041_sample.csv
       - name: Homework 5.1
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-5-1/HW_5_1.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-1/Homework_5_1.ipynb
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-1/Homework_5_1_sols.ipynb
     - id: '5.2'
       nav: Interactions
       title: Interactions
@@ -673,13 +483,6 @@ parts:
         sub: Gender Wage Gap
       - name: Homework 5.2
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-5-2/HW_5_2.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-2/Homework_5_2.ipynb
-        - label: Solutions
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-2/Homework_5_2_sols.ipynb
     - id: '5.3'
       nav: Numerical
       title: Numerical Controls
@@ -698,18 +501,8 @@ parts:
       - name: Exercise 5.3
         kind: exercise
         sub: Pittsburgh Housing Prices
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-3/Exercise_5_3.ipynb
-        - label: PGH Properties
-          href: data/pgh_housing.csv
       - name: Homework 5.3
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-5-3/HW_5_3.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-3/Homework_5_3.ipynb
     - id: '5.4'
       nav: Causation
       title: Causation, Controls, and Model Selection
@@ -726,16 +519,8 @@ parts:
       - name: Exercise 5.4
         kind: exercise
         sub: Model Comparison with the F-Test
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-4/Exercise_5_4.ipynb
       - name: Homework 5.4
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-5-4/HW_5_4.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-4/Homework_5_4.ipynb
     checkpoint:
       number: '5'
       description: ''
@@ -764,16 +549,8 @@ parts:
       steps:
       - name: Exercise 6.1
         kind: exercise
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-6-1/Exercise_6_1.ipynb
       - name: Homework 6.1
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-6-1/HW_6_1.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-6-1/Homework_6_1.ipynb
     - id: '6.2'
       nav: Communication
       title: Communicating With Data
@@ -789,16 +566,8 @@ parts:
       steps:
       - name: Exercise 6.2
         kind: exercise
-        links:
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-6-2/Exercise_6_2.ipynb
       - name: Homework 6.2
         kind: homework
-        links:
-        - label: Assignment
-          href: parts/part-6-2/HW_6_2.pdf
-        - label: Notebook
-          href: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-6-2/Homework_6_2.ipynb
     checkpoint_raw: |-
       <div class="block checkpoint" id="final-project">
                       <h1 class="subtitle">Final Project</h1>
