@@ -23,9 +23,37 @@ the most work here: any chart embedded in a page (matplotlib, plotly, SVG)
 uses the six Graphite marks in order of need — teal `#128A9B`, orange
 `#E2803A`, green `#34B57A`, red `#C63944`, purple `#A99CF2`, pink
 `#C95AC0` — on the graphite ground, with `#696969` axes and `#9E9E9E` axis
-captions, exactly like the video stage. No default matplotlib/plotly
-palettes. The set is CVD-validated as a group (checker in the Graphite
-repo); label series directly rather than relying on color alone.
+captions, exactly like the video stage. Use the Graphite repo's
+`styles/graphite-dark.mplstyle` (`plt.style.use(...)`). No default
+matplotlib/plotly palettes. The set is CVD-validated as a group (checker in
+the Graphite repo); label series directly rather than relying on color alone.
+
+## Slides
+
+**Slides are the stage without motion** (decided 2026-08-28). They are
+projected in the same rooms and the same lecture flow as the in-class
+animations, and students don't receive them — so they take the *stage*
+tokens, not a light "paper" treatment: graphite ground, azure flush-left
+title, CAPTION `#9E9E9E` for the question line under it, code in dark cards.
+A bright slide between dark animation beats would flash the room; dark keeps
+the projected experience continuous.
+
+**Figures on slides — one rule, two jobs:**
+
+- **Demonstration** (the code is on the slide: `sns.histplot(...)` → its
+  output): keep matplotlib's *default* styling — that white figure is
+  exactly what students' own notebooks will produce, and restyling it would
+  break the slide's promise. Don't fight the white box; **frame it**: give
+  the figure the same card treatment as the code blocks (matching corner
+  radius, padding, a margin of stage ground around it). A raw white
+  rectangle reads as a hole; a white card reads as a window into the
+  student's notebook.
+- **Illustration** (you're showing data; the code isn't the point): the
+  figure wears Graphite — `styles/graphite-dark.mplstyle` from the Graphite
+  repo — and sits seamlessly on the stage.
+
+*If the code is on the slide, the figure wears the notebook card; if it
+isn't, the figure wears Graphite.*
 
 Type: CMU Serif headings, Source Sans 3 body — both come with `course.css`.
 The `.course-econ-0150` variants (wider nav, course home, projects
