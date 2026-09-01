@@ -1,0 +1,13 @@
+#!/bin/sh
+# Validates course-content.yaml.js and the part-*.html shells with the shared checker in
+# tayweid.github.io/course-assets (the same rules the page applies in the browser, plus the
+# ones only a filesystem can make). Run it before committing.
+set -e
+ROOT=$(cd "$(dirname "$0")/.." && pwd)
+ASSETS=${COURSE_ASSETS:-$ROOT/../tayweid.github.io/course-assets}
+if [ ! -f "$ASSETS/check-course" ]; then
+  echo "check-course: the shared checker was not found at $ASSETS/check-course" >&2
+  echo "Clone github.com/tayweid/tayweid.github.io beside this repository, or set COURSE_ASSETS to its course-assets directory." >&2
+  exit 2
+fi
+exec node "$ASSETS/check-course" "$ROOT"
