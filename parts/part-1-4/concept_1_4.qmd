@@ -250,7 +250,7 @@ format:
 
 ```{.python}
 # Load Dataset
-sales = pd.read_csv('../../../econ-0150/data/Coffee_Sales_Reciepts.csv')
+sales = pd.read_csv('../../data/Coffee_Sales_Reciepts.csv')
 sales.head()
 ```
 

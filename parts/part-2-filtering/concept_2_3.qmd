@@ -126,7 +126,7 @@ format:
 ```{python}
 import pandas as pd
 # Load the data
-data = pd.read_csv('../../../econ-0150/data/Starbucks_Location_Hours.csv')
+data = pd.read_csv('../../data/Starbucks_Location_Hours.csv')
 #data.head()
 data[['storeNumber', 'country', 'open', 'close', 'duration_hr']].head()
 ```
@@ -407,7 +407,7 @@ hours[(hours['country'] == 'US') & (hours['country'] == 'CN')]
 ```{python}
 import pandas as pd
 # Load the data
-data = pd.read_csv('../../../econ-0150/data/Starbucks_Location_Hours.csv')
+data = pd.read_csv('../../data/Starbucks_Location_Hours.csv')
 #data.head()
 data[['storeNumber', 'country', 'open', 'close', 'duration_hr']].head()
 ```
@@ -462,7 +462,7 @@ How would we filter for coffee shops that open before 7 AM?
 ```{python}
 import pandas as pd
 # Load the data
-data = pd.read_csv('../../../econ-0150/data/Starbucks_Location_Hours.csv')
+data = pd.read_csv('../../data/Starbucks_Location_Hours.csv')
 #data.head()
 data[['storeNumber', 'country', 'open', 'close', 'duration_hr']].head()
 ```

@@ -24,7 +24,7 @@ A dataset on employment by education level.
 
 ```{python}
 # Income data
-data = pd.read_csv('../../../econ-0150/data/wrapup_05.csv', index_col=0)
+data = pd.read_csv('../../data/wrapup_05.csv', index_col=0)
 data.head().style.hide(axis="index")
 ```
 
@@ -52,7 +52,7 @@ A dataset on annual individual income by education.
 
 ```{python}
 # Income by education level
-data = pd.read_csv('../../../econ-0150/data/wrapup_06.csv', index_col=0)
+data = pd.read_csv('../../data/wrapup_06.csv', index_col=0)
 data.head().style.hide(axis="index")
 ```
 
@@ -86,7 +86,7 @@ A dataset on annual individual income by age.
 
 ```{python}
 # Income vs Age
-data = pd.read_csv('../../../econ-0150/data/wrapup_07.csv', index_col=0)
+data = pd.read_csv('../../data/wrapup_07.csv', index_col=0)
 data.head().style.hide(axis="index")
 ```
 
@@ -120,7 +120,7 @@ A dataset on inflation and unemployment after 2015.
 
 ```{python}
 # Unemployment rate and inflation
-data = pd.read_csv('../../../econ-0150/data/wrapup_09.csv', index_col=0)
+data = pd.read_csv('../../data/wrapup_09.csv', index_col=0)
 data.head().style.hide(axis="index")
 ```
 
@@ -167,7 +167,7 @@ A dataset on GDP growth by country after 2020.
 
 ```{python}
 # GDP for multiple countries
-data = pd.read_csv('../../../econ-0150/data/wrapup_10.csv', index_col=0)
+data = pd.read_csv('../../data/wrapup_10.csv', index_col=0)
 data.head().style.hide(axis="index")
 ```
 

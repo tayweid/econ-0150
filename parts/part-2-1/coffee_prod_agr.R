@@ -2,7 +2,6 @@
 rm(list=ls())
 
 #set the working directly 
-setwd("C:/Users/janaa/OneDrive - University of Pittsburgh/3rd Year/Summer teaching/0150")
 
 #load the libraries
 library(tidyr)
@@ -13,9 +12,9 @@ library(ggrepel)
 
 
 #load the data
-agric <- read.csv("../../../econ-0150/data/world_in_data.csv")
+agric <- read.csv("../../data/world_in_data.csv")
 
-coffee<- read.csv("../../../econ-0150/data/coffee_bean_production.csv")
+coffee<- read.csv("../../data/coffee_bean_production.csv")
 
 #clean the coffee data
 
@@ -38,7 +37,7 @@ coffee_years <- coffee %>%
 table(coffee_years$Code)
 
 #save a panel data for coffee production
-write.csv(coffee_years, "../../../econ-0150/data/coffee_prod_in_years.csv", row.names = FALSE)
+write.csv(coffee_years, "../../data/coffee_prod_in_years.csv", row.names = FALSE)
 ###############################################################################
 
 # Keep only Year=2023
@@ -67,7 +66,7 @@ colnames(merged_data)[colnames(merged_data) == "Employment.in.agriculture....of.
 colnames(merged_data)[colnames(merged_data) == "coffe_prod"] <- "Coffee_Prod"
 
 #save the merged data
-write.csv(merged_data, "../../../econ-0150/data/coffee_prod_agr.csv", row.names = FALSE)
+write.csv(merged_data, "../../data/coffee_prod_agr.csv", row.names = FALSE)
 
 ################################################################################
 #the variable Coffee_Prod is the coffee production in tons, remove the zeros for simplicity

@@ -112,7 +112,7 @@ We can convert text to numbers, forcing errors to become NA.
 ```{python}
 # Load the data
 import pandas as pd
-data = pd.read_csv('../../../econ-0150/data/Fall_2025_Survey_raw.csv')
+data = pd.read_csv('../../data/Fall_2025_Survey_raw.csv')
 data['distance'] = data['Approximately how many miles away from Pittsburgh is your hometown?']
 data['new'] = pd.to_numeric(data['distance'], errors='coerce')
 data[['new', 'Approximately how many miles away from Pittsburgh is your hometown?']].head()
@@ -126,7 +126,7 @@ data[['new', 'Approximately how many miles away from Pittsburgh is your hometown
 ```{python}
 # Load the data
 import pandas as pd
-data = pd.read_csv('../../../econ-0150/data/Fall_2025_Survey_raw.csv')
+data = pd.read_csv('../../data/Fall_2025_Survey_raw.csv')
 data['distance'] = data['Approximately how many miles away from Pittsburgh is your hometown?']
 data['new'] = pd.to_numeric(data['distance'], errors='coerce')
 subdata = data[~(data['new']>0)]

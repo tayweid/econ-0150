@@ -55,7 +55,7 @@ format:
 import pandas as pd
 
 # Create a small sample wage dataset
-df = pd.read_csv('../../../econ-0150/data/Coffee_Shops.csv')
+df = pd.read_csv('../../data/Coffee_Shops.csv')
 
 display_df = df.sample(5).copy()                                                
 ellipsis_row = pd.DataFrame({col: ['...'] for col in df.columns}, index=['']) 
@@ -255,7 +255,7 @@ Lets visualize the main variable in each dataset.
 
 ```{.python}
 # Load Dataset
-shops = pd.read_csv('../../../econ-0150/data/Coffee_Shops.csv')
+shops = pd.read_csv('../../data/Coffee_Shops.csv')
 ```
 
 . . .
@@ -283,7 +283,7 @@ sns.countplot(data=shops, y='STATE', hue='STATE')
 
 ```{.python}
 # Load Dataset
-shops = pd.read_csv('../../../econ-0150/data/Coffee_Shops.csv')
+shops = pd.read_csv('../../data/Coffee_Shops.csv')
 ```
 
 ```{.python}

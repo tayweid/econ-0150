@@ -881,7 +881,7 @@ plt.tight_layout()
 
 ```python
 # Load BRFSS data
-data = pd.read_csv('../../../econ-0150/data/BRFSS_cleaned.csv')
+data = pd.read_csv('../../data/BRFSS_cleaned.csv')
 data['low_income'] = (data['INCOME2'] <= 5).astype(int)
 
 # Visualize Binary Predictor
@@ -905,7 +905,7 @@ plt.rcParams.update({
 })
 
 # Load BRFSS data
-data = pd.read_csv('../../../econ-0150/data/BRFSS_cleaned.csv')
+data = pd.read_csv('../../data/BRFSS_cleaned.csv')
 data['low_income'] = (data['INCOME2'] <= 5).astype(int)
 data = data[['low_income', 'MENTHLTH']].dropna()
 
@@ -964,7 +964,7 @@ plt.rcParams.update({
 })
 
 # Load BRFSS data
-data = pd.read_csv('../../../econ-0150/data/BRFSS_cleaned.csv')
+data = pd.read_csv('../../data/BRFSS_cleaned.csv')
 data['low_income'] = (data['INCOME2'] <= 5).astype(int)
 data = data[['low_income', 'MENTHLTH']].dropna()
 
@@ -1052,7 +1052,7 @@ plt.rcParams.update({
 })
 
 # Load BRFSS data
-data = pd.read_csv('../../../econ-0150/data/BRFSS_cleaned.csv')
+data = pd.read_csv('../../data/BRFSS_cleaned.csv')
 data['low_income'] = (data['INCOME2'] <= 5).astype(int)
 data = data[['low_income', 'MENTHLTH']].dropna()
 

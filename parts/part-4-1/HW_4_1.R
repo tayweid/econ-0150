@@ -2,7 +2,6 @@
 rm(list=ls())
 
 #set the working directly 
-setwd("C:/Users/janaa/OneDrive - University of Pittsburgh/3rd Year/Summer teaching/0150")
 
 #load the libraries
 library(tidyr)
@@ -101,7 +100,7 @@ BRFSS <- BRFSS %>%
   select(-`_BMI5`)
 
 #save the data
-write.csv(BRFSS, "../../../econ-0150/data/BRFSS_cleaned.csv", row.names = FALSE)
+write.csv(BRFSS, "../../data/BRFSS_cleaned.csv", row.names = FALSE)
 
 ################################################################################
 ##HW 4.2##

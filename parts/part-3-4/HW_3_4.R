@@ -2,7 +2,6 @@
 rm(list=ls())
 
 #set the working directly 
-setwd("C:/Users/janaa/OneDrive - University of Pittsburgh/3rd Year/Summer teaching/0150")
 
 #load the libraries
 library(tidyr)
@@ -45,7 +44,7 @@ pa_sample_30 <- pa_county %>%
   slice_sample(n = 30)
 
 #save the sample data
-write.csv(pa_sample_30, "../../../econ-0150/data/pa_sample_30.csv")
+write.csv(pa_sample_30, "../../data/pa_sample_30.csv")
 
 
 # View basic summary statistics

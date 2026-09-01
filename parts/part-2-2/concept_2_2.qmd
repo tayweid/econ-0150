@@ -38,7 +38,7 @@ format:
 ```{python}
 import pandas as pd
 import numpy as np
-data = pd.read_csv('../../../econ-0150/data/Starbucks_Promos.csv', index_col=0)
+data = pd.read_csv('../../data/Starbucks_Promos.csv', index_col=0)
 data.head(5)
 ```
 
