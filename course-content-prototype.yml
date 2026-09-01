@@ -1,0 +1,602 @@
+code: ECON 0150
+title: Economic Data Analysis
+brand:
+- ECONOMIC
+- DATA
+- ANALYSIS
+home: econ-0150.html
+extra_nav:
+- label: Projects
+  href: projects.html
+stylesheet: https://tayweid.github.io/course-assets/course.css
+script: https://tayweid.github.io/course-assets/course.js
+parts:
+  '1':
+    title: Univariate EDA
+    tagline: Summarize single variables
+    introduction: Before exploring relationships, we start by understanding what each variable contains on its own. Part 1 introduces the tools for visualizing and summarizing single variables. You'll learn to diagram your data and choose the appropriate summarization tool based on the data structure and variable type.
+    blocks:
+    - id: '1.1'
+      nav: Categorical
+      title: Cross-Sectional (Categorical) Data
+      description: Use bar charts to show frequencies of categorical variables. Use pie charts sparingly and generally only for binary variables.
+      episode:
+        name: Categorical Variables
+        desc: Summarizing categorical variables with bar charts and pie charts
+        video: MWAYjws77Hg
+        links:
+        - label: Slides
+          href: parts/part-1-1/concept_1_1.pdf
+        - label: Interactive
+          href: parts/part-1-1/concept_1_1.html
+        - label: Notes
+          href: parts/part-1-1/Notes_1_1_Categorical.pdf
+      steps:
+      - name: Exercise 1.1
+        kind: exercise
+        sub: Coffee Shop Locations
+        video: fWk7LBDcfY8
+      - name: Homework 1.1
+        kind: homework
+    - id: '1.2'
+      nav: Numerical
+      title: Cross-Sectional (Numerical) Data
+      description: Use histograms to show distributions. Use boxplots with stripplots to show quartiles and individual values.
+      episode:
+        name: Numerical Variables
+        desc: Summarizing numerical variables with histograms and boxplots
+        video: iAadf_4Qlio
+        links:
+        - label: Slides
+          href: parts/part-1-2/concept_1_2.pdf
+        - label: Interactive
+          href: parts/part-1-2/concept_1_2.html
+        - label: Notes
+          href: parts/part-1-2/Notes_1_2_Numerical.pdf
+      steps:
+      - name: Exercise 1.2
+        kind: exercise
+        sub: Customer Profiles
+        video: 9lcLcB6k4dk
+      - name: Homework 1.2
+        kind: homework
+    - id: '1.3'
+      nav: Timeseries
+      title: Timeseries Data
+      description: Use line plots to show how a variable changes over time. Identify trends and seasonality. Apply transformations like log, inflation adjustment, per capita, and differencing.
+      episode:
+        name: Time Series
+        desc: Visualizing variables over time with line plots
+        video: Sls5Oqi2cJ8
+        links:
+        - label: Slides
+          href: parts/part-1-3/concept_1_3.pdf
+        - label: Interactive
+          href: parts/part-1-3/concept_1_3.html
+        - label: Notes
+          href: parts/part-1-3/Notes_1_3_Timeseries.pdf
+      steps:
+      - name: Livestream 1.3
+        kind: livestream
+        video: iDWtRhNFyIQ
+      - name: Exercise 1.3
+        kind: exercise
+        sub: Coffee Prices Over Time
+        video: VYKmhv_yTQc
+      - name: Homework 1.3
+        kind: homework
+        video: C3QyJ6ORnoo
+    - id: '1.4'
+      nav: Panel (Long)
+      title: Panel Data (Long Format)
+      description: Work with long format panel data where each row is an observation. Use groupby to create summary tables. Visualize with multi-line plots and facets.
+      episode:
+        name: Panel Data (Long Format)
+        desc: Groupby, multi-line plots, and faceting
+        video: pwMA8IGxNOk
+        links:
+        - label: Slides
+          href: parts/part-1-4/concept_1_4.pdf
+        - label: Interactive
+          href: parts/part-1-4/concept_1_4.html
+        - label: Notes
+          href: parts/part-1-4/Notes_1_4_Panel.pdf
+      steps:
+      - name: Livestream 1.4b
+        kind: livestream
+        video: 6G4sEGTKemI
+      - name: Livestream 1.4a
+        kind: livestream
+        video: YGuY3f2PJS8
+      - name: Exercise 1.4
+        kind: exercise
+        sub: Coffee Shop Transactions
+        video: EXJ4KGV3xnA
+      - name: Homework 1.4
+        kind: homework
+    - id: '1.5'
+      nav: Panel (Wide)
+      title: Panel Data (Wide Format)
+      description: Work with wide format panel data where each time period is a column. Use multi-boxplots to compare distributions across years. Use scatterplots with 45° lines to track individual changes. Reshape between formats with melt() and pivot().
+      episode:
+        name: Panel Data (Wide Format)
+        desc: Multi-boxplots, scatterplots with 45° lines, and reshaping
+        video: Ego0_HTatt0
+        links:
+        - label: Slides
+          href: parts/part-1-5/concept_1_5.pdf
+        - label: Interactive
+          href: parts/part-1-5/concept_1_5.html
+        - label: Notes
+          href: parts/part-1-5/Notes_1_5_Wide.pdf
+      steps:
+      - name: Livestream 1.5
+        kind: livestream
+        video: gdWP38Ij6Iw
+      - name: Exercise 1.5
+        kind: exercise
+        sub: Coffee Consumption Per Capita
+        video: ummv01FLpmk
+      - name: Homework 1.5
+        kind: homework
+    checkpoint:
+      number: '1'
+      description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts we've developed. If you understand the concepts and feel comfortable with the exercises and homework, you'll be well prepared.
+      demo:
+        video: b4d8l4QMu8E
+        name: Demo 1 Walkthrough
+        desc: Practice exam covering Part 1 material. The video was recorded in Fall 2025 so the questions are similar but cover slightly different material than the current Demo below. You can find the current questions and solutions using the download links below.
+      demo_links:
+      - label: Demo
+        href: ME/ME_1/ME_1_Demo.pdf
+      - label: Solutions
+        href: ME/ME_1/ME_1_Demo_sols.pdf
+      next: 2
+  '2':
+    title: Multivariate EDA
+    tagline: Summarize relationships between variables
+    introduction: We'll explore how variables relate to each other through scatterplots, grouped comparisons, and conditional analysis. This is where data starts telling richer stories.
+    blocks:
+    - id: '2.1'
+      nav: N × N
+      title: Numerical × Numerical
+      description: Visualize relationships between numerical variables. Anscombe's Quartet shows why we visualize. Scatterplots for two variables; bubble charts and color encoding for three or more.
+      episode:
+        name: Bivariate Data
+        desc: Anscombe's Quartet; scatterplots; size and shape encoding with bubble charts.
+        video: 7hOEr4YTcQg
+        links:
+        - label: Slides
+          href: parts/part-2-1/concept_2_1.pdf
+        - label: Interactive
+          href: parts/part-2-1/concept_2_1.html
+        - label: Notes
+          href: parts/part-2-1/Notes_2_1_Bivariate.pdf
+      steps:
+      - name: Livestream 2.1
+        kind: livestream
+        video: 7hOEr4YTcQg
+      - name: Exercise 2.1
+        kind: exercise
+        sub: Bivariate Relationships
+      - name: Homework 2.1
+        kind: homework
+    - id: '2.2'
+      nav: N × C
+      title: Numerical × Categorical
+      description: Compare a numerical variable across categories. Grouped boxplots show how distributions differ by group.
+      episode:
+        name: Grouping Data
+        desc: Compare distributions across categories with grouped visualizations.
+        video: k45kuBs_Y2M
+        links:
+        - label: Slides
+          href: parts/part-2-2/concept_2_2.pdf
+        - label: Interactive
+          href: parts/part-2-2/concept_2_2.html
+        - label: Notes
+          href: parts/part-2-grouping/Notes_2_2_Grouping.pdf
+      steps:
+      - name: Livestream 2.2
+        kind: livestream
+        video: k45kuBs_Y2M
+      - name: Exercise 2.2
+        kind: exercise
+        sub: Grouped Comparisons
+      - name: Homework 2.2
+        kind: homework
+    - id: '2.3'
+      nav: N × N × C
+      title: Numerical × Numerical × Categorical
+      description: Does a relationship differ across groups? Use color and faceting to compare scatterplots by category. Filter data to focus on specific subgroups.
+      episode:
+        name: Conditional Relationships
+        desc: Scatterplots by category.
+        video: h1PPonR9VEw
+        links:
+        - label: Slides
+          href: parts/part-2-3/concept_2_3.pdf
+        - label: Interactive
+          href: parts/part-2-3/concept_2_3.html
+        - label: Notes
+          href: parts/part-2-filtering/Notes_2_3_Filtering.pdf
+      steps:
+      - name: Livestream 2.3
+        kind: livestream
+        video: h1PPonR9VEw
+      - name: Exercise 2.3
+        kind: exercise
+        sub: Conditional Analysis
+      - name: Homework 2.3
+        kind: homework
+    checkpoint:
+      number: '2'
+      description: 'MiniExam 2 will be held on Februrary 24 and covers everything in Part 2: numerical relationships, grouped comparisons, and conditional analysis. Practice with the exercises and homework to prepare.'
+      demo:
+        video: xIfuZpriojY
+        name: Demo 2 Walkthrough
+        desc: MiniExam 2 Demo covers all material from Parts 2.1 through 2.3.
+      demo_links:
+      - label: Demo
+        href: ME/ME_2/ME_2_Demo.pdf
+      - label: Solutions
+        href: ME/ME_2/ME_2_Demo_sols.pdf
+      next: 3
+  '3':
+    title: Univariate GLM
+    tagline: Studying the population using a sample
+    introduction: 'Data is a sample drawn from an unobservable population. While we can summarize our data, our main questions are typically about the unobservable population our sample was drawn from. Part 3 develops the most basic tools of the General Linear Model (GLM), which allow us to make inferences about unknown populations from known samples. The core idea: the Central Limit Theorem tells us the distribution of the sample mean without needing to know the population distribution. This idea forms the backbone of modern empirical science. It''s difficult to overstate how important this idea has been in our modern world.'
+    blocks:
+    - id: '3.1'
+      nav: Random Variables
+      title: Random Variables
+      description: Data is a sample drawn from an unobservable population. We can summarize the sample, but our questions are about the population.
+      episode:
+        name: Random Variables
+        desc: Data is the realization of repeated draws from the population random variable.
+        video: d9y9ddemcH0
+        links:
+        - label: Slides
+          href: parts/part-3-1/concept_3_1.pdf
+        - label: Interactive
+          href: parts/part-3-1/concept_3_1.html
+      steps:
+      - name: Exercise 3.1
+        kind: exercise
+        sub: Random Variables
+      - name: Homework 3.1
+        kind: homework
+    - id: '3.2'
+      nav: Sampling & CLT
+      title: Sampling and Central Limit Theorem
+      description: The Central Limit Theorem tells us the distribution of the sample mean despite not knowing the population distribution.
+      episode:
+        name: Central Limit Theorem
+        desc: One of the most powerful ideas in science
+        video: B8rhaPebYyg
+        links:
+        - label: Slides
+          href: parts/part-3-2/concept_3_2.pdf
+        - label: Interactive
+          href: parts/part-3-2/concept_3_2.html
+      steps:
+      - name: Exercise 3.2
+        kind: exercise
+        sub: CLT Demonstration
+      - name: Homework 3.2
+        kind: homework
+    - id: '3.3'
+      nav: Uncertainty
+      title: Quantifying Uncertainty
+      description: Build confidence intervals, test hypotheses, and interpret p-values using the t-distribution.
+      episode:
+        name: Quantifying Uncertainty
+        desc: Confidence intervals, hypothesis testing, and p-values
+        video: FAgILciCNGQ
+        links:
+        - label: Slides
+          href: parts/part-3-3/concept_3_3.pdf
+        - label: Interactive
+          href: parts/part-3-3/concept_3_3.html
+      steps:
+      - name: Exercise 3.3
+        kind: exercise
+        sub: Interactive Confidence Intervals
+      - name: Homework 3.3
+        kind: homework
+    - id: '3.4'
+      nav: Simplest GLM
+      title: The Simplest Linear Model
+      description: Express the sample mean as a model parameter. Connect the t-test to the general linear model framework.
+      episode:
+        name: The Simplest Linear Model
+        desc: The intercept-only model and the general linear model framework
+        video: AujZxBVjQkU
+        links:
+        - label: Slides
+          href: parts/part-3-4/concept_3_4.pdf
+        - label: Interactive
+          href: parts/part-3-4/concept_3_4.html
+      steps:
+      - name: Exercise 3.4
+        kind: exercise
+        sub: The Simplest GLM
+      - name: Homework 3.4
+        kind: homework
+    checkpoint:
+      number: '3'
+      description: MiniExam 3 covers everything in Part 3, focussing on testing your understanding of statistical concepts including random variables, sampling theory, confidence intervals, and hypothesis testing. MiniExams focuses on the application of the concepts we've developed. Practice with Homework and Exercises to prepare effectively.
+      demo:
+        video: 8awMXVDFm-g
+        name: Demo 3 Walkthrough
+        desc: MiniExam 03 Demo covers all material from Parts 3.1 through 3.4.
+      demo_links:
+      - label: Demo
+        href: ME/ME_3/ME_3_Demo.pdf
+      - label: Solutions
+        href: ME/ME_3/ME_3_Demo_sols.pdf
+      next: 4
+  '4':
+    title: Bivariate GLM
+    tagline: Models with one predictor
+    introduction: 'Part 4 introduces the workhorse of empirical economics: regression analysis. In Part 3, we developed the simplest statistical model of samples with unknown population parameters. This model allowed us to test simple hypotheses about the population parameters. But economic relationships are rarely so simple. The General Linear Model not only lets us test simple hypotheses, but also lets us handle relationships between variables of different types - continuous, categorical, and their interactions - while maintaining our core tools of visualization and residual analysis. These tools are the foundation of modern science.'
+    blocks:
+    - id: '4.1'
+      nav: Numerical
+      title: Numerical Predictors
+      description: Finding relationships between numerical variables.
+      episode:
+        name: Numerical Predictors
+        desc: The slope parameters follow a normal distribution.
+        video: d16_GOJBxTE
+        links:
+        - label: Slides
+          href: parts/part-4-1/concept_4_1.pdf
+        - label: Interactive
+          href: parts/part-4-1/concept_4_1.html
+      steps:
+      - name: Livestream 4.1
+        kind: livestream
+        video: yZPUiFxOSko
+      - name: Exercise 4.1
+        kind: exercise
+        sub: Numerical Predictors
+      - name: Homework 4.1
+        kind: homework
+    - id: '4.2'
+      nav: Categorical
+      title: Categorical Predictors
+      description: Comparing group means using binary indicator variables (two-sample t-test).
+      episode:
+        name: Categorical Predictors
+        desc: Binary predictors turn group comparisons into regression.
+        video: oDgC5RwZjME
+        links:
+        - label: Slides
+          href: parts/part-4-2/concept_4_2.pdf
+        - label: Interactive
+          href: parts/part-4-2/concept_4_2.html
+      steps:
+      - name: Exercise 4.2
+        kind: exercise
+        sub: Categorical Predictors
+      - name: Homework 4.2
+        kind: homework
+    - id: '4.3'
+      nav: Diagnostics
+      title: Model Diagnostics
+      description: Checking whether our model's assumptions hold and what to do when they don't.
+      episode:
+        name: Model Assumptions
+        desc: Residual plots check linearity, homoskedasticity, independence, and normality.
+        video: pvi_ovxsdSg
+        links:
+        - label: Slides
+          href: parts/part-4-3/concept_4_3.pdf
+        - label: Interactive
+          href: parts/part-4-3/concept_4_3.html
+      steps:
+      - name: Exercise 4.3
+        kind: exercise
+        sub: Model Assumptions
+      - name: Homework 4.3
+        kind: homework
+    - id: '4.4'
+      nav: Timeseries
+      title: The Problem of Timeseries
+      description: Autocorrelation violates independence. Differencing and growth rates can mitigate the problem.
+      episode:
+        name: The Problem of Timeseries
+        desc: Levels, first differences, and growth rates for time series data.
+        video: wP6KMAV8XkA
+        links:
+        - label: Slides
+          href: parts/part-4-4/concept_4_4.pdf
+        - label: Interactive
+          href: parts/part-4-4/concept_4_4.html
+      steps:
+      - name: Exercise 4.4
+        kind: exercise
+        sub: The Problem of Timeseries
+      - name: Homework 4.4
+        kind: homework
+    checkpoint:
+      number: '4'
+      description: 'MiniExam 4 will test your understanding of everything in Part 4: numerical predictors, categorical predictors, model diagnostics, and timeseries.'
+      demo:
+        video: NgEffN3TOtw
+        name: Demo 4 Walkthrough
+        desc: Try solving the demo then check your answers against the video.
+      demo_links:
+      - label: ME 4 Demo
+        href: ME/ME_4/ME_4_Demo.pdf
+      - label: Solutions
+        href: ME/ME_4/ME_4_Demo_sols.pdf
+      - label: Slides
+        href: parts/part-4-review/concept_4_review.pdf
+      - label: Interactive
+        href: parts/part-4-review/concept_4_review.html
+      next: 5
+  '5':
+    title: Multivariate GLM
+    tagline: Models with multiple predictors
+    introduction: In Part 4 we developed the basics of linear models, extending the hypothesis testing framework to slopes. In Part 5 we extend this same framework one step further. We'll develop models of relationships that vary across groups, effects that depend on context, and unobserved factors that confound your analysis. You'll learn advanced techniques like numerical controls, categorical controls, interactions, and model selection that let you handle these complexities systematically.
+    blocks:
+    - id: '5.1'
+      nav: Categorical
+      title: Categorical/Numerical
+      description: Use fixed effects to control for unobserved group differences. Interpret coefficients in models with multiple categorical predictors.
+      episode:
+        name: Categorical/Numerical
+        desc: Models of multiple intercepts
+        video: WgY80uUILoI
+        links:
+        - label: Slides
+          href: parts/part-5-1/concept_5_1.pdf
+        - label: Interactive
+          href: parts/part-5-1/concept_5_1.html
+      steps:
+      - name: Livestream 5.1
+        kind: livestream
+        video: U6u0cIP2dRM
+      - name: Exercise 5.1
+        kind: exercise
+        sub: Gender Wage Gap
+      - name: Homework 5.1
+        kind: homework
+    - id: '5.2'
+      nav: Interactions
+      title: Interactions
+      description: Test whether the relationship between variables varies by group.
+      episode:
+        name: Interactions
+        desc: Models of multiple slopes
+        video: DyuY2koYoGY
+        links:
+        - label: Slides
+          href: parts/part-5-2/concept_5_2.pdf
+        - label: Interactive
+          href: parts/part-5-2/concept_5_2.html
+      steps:
+      - name: Exercise 5.2
+        kind: exercise
+        sub: Gender Wage Gap
+      - name: Homework 5.2
+        kind: homework
+    - id: '5.3'
+      nav: Numerical
+      title: Numerical Controls
+      description: Control for related variables.
+      episode:
+        name: Numerical Controls
+        desc: Adding numerical control variables
+        video: pW8vBVp2Q4I
+        links:
+        - label: Interactive
+          href: parts/part-5-3/concept_5_3.html
+      steps:
+      - name: Livestream 5.3
+        kind: livestream
+        video: w49fKn_3yLU
+      - name: Exercise 5.3
+        kind: exercise
+        sub: Pittsburgh Housing Prices
+      - name: Homework 5.3
+        kind: homework
+    - id: '5.4'
+      nav: Causation
+      title: Causation, Controls, and Model Selection
+      description: Why controls matter, how to compare models, and how to choose the right one.
+      episode:
+        name: Causation, Controls, and Model Selection
+        desc: Causation vs. correlation, R² and F-tests, choosing the right model
+        links:
+        - label: Slides
+          href: parts/part-5-4/concept_5_4.pdf
+        - label: Interactive
+          href: parts/part-5-4/concept_5_4.html
+      steps:
+      - name: Exercise 5.4
+        kind: exercise
+        sub: Model Comparison with the F-Test
+      - name: Homework 5.4
+        kind: homework
+    checkpoint:
+      number: '5'
+      description: ''
+      demo:
+        video: T2okITdU5-c
+        name: Demo 5 Walkthrough
+        desc: This Demo is more challenging than what you can expect on the actual MiniExam. Try solving the demo then check your answers against the video.
+      demo_links:
+      - label: Demo
+        href: ME/ME_5/ME_5_Demo.pdf
+      - label: Solutions
+        href: ME/ME_5/ME_5_Demo_sols.pdf
+      next: 6
+  '6':
+    title: Communication
+    tagline: Effectively communicate your analysis
+    introduction: In Parts 1 and 2 we developed the visualization tools to understand our data. In Parts 3 through 5 we developed the statistical tools to make claims about the truth from our sample. In Part 6 we turn our focus to communicating our findings clearly. Here we focus on crafting clear narratives about economic relationships, choosing the right visualizations for our findings, and presenting results with slides in ways that are easily understandable. We've already developed most of the skills. Here's where we tie it all together.
+    blocks:
+    - id: '6.1'
+      nav: Workflow
+      title: Economic Data Analysis
+      description: Design a complete analysis workflow from data import to final results.
+      episode:
+        name: Analysis Pipeline
+        desc: Comprehensive overview of data analysis workflow
+      steps:
+      - name: Exercise 6.1
+        kind: exercise
+      - name: Homework 6.1
+        kind: homework
+    - id: '6.2'
+      nav: Communication
+      title: Communicating With Data
+      description: Communicate data analysis to an audience.
+      episode:
+        name: Communication Methods
+        desc: Best practices for communicating data with slides
+        video: 2wjP1uoUSmU
+        links:
+        - label: Slides
+          href: parts/part-6-2/concept_6_2.pdf
+          icon: fa-file-powerpoint-o
+      steps:
+      - name: Exercise 6.2
+        kind: exercise
+      - name: Homework 6.2
+        kind: homework
+    project:
+      id: final-project
+      nav: Final Project
+      title: Final Project
+      description: Here's where we tie it all together.
+      prompts:
+      - label: Research Question.
+        kind: research
+        text: What is an interesting question to YOU that you can answer with data?
+      - label: Data Source.
+        kind: data
+        text: What dataset could you use to answer your research question?
+      - label: Methods.
+        kind: methods
+        text: What statistical methods would you need for your question?
+      - label: Main Finding.
+        kind: finding
+        text: You may find something interesting!
+      requirements:
+      - Prepare a 3-minute presentation with 1-2 slides.
+      - Write a 1-2 page report of your findings.
+      - Organize a replication folder with your data and code.
+      links:
+      - label: Guidelines
+        href: projects/project_guidelines.pdf
+        icon: fa-file-pdf-o
+      - label: Data Sources
+        href: projects/data_sources.pdf
+        icon: fa-file-pdf-o
+      - label: Project Template Notebook
+        href: https://colab.research.google.com/drive/1eHmy9zJb-E1-zDmsFEhw7o5OA7o8FgDb?usp=sharing
+        icon: fa-external-link

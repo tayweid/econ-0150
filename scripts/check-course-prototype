@@ -1,0 +1,415 @@
+#!/usr/bin/env node
+
+"use strict";
+
+const fs = require("node:fs");
+const path = require("node:path");
+
+const prototypeRoot = path.resolve(__dirname, "..");
+const yaml = require(path.join(prototypeRoot, "assets/vendor/js-yaml.min.js"));
+
+function usage() {
+  return [
+    "Usage: node scripts/check-course-prototype [options]",
+    "",
+    "Options:",
+    "  --manifest <path>   YAML manifest to validate",
+    "  --site-root <path>  Website root containing prototype shells and linked files",
+    "  --help              Show this help",
+  ].join("\n");
+}
+
+function parseArguments(argv) {
+  const options = {
+    manifest: path.join(prototypeRoot, "course-content-prototype.yml"),
+    siteRoot: prototypeRoot,
+  };
+
+  for (let index = 0; index < argv.length; index += 1) {
+    const argument = argv[index];
+    if (argument === "--help" || argument === "-h") {
+      process.stdout.write(`${usage()}\n`);
+      process.exit(0);
+    }
+    if (argument !== "--manifest" && argument !== "--site-root") {
+      throw new Error(`Unknown option: ${argument}\n\n${usage()}`);
+    }
+    const value = argv[index + 1];
+    if (!value || value.startsWith("--")) {
+      throw new Error(`Missing value for ${argument}\n\n${usage()}`);
+    }
+    options[argument === "--manifest" ? "manifest" : "siteRoot"] = path.resolve(value);
+    index += 1;
+  }
+
+  return options;
+}
+
+const errors = [];
+let blockCount = 0;
+let stepCount = 0;
+let linkCount = 0;
+
+function fail(location, message) {
+  errors.push(`${location}: ${message}`);
+}
+
+function isRecord(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function record(value, location) {
+  if (!isRecord(value)) {
+    fail(location, "must be a mapping");
+    return false;
+  }
+  return true;
+}
+
+function array(value, location, { nonempty = false } = {}) {
+  if (!Array.isArray(value)) {
+    fail(location, "must be a list");
+    return false;
+  }
+  if (nonempty && value.length === 0) {
+    fail(location, "must not be empty");
+    return false;
+  }
+  return true;
+}
+
+function text(value, location, { nonempty = true } = {}) {
+  if (typeof value !== "string") {
+    fail(location, "must be text");
+    return false;
+  }
+  if (nonempty && value.trim() === "") {
+    fail(location, "must not be empty");
+    return false;
+  }
+  if (/&(?:amp|lt|gt|quot|apos|#\d+|#x[\da-f]+);/iu.test(value)) {
+    fail(location, "contains an HTML entity; store the actual character in YAML");
+  }
+  if (/<\/?[a-z][^>]*>/iu.test(value) || /<!--|-->/u.test(value)) {
+    fail(location, "contains raw HTML; use structured YAML fields instead");
+  }
+  return true;
+}
+
+function keys(value, location, required, optional = []) {
+  if (!record(value, location)) return false;
+  const allowed = new Set([...required, ...optional]);
+  for (const key of required) {
+    if (!Object.hasOwn(value, key)) fail(`${location}.${key}`, "is required");
+  }
+  for (const key of Object.keys(value)) {
+    if (!allowed.has(key)) fail(`${location}.${key}`, "is not an allowed field (possible typo)");
+    if (key.endsWith("_raw")) fail(`${location}.${key}`, "raw markup fields are not allowed");
+  }
+  return true;
+}
+
+function videoId(value, location) {
+  if (!text(value, location)) return;
+  if (!/^[A-Za-z0-9_-]{11}$/u.test(value)) {
+    fail(location, "must be an 11-character YouTube video ID");
+  }
+}
+
+function validateHref(value, location, siteRoot) {
+  linkCount += 1;
+  if (!text(value, location)) return;
+
+  if (/[\u0000-\u001F\u007F]/u.test(value)) {
+    fail(location, "must not contain control characters");
+    return;
+  }
+  if (value.includes("\\")) {
+    fail(location, "must use forward slashes");
+    return;
+  }
+
+  if (/^[a-z][a-z\d+.-]*:/iu.test(value)) {
+    let url;
+    try {
+      url = new URL(value);
+    } catch {
+      fail(location, "is not a valid URL");
+      return;
+    }
+    if (url.protocol !== "https:") {
+      fail(location, "external URLs must use https");
+    }
+    return;
+  }
+
+  if (value.startsWith("//") || value.startsWith("/") || value.startsWith("\\")) {
+    fail(location, "must be a site-relative path without a leading slash");
+    return;
+  }
+
+  const withoutFragment = value.split("#", 1)[0].split("?", 1)[0];
+  let decoded;
+  try {
+    decoded = decodeURIComponent(withoutFragment);
+  } catch {
+    fail(location, "contains invalid URL encoding");
+    return;
+  }
+  const segments = decoded.split(/[\\/]/u);
+  if (segments.some((segment) => segment === ".." || segment === ".")) {
+    fail(location, "must not traverse outside the site root");
+    return;
+  }
+  if (!withoutFragment) {
+    fail(location, "must identify a file");
+    return;
+  }
+
+  const target = path.resolve(siteRoot, decoded);
+  const relativeTarget = path.relative(siteRoot, target);
+  if (relativeTarget.startsWith("..") || path.isAbsolute(relativeTarget)) {
+    fail(location, "resolves outside the site root");
+    return;
+  }
+  if (!fs.existsSync(target)) {
+    fail(location, `points to a missing local file: ${decoded}`);
+  }
+}
+
+function validateResourceLink(value, location, siteRoot) {
+  if (!keys(value, location, ["label", "href"], ["icon"])) return;
+  text(value.label, `${location}.label`);
+  validateHref(value.href, `${location}.href`, siteRoot);
+  if (Object.hasOwn(value, "icon")) {
+    if (text(value.icon, `${location}.icon`) && !/^fa-[a-z\d-]+$/u.test(value.icon)) {
+      fail(`${location}.icon`, "must be a Font Awesome name such as fa-file-pdf-o");
+    }
+  }
+}
+
+function validateResourceLinks(value, location, siteRoot, { nonempty = true } = {}) {
+  if (!array(value, location, { nonempty })) return;
+  value.forEach((item, index) => validateResourceLink(item, `${location}[${index}]`, siteRoot));
+}
+
+function validateEpisode(value, location, siteRoot) {
+  if (!keys(value, location, ["name", "desc"], ["video", "links"])) return;
+  text(value.name, `${location}.name`);
+  text(value.desc, `${location}.desc`);
+  if (Object.hasOwn(value, "video")) videoId(value.video, `${location}.video`);
+  if (Object.hasOwn(value, "links")) {
+    validateResourceLinks(value.links, `${location}.links`, siteRoot);
+  }
+}
+
+function validateSteps(value, location, siteRoot) {
+  if (!array(value, location, { nonempty: true })) return;
+  value.forEach((step, index) => {
+    stepCount += 1;
+    const stepLocation = `${location}[${index}]`;
+    if (!keys(step, stepLocation, ["name", "kind"], ["sub", "due", "video", "links"])) return;
+    text(step.name, `${stepLocation}.name`);
+    if (text(step.kind, `${stepLocation}.kind`) && !["exercise", "homework", "livestream"].includes(step.kind)) {
+      fail(`${stepLocation}.kind`, "must be exercise, homework, or livestream");
+    }
+    if (Object.hasOwn(step, "sub")) text(step.sub, `${stepLocation}.sub`);
+    if (Object.hasOwn(step, "due")) text(step.due, `${stepLocation}.due`);
+    if (Object.hasOwn(step, "video")) videoId(step.video, `${stepLocation}.video`);
+    if (step.kind === "livestream" && !Object.hasOwn(step, "video")) {
+      fail(`${stepLocation}.video`, "is required for a livestream");
+    }
+    if (Object.hasOwn(step, "links")) {
+      validateResourceLinks(step.links, `${stepLocation}.links`, siteRoot);
+    }
+  });
+}
+
+function validateCheckpoint(value, location, partNumber, siteRoot) {
+  if (!keys(value, location, ["number", "description", "demo", "demo_links", "next"])) return;
+  if (text(value.number, `${location}.number`) && value.number !== partNumber) {
+    fail(`${location}.number`, `must match Part ${partNumber}`);
+  }
+  // An empty description intentionally omits the checkpoint intro (currently Part 5).
+  text(value.description, `${location}.description`, { nonempty: false });
+  if (keys(value.demo, `${location}.demo`, ["video", "name", "desc"])) {
+    videoId(value.demo.video, `${location}.demo.video`);
+    text(value.demo.name, `${location}.demo.name`);
+    text(value.demo.desc, `${location}.demo.desc`);
+  }
+  validateResourceLinks(value.demo_links, `${location}.demo_links`, siteRoot);
+  const expectedNext = Number(partNumber) + 1;
+  if (!Number.isInteger(value.next) || value.next !== expectedNext) {
+    fail(`${location}.next`, `must be the integer ${expectedNext}`);
+  }
+}
+
+function validateProject(value, location, siteRoot) {
+  if (!keys(value, location, ["id", "nav", "title", "description", "prompts", "requirements", "links"])) return;
+  text(value.id, `${location}.id`);
+  if (typeof value.id === "string" && !/^[a-z][a-z\d]*(?:-[a-z\d]+)*$/u.test(value.id)) {
+    fail(`${location}.id`, "must be a lowercase, hyphenated HTML id");
+  }
+  text(value.nav, `${location}.nav`);
+  text(value.title, `${location}.title`);
+  text(value.description, `${location}.description`);
+
+  if (array(value.prompts, `${location}.prompts`, { nonempty: true })) {
+    const kinds = new Set();
+    value.prompts.forEach((prompt, index) => {
+      const promptLocation = `${location}.prompts[${index}]`;
+      if (!keys(prompt, promptLocation, ["label", "kind", "text"])) return;
+      text(prompt.label, `${promptLocation}.label`);
+      if (text(prompt.kind, `${promptLocation}.kind`)) {
+        if (!["research", "data", "methods", "finding"].includes(prompt.kind)) {
+          fail(`${promptLocation}.kind`, "must be research, data, methods, or finding");
+        }
+        if (kinds.has(prompt.kind)) fail(`${promptLocation}.kind`, "must be unique within project prompts");
+        kinds.add(prompt.kind);
+      }
+      text(prompt.text, `${promptLocation}.text`);
+    });
+  }
+
+  if (array(value.requirements, `${location}.requirements`, { nonempty: true })) {
+    value.requirements.forEach((item, index) => text(item, `${location}.requirements[${index}]`));
+  }
+  validateResourceLinks(value.links, `${location}.links`, siteRoot);
+}
+
+function validateManifest(course, siteRoot) {
+  if (!keys(course, "course", ["code", "title", "brand", "home", "extra_nav", "stylesheet", "script", "parts"])) return;
+  text(course.code, "course.code");
+  text(course.title, "course.title");
+  if (array(course.brand, "course.brand", { nonempty: true })) {
+    course.brand.forEach((item, index) => text(item, `course.brand[${index}]`));
+  }
+  validateHref(course.home, "course.home", siteRoot);
+  validateResourceLinks(course.extra_nav, "course.extra_nav", siteRoot, { nonempty: false });
+  validateHref(course.stylesheet, "course.stylesheet", siteRoot);
+  validateHref(course.script, "course.script", siteRoot);
+
+  if (!record(course.parts, "course.parts")) return;
+  const expectedParts = ["1", "2", "3", "4", "5", "6"];
+  const actualParts = Object.keys(course.parts);
+  for (const partNumber of expectedParts) {
+    if (!Object.hasOwn(course.parts, partNumber)) fail(`course.parts.${partNumber}`, "is required");
+  }
+  for (const partNumber of actualParts) {
+    if (!expectedParts.includes(partNumber)) fail(`course.parts.${partNumber}`, "is not a supported part number");
+  }
+
+  const blockIds = new Set();
+  for (const partNumber of expectedParts) {
+    const part = course.parts[partNumber];
+    if (!part) continue;
+    const optional = partNumber === "6" ? ["project"] : ["checkpoint"];
+    if (!keys(part, `course.parts.${partNumber}`, ["title", "tagline", "introduction", "blocks"], optional)) continue;
+    text(part.title, `course.parts.${partNumber}.title`);
+    text(part.tagline, `course.parts.${partNumber}.tagline`);
+    text(part.introduction, `course.parts.${partNumber}.introduction`);
+    if (array(part.blocks, `course.parts.${partNumber}.blocks`, { nonempty: true })) {
+      part.blocks.forEach((block, index) => {
+        blockCount += 1;
+        const blockLocation = `course.parts.${partNumber}.blocks[${index}]`;
+        if (!keys(block, blockLocation, ["id", "nav", "title", "description", "episode", "steps"])) return;
+        if (text(block.id, `${blockLocation}.id`)) {
+          if (!new RegExp(`^${partNumber}\\.\\d+$`, "u").test(block.id)) {
+            fail(`${blockLocation}.id`, `must use the form ${partNumber}.N`);
+          }
+          if (blockIds.has(block.id)) fail(`${blockLocation}.id`, "must be unique");
+          blockIds.add(block.id);
+        }
+        text(block.nav, `${blockLocation}.nav`);
+        text(block.title, `${blockLocation}.title`);
+        text(block.description, `${blockLocation}.description`);
+        validateEpisode(block.episode, `${blockLocation}.episode`, siteRoot);
+        validateSteps(block.steps, `${blockLocation}.steps`, siteRoot);
+      });
+    }
+
+    if (partNumber === "6") {
+      if (!Object.hasOwn(part, "project")) fail(`course.parts.${partNumber}.project`, "is required for Part 6");
+      else validateProject(part.project, `course.parts.${partNumber}.project`, siteRoot);
+      if (Object.hasOwn(part, "checkpoint")) fail(`course.parts.${partNumber}.checkpoint`, "Part 6 uses project instead of checkpoint");
+    } else {
+      if (!Object.hasOwn(part, "checkpoint")) fail(`course.parts.${partNumber}.checkpoint`, `is required for Part ${partNumber}`);
+      else validateCheckpoint(part.checkpoint, `course.parts.${partNumber}.checkpoint`, partNumber, siteRoot);
+      if (Object.hasOwn(part, "project")) fail(`course.parts.${partNumber}.project`, "is only allowed in Part 6");
+    }
+  }
+}
+
+function validatePrototypeFiles(siteRoot) {
+  const rendererPath = path.join(siteRoot, "assets/scripts/yaml-course-page.js");
+  const vendorPath = path.join(siteRoot, "assets/vendor/js-yaml.min.js");
+  for (const [filePath, label] of [
+    [rendererPath, "shared renderer"],
+    [vendorPath, "vendored YAML parser"],
+  ]) {
+    if (!fs.existsSync(filePath)) fail(label, `missing file ${path.relative(siteRoot, filePath)}`);
+  }
+
+  for (let partNumber = 1; partNumber <= 6; partNumber += 1) {
+    const relativeShell = `part-${partNumber}-yaml.html`;
+    const shellPath = path.join(siteRoot, relativeShell);
+    if (!fs.existsSync(shellPath)) {
+      fail(relativeShell, "prototype page is missing");
+      continue;
+    }
+    const html = fs.readFileSync(shellPath, "utf8");
+    const escapedPart = String(partNumber);
+    if (!new RegExp(`data-part=["']${escapedPart}["']`, "u").test(html)) {
+      fail(relativeShell, `must declare data-part=\"${escapedPart}\"`);
+    }
+    if (!/course-content-prototype\.yml/u.test(html)) {
+      fail(relativeShell, "must reference course-content-prototype.yml");
+    }
+    if (!/yaml-course-page\.js/u.test(html)) {
+      fail(relativeShell, "must load the shared YAML renderer");
+    }
+    if (!/course-render-error/u.test(html)) {
+      fail(relativeShell, "must contain an in-page rendering failure fallback");
+    }
+    if (/<section\b[^>]*(?:data-block|id=["'](?:block|unit)-)/iu.test(html)) {
+      fail(relativeShell, "must not hard-code course blocks in the thin shell");
+    }
+  }
+}
+
+function main() {
+  let options;
+  try {
+    options = parseArguments(process.argv.slice(2));
+  } catch (error) {
+    process.stderr.write(`${error.message}\n`);
+    process.exit(2);
+  }
+
+  if (!fs.existsSync(options.manifest)) {
+    fail("manifest", `file does not exist: ${options.manifest}`);
+  } else {
+    let course;
+    try {
+      course = yaml.load(fs.readFileSync(options.manifest, "utf8"), {
+        maxDepth: 100,
+        maxTotalMergeKeys: 1000,
+      });
+    } catch (error) {
+      fail("manifest", `invalid YAML: ${error.message}`);
+    }
+    if (course !== undefined) validateManifest(course, options.siteRoot);
+  }
+  validatePrototypeFiles(options.siteRoot);
+
+  if (errors.length > 0) {
+    process.stderr.write(`Course prototype validation failed (${errors.length} ${errors.length === 1 ? "error" : "errors"}):\n`);
+    errors.forEach((error) => process.stderr.write(`  - ${error}\n`));
+    process.stderr.write("\nValidation stopped here. Fix these errors and run this check again.\n");
+    process.exit(1);
+  }
+
+  process.stdout.write(`Course prototype is valid: 6 parts, ${blockCount} blocks, ${stepCount} steps, ${linkCount} checked links.\n`);
+}
+
+main();

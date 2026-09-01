@@ -1,0 +1,160 @@
+name: Check course prototype
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - course-content-prototype.yml
+      - part-*-yaml.html
+      - econ-0150.html
+      - projects.html
+      - assets/scripts/yaml-course-page.js
+      - assets/styles/prototype.css
+      - assets/vendor/js-yaml.min.js
+      - parts/**
+      - ME/**
+      - projects/**
+      - scripts/check-course-prototype
+      - tests/prototype/**
+      - .github/workflows/course-prototype-check.yml
+  pull_request:
+    paths:
+      - course-content-prototype.yml
+      - part-*-yaml.html
+      - econ-0150.html
+      - projects.html
+      - assets/scripts/yaml-course-page.js
+      - assets/styles/prototype.css
+      - assets/vendor/js-yaml.min.js
+      - parts/**
+      - ME/**
+      - projects/**
+      - scripts/check-course-prototype
+      - tests/prototype/**
+      - .github/workflows/course-prototype-check.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: course-prototype-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate prototype data and links
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Validate the prototype
+        run: node scripts/check-course-prototype
+
+      - name: Run validator regression tests
+        run: node --test tests/prototype/*.test.js
+
+  report-failure:
+    name: Open or update the failure issue
+    needs: validate
+    if: >-
+      ${{ always() && github.event_name == 'push' &&
+          github.ref == 'refs/heads/main' && needs.validate.result == 'failure' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Keep one visible failure issue open
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const title = 'Course prototype validation failed';
+            const { owner, repo } = context.repo;
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`;
+            const message = [
+              `@${context.actor}, the course prototype validation failed on \`${context.sha}\`.`,
+              '',
+              `Workflow run: ${runUrl}`,
+              '',
+              'This check does not control the current Pages deployment. Review the linked run before relying on the prototype. Fix the reported error and push again; the recovery run will close this issue automatically.'
+            ].join('\n');
+
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'all',
+              per_page: 100
+            });
+            const issue = issues.find(candidate =>
+              !candidate.pull_request && candidate.title === title
+            );
+
+            if (!issue) {
+              await github.rest.issues.create({ owner, repo, title, body: message });
+              return;
+            }
+
+            if (issue.state !== 'open') {
+              await github.rest.issues.update({
+                owner,
+                repo,
+                issue_number: issue.number,
+                state: 'open'
+              });
+            }
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: issue.number,
+              body: message
+            });
+
+  report-recovery:
+    name: Close the failure issue after recovery
+    needs: validate
+    if: >-
+      ${{ always() && github.event_name == 'push' &&
+          github.ref == 'refs/heads/main' && needs.validate.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Record recovery and close the issue
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const title = 'Course prototype validation failed';
+            const { owner, repo } = context.repo;
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`;
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            const issue = issues.find(candidate =>
+              !candidate.pull_request && candidate.title === title
+            );
+
+            if (!issue) return;
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: issue.number,
+              body: `Validation recovered on \`${context.sha}\`. Successful run: ${runUrl}`
+            });
+            await github.rest.issues.update({
+              owner,
+              repo,
+              issue_number: issue.number,
+              state: 'closed',
+              state_reason: 'completed'
+            });
