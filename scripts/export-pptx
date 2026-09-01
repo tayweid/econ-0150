@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Export every slide deck to PowerPoint, into pptx/ at the repo root.
+#
+# Uses scripts/pptx.lua, which translates reveal.js-flavored constructs into
+# native pandoc elements so the PowerPoint writer keeps them: raw <img> tags
+# become real images, subheaders become italic paragraphs, ". . ." pause
+# markers are removed, and reveal's empty spacer columns are dropped so real
+# multi-column slides survive as PowerPoint two-content layouts.
+#
+# Names are part-prefixed (part-1-2__concept_1_2.pptx) because several deck
+# filenames repeat across parts. Skips *_old.qmd (superseded).
+set -uo pipefail
+export PATH="/Applications/quarto/bin:$PATH"
+cd "$(dirname "$0")/.."
+REPO="$(pwd)"
+OUT="$REPO/pptx"
+FILTER="$REPO/scripts/pptx.lua"
+mkdir -p "$OUT"
+
+ok=0; fail=0; failed=""
+for qmd in parts/*/concept_*.qmd; do
+  case "$qmd" in *_old.qmd) continue;; esac
+  part=$(basename "$(dirname "$qmd")")
+  name=$(basename "$qmd" .qmd)
+  printf '  %-42s ' "$part/$name"
+  if (cd "$(dirname "$qmd")" && quarto render "$(basename "$qmd")" --to pptx \
+        --lua-filter "$FILTER" \
+        --output "${part}__${name}.pptx" --output-dir "$OUT" >/tmp/pptx.$$.log 2>&1); then
+    echo ok; ok=$((ok+1))
+  else
+    echo FAILED; fail=$((fail+1)); failed="$failed  $part/$name\n"
+    tail -3 /tmp/pptx.$$.log | sed 's/^/        /'
+  fi
+  rm -f /tmp/pptx.$$.log
+done
+
+# quarto copies referenced resource dirs beside the output; pptx embeds its
+# media, so these are strays
+find "$OUT" -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} + 2>/dev/null
+rm -f "$OUT"/*.png "$OUT"/*.jpg "$OUT"/custom.css "$OUT"/TEST_*.pptx 2>/dev/null
+
+echo; echo "exported $ok · failed $fail"
+[ $fail -gt 0 ] && printf "failed:\n$failed"
+exit 0

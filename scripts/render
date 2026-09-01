@@ -1,0 +1,87 @@
+#!/usr/bin/env bash
+# Render selected reveal.js decks in place beside their public-safe sources.
+set -uo pipefail
+shopt -s nullglob
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
+ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd -P)"
+
+QUARTO_BIN="${QUARTO_BIN:-quarto}"
+if ! command -v "$QUARTO_BIN" >/dev/null 2>&1; then
+  if [[ "$QUARTO_BIN" == "quarto" && -x /Applications/quarto/bin/quarto ]]; then
+    QUARTO_BIN=/Applications/quarto/bin/quarto
+  else
+    echo "quarto not found (set QUARTO_BIN to its executable)" >&2
+    exit 1
+  fi
+fi
+
+LOG_FILE="$(mktemp "${TMPDIR:-/tmp}/econ0150-render.XXXXXX")" || exit 1
+cleanup() {
+  rm -f -- "$LOG_FILE"
+}
+trap cleanup EXIT HUP INT TERM
+
+if (( $# > 0 )); then
+  parts=("$@")
+else
+  parts=()
+  for part_dir in "$ROOT"/parts/*; do
+    [[ -d "$part_dir" ]] && parts+=("$(basename -- "$part_dir")")
+  done
+fi
+
+ok=0
+fail=0
+failed=()
+
+for part in "${parts[@]}"; do
+  if [[ ! "$part" =~ ^[A-Za-z0-9._-]+$ ]]; then
+    echo "FAILED: invalid part name: $part" >&2
+    ((fail += 1))
+    failed+=("$part (invalid name)")
+    continue
+  fi
+
+  part_dir="$ROOT/parts/$part"
+  if [[ ! -d "$part_dir" ]]; then
+    echo "FAILED: no such part: $part" >&2
+    ((fail += 1))
+    failed+=("$part (missing directory)")
+    continue
+  fi
+
+  decks=()
+  for qmd in "$part_dir"/concept_*.qmd; do
+    [[ "$qmd" == *_old.qmd ]] || decks+=("$qmd")
+  done
+
+  if (( ${#decks[@]} == 0 )); then
+    echo "FAILED: no current concept_*.qmd deck in parts/$part" >&2
+    ((fail += 1))
+    failed+=("$part (no current deck)")
+    continue
+  fi
+
+  for qmd in "${decks[@]}"; do
+    name="$(basename -- "$qmd")"
+    printf '  %-28s %-26s ' "$part" "$name"
+    if (cd -- "$part_dir" && "$QUARTO_BIN" render "$name" --to revealjs) >"$LOG_FILE" 2>&1; then
+      echo "ok"
+      ((ok += 1))
+    else
+      echo "FAILED"
+      ((fail += 1))
+      failed+=("$part/$name")
+      tail -n 8 "$LOG_FILE" | sed 's/^/        /' >&2
+    fi
+  done
+done
+
+echo
+echo "rendered $ok; failed $fail"
+if (( fail > 0 )); then
+  echo "failed decks:" >&2
+  printf '  %s\n' "${failed[@]}" >&2
+  exit 1
+fi

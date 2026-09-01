@@ -14,3 +14,7 @@ archive/
 
 # over GitHub's 100MB hard file limit
 data/usa_00043_formatted.csv
+
+# local Quarto and PowerPoint build state
+**/.quarto/
+/pptx/
