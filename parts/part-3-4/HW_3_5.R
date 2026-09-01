@@ -12,8 +12,8 @@ library(ggrepel)
 library(tidycensus)
 library(tidyverse)
 
-# Add and save your API key
-census_api_key("932c5fe910c462d161f71af34e34b42705517abf", overwrite = TRUE, install = TRUE)
+# Add and save your API key -- request a free key at https://api.census.gov/data/key_signup.html
+census_api_key("YOUR_CENSUS_API_KEY", overwrite = TRUE, install = TRUE)
 
 # Reload the session after setting the key
 readRenviron("~/.Renviron")
