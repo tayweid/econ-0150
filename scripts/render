@@ -27,7 +27,15 @@ if (( $# > 0 )); then
 else
   parts=()
   for part_dir in "$ROOT"/parts/*; do
-    [[ -d "$part_dir" ]] && parts+=("$(basename -- "$part_dir")")
+    [[ -d "$part_dir" ]] || continue
+    has_current_deck=0
+    for qmd in "$part_dir"/concept_*.qmd; do
+      if [[ "$qmd" != *_old.qmd ]]; then
+        has_current_deck=1
+        break
+      fi
+    done
+    (( has_current_deck == 1 )) && parts+=("$(basename -- "$part_dir")")
   done
 fi
 
