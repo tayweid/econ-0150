@@ -61,6 +61,11 @@ parts:
           file: data/Coffee_Shops.csv
       - name: Homework 1.1
         kind: homework
+        links:
+        - label: Homework
+          file: parts/part-1-1/HW_1_1.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-1/Homework_1_1.ipynb
     - block: '1.2'
       nav: Numerical
       title: Cross-Sectional (Numerical) Data
@@ -84,6 +89,11 @@ parts:
         video: 9lcLcB6k4dk
       - name: Homework 1.2
         kind: homework
+        links:
+        - label: Homework
+          file: parts/part-1-2/HW_1_2.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-2/Homework_1_2.ipynb
     - block: '1.3'
       nav: Timeseries
       title: Timeseries Data
