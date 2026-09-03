@@ -4,7 +4,7 @@ Instructor-facing. The homework file is free response worked in the notebook; th
 
 **Assignment settings:** Online Assignment · name: `HW 1.2` · due Friday, Sept. 4, 5:00 PM. 4 parent questions, 16 sub-questions at 1 pt each. Select-all fields keep default (strict) scoring — completion-graded anyway. Question 4's Description needs the Better Life Index histogram (`parts/part-1-2/i/hw_01.png`) inserted with **Insert Image**; all four sub-questions read from it.
 
-Answer check, from `Survey_26F.csv` (distance in miles): mean 924.66, standard deviation 2326.71, median 250, quartiles 21.25 and 350; 5 students are more than 2000 miles out and one is 12000. With 100-mile bins the 0-100 bar holds 17 students; with 500-mile bins the 0-500 bar holds 41. Birthyear runs 2002-2007 for 48 students, with 2 typo responses of 2026; 2005 is the most common. Q4 answers follow `Homework_1_2_sols.ipynb`.
+Answer check, from `Survey_26F.csv` (distance in miles): mean 924.66, standard deviation 2326.71, median 250, quartiles 21.25 and 350; 5 students are more than 2000 miles out and one is 12000. With 100-mile bins the 0-100 bar holds 17 students; with 500-mile bins the 0-500 bar holds 41. Birthyear runs 2002-2007 for 48 students, with 2 typo responses of 2026; 2005 is the most common. Q4 reads off the Better Life Index histogram (`data/HW_01_Q1_Leisure_Time_OECD.csv`, hours converted to minutes, 38 countries): 750-800 has 2, 800-850 has 3, 850-900 has 18, 900-950 has 11, 950-1000 has 4. So the most common range is 850-900, 3 countries are in 800-850, 15 are above 900, and the top two bars differ by 7.
 
 ---
 
@@ -179,25 +179,25 @@ The following data from the Better Life Index was collected from OECD countries 
 
 ```
 ( ) 2
-( ) 4
-(x) 6
-( ) 8
+(x) 3
+( ) 5
+( ) 18
 ```
 
 ### Question 4.3 — title: `How many countries spend more than 900 minutes on leisure and personal care?` · 1 pt
 
 ```
 ( ) 4
-( ) 6
-(x) 8
-( ) 12
+( ) 11
+(x) 15
+( ) 18
 ```
 
 ### Question 4.4 — title: `What is the approximate difference in counts between the two most common ranges?` · 1 pt
 
 ```
-( ) 0 - 1 countries
-(x) 2 - 3 countries
-( ) 5 - 6 countries
-( ) 8 - 10 countries
+( ) 0 - 2 countries
+( ) 3 - 5 countries
+(x) 6 - 8 countries
+( ) 9 - 11 countries
 ```
