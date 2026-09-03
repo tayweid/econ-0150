@@ -190,13 +190,7 @@ parts:
           name: Demo 1 Walkthrough
           video: b4d8l4QMu8E
           description: Practice exam covering Part 1 material. The video was recorded in Fall 2025 so the questions
-            are similar but cover slightly different material than the current Demo below. You can find the current
-            questions and solutions using the download links below.
-          links:
-          - label: Demo
-            file: ME/ME_1/ME_1_Demo.pdf
-          - label: Solutions
-            file: ME/ME_1/ME_1_Demo_sols.pdf
+            are similar but cover slightly different material than the current Demo.
         next: 2
   '2':
     title: Multivariate EDA
@@ -286,11 +280,6 @@ parts:
           name: Demo 2 Walkthrough
           video: xIfuZpriojY
           description: MiniExam 2 Demo covers all material from Parts 2.1 through 2.3.
-          links:
-          - label: Demo
-            file: ME/ME_2/ME_2_Demo.pdf
-          - label: Solutions
-            file: ME/ME_2/ME_2_Demo_sols.pdf
         next: 3
   '3':
     title: Univariate GLM
@@ -390,11 +379,6 @@ parts:
           name: Demo 3 Walkthrough
           video: 8awMXVDFm-g
           description: MiniExam 03 Demo covers all material from Parts 3.1 through 3.4.
-          links:
-          - label: Demo
-            file: ME/ME_3/ME_3_Demo.pdf
-          - label: Solutions
-            file: ME/ME_3/ME_3_Demo_sols.pdf
         next: 4
   '4':
     title: Bivariate GLM
@@ -493,10 +477,6 @@ parts:
           video: NgEffN3TOtw
           description: Try solving the demo then check your answers against the video.
           links:
-          - label: ME 4 Demo
-            file: ME/ME_4/ME_4_Demo.pdf
-          - label: Solutions
-            file: ME/ME_4/ME_4_Demo_sols.pdf
           - label: Slides
             file: parts/part-4-review/concept_4_review.pdf
           - label: Interactive
@@ -598,11 +578,6 @@ parts:
           video: T2okITdU5-c
           description: This Demo is more challenging than what you can expect on the actual MiniExam. Try solving
             the demo then check your answers against the video.
-          links:
-          - label: Demo
-            file: ME/ME_5/ME_5_Demo.pdf
-          - label: Solutions
-            file: ME/ME_5/ME_5_Demo_sols.pdf
         next: 6
   '6':
     title: Communication
