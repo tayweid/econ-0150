@@ -86,6 +86,11 @@ parts:
       - name: Exercise 1.2
         kind: exercise
         sub: Customer Profiles
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-2/Exercise_1_2.ipynb
+        - label: Profiles
+          file: data/Starbucks_Customer_Profiles_40k.csv
         video: 9lcLcB6k4dk
       - name: Homework 1.2
         kind: homework

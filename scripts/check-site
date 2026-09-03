@@ -12,7 +12,7 @@ require 'yaml'
 ROOT = Pathname.new(__dir__).parent.realpath
 PAGES = ['index.html', *(1..6).map { |number| "part-#{number}.html" }].freeze
 STATIC_HOME = 'econ-0150.html'
-EXPECTED_LOCAL_LINK_COUNT = 63
+EXPECTED_LOCAL_LINK_COUNT = 65
 EXPECTED_ME_LINKS = (1..5).flat_map do |number|
   ["ME/ME_#{number}/ME_#{number}_Demo.pdf", "ME/ME_#{number}/ME_#{number}_Demo_sols.pdf"]
 end.to_set.freeze
