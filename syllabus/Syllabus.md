@@ -8,6 +8,8 @@
 #line(length: 20%)
 ```
 
+Jillian’s Office Hours 4923 on Fridays 130pm - 3:30pm.
+
 Economists rely on data to build economic models of decision making. This course is designed to equip you with the skills to do this analysis, interpretation, and communication of economic data, and may be the most important class you take in college. We will focus on understanding statistical tools and applying them to data, rather than on either the theoretical foundation of the tools or on a simple use of formulas.
 
 The course follows a central arc, beginning with a toolset for understanding data, building a highly flexible model for inference, culminating in a capstone project that you will communicate to your peers. We will emphasize practical applications through a systematic approach to exploratory analysis, statistical modeling, and communication of the data. Each part builds progressively toward a final project, where you will address an economic question using the skills developed in the course. We will consider applications in a variety of areas not strictly limited to economics, although economic data will be the main focus. The course is proceeds in six parts.
