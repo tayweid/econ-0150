@@ -126,6 +126,13 @@ parts:
       - name: Exercise 1.3
         kind: exercise
         sub: Coffee Prices Over Time
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-3/Exercise_1_3.ipynb
+        - label: Monthly Prices
+          file: data/Monthly_Coffee_Prices_dated.csv
+        - label: Prices with CPI
+          file: data/Coffee_Prices_CPI.csv
         video: VYKmhv_yTQc
       - name: Homework 1.3
         kind: homework
