@@ -1,14 +1,28 @@
 ```typst
 #text(size: 20pt, weight: "bold")[Econ 0150 | Fall 2026] \
 #text(size: 18pt, style: "italic")[Introduction to the economist's data analysis skillset] \
-#line(length: 20%)
-#text(size: 15pt)[Taylor J. Weidman] \
-#text(size: 13pt)[Office Hours: 2:30 - 3:30 Wed/Thurs] \ 
-#text(size: 13pt)[4702 Posvar | taylorjweidman\@pitt.edu]
+#text(size: 13pt)[Taylor J. Weidman, PhD · 4702 Posvar · taylorjweidman\@pitt.edu]
+#v(0.4em)
+#text(size: 13pt, weight: "bold")[Teaching Team & Office Hours] #h(0.5em) #text(size: 11pt, style: "italic")[(just drop in!)]
+#[
+  #set text(size: 11pt, hyphenate: false)
+  #set par(justify: false)
+  #table(
+    columns: (auto, 1fr, auto),
+    stroke: none,
+    inset: (x: 0pt, y: 3pt),
+    column-gutter: 1em,
+    [*Wed 10 AM–12 PM*], [Kayla Onyango (UTA)], [4923 Posvar],
+    [*Wed 2:30–3:30 PM*], [Taylor Weidman (Instructor)], [4702 Posvar],
+    [*Thu 2:30–3:30 PM*], [Taylor Weidman (Instructor)], [4702 Posvar],
+    [*Fri 1:30–3:30 PM*], [Jillian Zirnhelt & Arifah Hasanbasri (TAs)], [4911 Posvar],
+    [*Fri 1:30–3:30 PM*], [Olga Tseytlin (UTA)], [4923 Posvar],
+  )
+]
+#v(0.6em)
 #line(length: 20%)
 ```
 
-Jillian’s Office Hours 4923 on Fridays 130pm - 3:30pm.
 
 Economists rely on data to build economic models of decision making. This course is designed to equip you with the skills to do this analysis, interpretation, and communication of economic data, and may be the most important class you take in college. We will focus on understanding statistical tools and applying them to data, rather than on either the theoretical foundation of the tools or on a simple use of formulas.
 
@@ -85,8 +99,8 @@ There are many resources available to help you master the material. Some of your
   - MiniExam information
 - **Canvas** is used primarily for announcements.
 - **Gradescope** will be the portal to collect and return assignments.
-- **Office Hours** are a great resource so come see me or the TA! Times are listed on Canvas.
-- The **Teaching Assistant** is a highly trained economist in the graduate department. They will hold office hours and grade some of your work. More information will be posted soon.
+- **Office Hours** are a great resource, so come see me, the TAs, or the UTAs! Times and rooms are at the top of this syllabus and on the course page.
+- The **Teaching Assistants**, Jillian Zirnhelt and Arifah Hasanbasri, are highly trained economists in the graduate department. They hold office hours and grade some of your work. The **Undergraduate Teaching Assistants**, Olga Tseytlin and Kayla Onyango, hold additional office hours and are a great first stop for homework questions.
 - **Textbooks** (*optional*): These textbooks are not required but may prove helpful.
 
     - *Data Visualization and Analysis in R*, by Dustin Fife, available freely online at https://datavisualizations.tech/. The book provides straightforward explanations of data analysis and visualization principles.

@@ -201,7 +201,14 @@ parts:
           name: Demo 1 Walkthrough
           video: b4d8l4QMu8E
           description: Practice exam covering Part 1 material. The video was recorded in Fall 2025 so the questions
-            are similar but cover slightly different material than the current Demo.
+            are similar but cover slightly different material than the current Demo below. You can find the current
+            questions and solutions using the download links below.
+          links:
+          - label: Demo
+            file: ME/ME_1/ME_1_Demo.pdf
+          - label: Solutions
+            file: ME/ME_1/ME_1_Demo_sols.pdf
+        date: '2026-09-22'
         next: 2
   '2':
     title: Multivariate EDA
