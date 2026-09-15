@@ -163,6 +163,11 @@ parts:
       - name: Exercise 1.4
         kind: exercise
         sub: Coffee Shop Transactions
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-4/Exercise_1_4.ipynb
+        - label: Transactions
+          file: data/Coffee_Sales_Reciepts.csv
         video: EXJ4KGV3xnA
       - name: Homework 1.4
         kind: homework
