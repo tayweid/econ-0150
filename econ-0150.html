@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Graphite ground before external CSS loads, including local-file navigation. -->
+    <meta name="color-scheme" content="dark">
+    <style>html { color-scheme: dark; background: #212121; }</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -169,7 +172,21 @@
 </div> <!-- Close wrapper -->
 
 <!-- UNIFIED JAVASCRIPT (NO JQUERY) -->
-<script src="https://tayweid.github.io/course-assets/course.js"></script>
+<script>
+(function () {
+    var published = 'https://tayweid.github.io/course-assets/';
+    var base = location.protocol === 'file:' ? '../tayweid.github.io/course-assets/' : published;
+    if (base !== published) {
+        var css = document.querySelector('link[rel="stylesheet"]');
+        css.onerror = function () { css.onerror = null; css.href = published + 'course.css'; };
+        css.href = base + 'course.css';
+    }
+    var script = document.createElement('script');
+    script.src = base + 'course.js';
+    script.onerror = function () { script.onerror = null; script.src = published + 'course.js'; };
+    document.head.append(script);
+}());
+</script>
 
 </body>
 </html>
