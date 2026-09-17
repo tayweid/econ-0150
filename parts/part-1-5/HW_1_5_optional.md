@@ -1,16 +1,10 @@
+# ECON 0150 | Homework 1.5 (Optional Question)
 
-
-<div style="margin-top: -70px;"></div>
-
-## ECON 0150 | Spring 2026 | Homework 1.5 (Optional Question)
-
-### Due: Friday, February 6 at 5PM
+*Due: Sunday, Sept. 20*
 
 Homework is designed to both test your knowledge and challenge you to apply familiar concepts in new applications. Answer clearly and completely. You are welcomed and encouraged to work in groups so long as your work is your own. Submit your figures and answers to Gradescope.
 
-
-
-##### Q2 (optional addition to Q1). Comparing Coffee Production Across Time
+### Q1 (optional addition to Homework 1.5). Comparing Coffee Production Across Time
 
 Using the dataset `coffee_prod_in_years.csv`, which provides information on coffee production in different countries between 1961 and 2023. This dataset is in **long format**. To create a scatter plot comparing two years, you'll first need to reshape it to wide format using `pivot()`.
 

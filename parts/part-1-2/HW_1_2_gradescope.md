@@ -1,16 +1,23 @@
-# Gradescope build sheet — HW 1.2
+# Homework 1.2 | Gradescope
 
-Instructor-facing. The homework file is free response worked in the notebook; this sheet is the selection form students submit. It mirrors the Online Assignment editor's structure: each `## Question N` is a parent question — put its title in the title field and paste its **Description** block into the Description box. Each `### Question N.M` under it is a sub-question — put its title in the sub-question's title field and paste its block into the **Problem** box. Parent points are the sum of their sub-questions. Gradescope parses the typed syntax directly: consecutive `( )` lines become a multiple-choice field and consecutive `[ ]` lines a select-all field, with `(x)`/`[x]` marked correct.
+This is an instructor-facing document to make it easy to enter questions into Gradescope. This sheet is the selection form students submit on Gradescope after completing their work in a notebook, taken from the Homework file. 
 
-**Assignment settings:** Online Assignment · name: `HW 1.2` · due Friday, Sept. 4, 5:00 PM. 4 parent questions, 16 sub-questions at 1 pt each. Select-all fields keep default (strict) scoring — completion-graded anyway. Question 4's Description needs the Better Life Index histogram (`parts/part-1-2/i/hw_01.png`) inserted with **Insert Image**; all four sub-questions read from it.
+- Each `## QN` is a parent question. Put its title in the title field and paste its block into the Description box. A parent question can only hold description text; students answer the sub-questions.
 
-Answer check, from `Survey_26F.csv` (distance in miles): mean 924.66, standard deviation 2326.71, median 250, quartiles 21.25 and 350; 5 students are more than 2000 miles out and one is 12000. With 100-mile bins the 0-100 bar holds 17 students; with 500-mile bins the 0-500 bar holds 41. Birthyear runs 2002-2007 for 48 students, with 2 typo responses of 2026; 2005 is the most common. Q4 reads off the Better Life Index histogram (`data/HW_01_Q1_Leisure_Time_OECD.csv`, hours converted to minutes, 38 countries): 750-800 has 2, 800-850 has 3, 850-900 has 18, 900-950 has 11, 950-1000 has 4. So the most common range is 850-900, 3 countries are in 800-850, 15 are above 900, and the top two bars differ by 7.
+- Each `### QN.M` under it is a sub-question. Put its title in the sub-question’s title field and paste its block into the **Problem** box.
 
----
+- Ignore points. Each sub-question is worth 1 point by default on Gradescope.
 
-## Question 1 — title: `Histograms, Means, and Standard Deviations` · 6 pts
+Gradescope parses the code directly. Every input field must sit on its own line with no text before or after it, and a question can hold several fields:
 
-Description:
+- Text is Markdown, and LaTeX goes between `$$`. Images can be inserted with **Insert Image** or as a Markdown link `![alt](url)` to a file on the course site.
+- Multiple choice: consecutive `( )` lines become a multiple-choice field, with `(x)` marking the correct answer. A blank line between choices starts a new group.
+- Select all: consecutive `[ ]` lines become a select-all field, with `[x]` marking each correct answer. Students must mark every correct answer to get the point.
+- Short answer: `[____](answer)` gives a one-line text box, autograded against the answer in parentheses. For numbers, `[____](=2+-0)` accepts any equivalent of 2 and `[____](=2+-0.2)` accepts anything from 1.8 to 2.2. Leave the parentheses empty to grade by hand.
+- Free response: `|____|` gives a multi-paragraph text box. Any question with one is graded by hand.
+- File uploads: `|files|` lets students upload any file type (a PNG of a figure, a notebook, a PDF). Uploads can be viewed and graded but not annotated.
+
+## Q1: `Histograms, Means, and Standard Deviations`
 
 ```
 Homework is designed to both test your knowledge and challenge you to apply familiar concepts in new applications. Work through the questions in your notebook first, building each figure and computing each number, then enter your answers here as selections. You are welcomed and encouraged to work in groups so long as your work is your own.
@@ -18,7 +25,7 @@ Homework is designed to both test your knowledge and challenge you to apply fami
 Lets continue using the class survey dataset to understand who is in our class! Use it to create a histogram of "Approximately how many miles away from Pittsburgh is your hometown?"
 ```
 
-### Question 1.1 — title: `Create a histogram with bins of width 100 miles. Which bin holds the most students?` · 1 pt
+### Q1.1: `Create a histogram with bins of width 100 miles. Which bin holds the most students?`
 
 ```
 (x) 0 - 100 miles
@@ -27,7 +34,7 @@ Lets continue using the class survey dataset to understand who is in our class! 
 ( ) 850 - 950 miles
 ```
 
-### Question 1.2 — title: `Create a histogram with bins of width 500 miles. How many students fall in the first bar, 0 - 500 miles?` · 1 pt
+### Q1.2: `Create a histogram with bins of width 500 miles. How many students fall in the first bar, 0 - 500 miles?`
 
 ```
 ( ) 17
@@ -36,7 +43,7 @@ Lets continue using the class survey dataset to understand who is in our class! 
 ( ) 50
 ```
 
-### Question 1.3 — title: `Which bin width better shows the distribution?` · 1 pt
+### Q1.3: `Which bin width better shows the distribution?`
 
 ```
 There is no single right answer here — select the statements that correctly describe what your two figures show.
@@ -47,7 +54,7 @@ There is no single right answer here — select the statements that correctly de
 [ ] The two bin widths give the same shape.
 ```
 
-### Question 1.4 — title: `Calculate the mean distance from Pittsburgh.` · 1 pt
+### Q1.4: `Calculate the mean distance from Pittsburgh.`
 
 ```
 ( ) 250 miles
@@ -56,7 +63,7 @@ There is no single right answer here — select the statements that correctly de
 ( ) 2327 miles
 ```
 
-### Question 1.5 — title: `Calculate the standard deviation of distance from Pittsburgh.` · 1 pt
+### Q1.5: `Calculate the standard deviation of distance from Pittsburgh.`
 
 ```
 ( ) 250 miles
@@ -65,7 +72,7 @@ There is no single right answer here — select the statements that correctly de
 (x) 2327 miles
 ```
 
-### Question 1.6 — title: `Which interpretation uses both values correctly?` · 1 pt
+### Q1.6: `Which interpretation uses both values correctly?`
 
 ```
 (x) The average student is about 925 miles from Pittsburgh; distances typically vary by about 2327 miles from that average.
@@ -74,17 +81,13 @@ There is no single right answer here — select the statements that correctly de
 ( ) Every student lives between 925 and 2327 miles from Pittsburgh.
 ```
 
----
-
-## Question 2 — title: `Boxplots and Quartiles` · 3 pts
-
-Description:
+## Q2: `Boxplots and Quartiles`
 
 ```
 Use the class survey dataset to create a boxplot with a stripplot of "Approximately how many miles away from Pittsburgh is your hometown?"
 ```
 
-### Question 2.1 — title: `Create a boxplot with stripplot. Where does the box itself sit?` · 1 pt
+### Q2.1: `Create a boxplot with stripplot. Where does the box itself sit?`
 
 ```
 (x) Between about 21 and 350 miles, well to the left of the far points
@@ -93,7 +96,7 @@ Use the class survey dataset to create a boxplot with a stripplot of "Approximat
 ( ) Between about 900 and 1000 miles
 ```
 
-### Question 2.2 — title: `What is the median distance from Pittsburgh?` · 1 pt
+### Q2.2: `What is the median distance from Pittsburgh?`
 
 ```
 ( ) 21 miles
@@ -102,7 +105,7 @@ Use the class survey dataset to create a boxplot with a stripplot of "Approximat
 ( ) 925 miles
 ```
 
-### Question 2.3 — title: `Explain why the mean and the median differ.` · 1 pt
+### Q2.3: `Explain why the mean and the median differ.`
 
 ```
 Select all that apply.
@@ -113,17 +116,13 @@ Select all that apply.
 [ ] The median is always smaller than the mean for any dataset.
 ```
 
----
-
-## Question 3 — title: `Choosing the Right Tool` · 3 pts
-
-Description:
+## Q3: `Choosing the Right Tool`
 
 ```
 Use the class survey dataset to visualize "When is your birthyear?"
 ```
 
-### Question 3.1 — title: `Create a histogram of birthyear. Which birthyear is most common?` · 1 pt
+### Q3.1: `Create a histogram of birthyear. Which birthyear is most common?`
 
 ```
 Set aside any implausible responses.
@@ -133,7 +132,7 @@ Set aside any implausible responses.
 ( ) 2007
 ```
 
-### Question 3.2 — title: `Create a boxplot with stripplot of birthyear. What does it show is wrong with the data?` · 1 pt
+### Q3.2: `Create a boxplot with stripplot of birthyear. What does it show is wrong with the data?`
 
 ```
 (x) Two responses give a birthyear of 2026, which is a typo rather than a real value
@@ -142,7 +141,7 @@ Set aside any implausible responses.
 ( ) Two students share the same birthday
 ```
 
-### Question 3.3 — title: `Given the number of students in our class, which visualization better shows the distribution?` · 1 pt
+### Q3.3: `Given the number of students in our class, which visualization better shows the distribution?`
 
 ```
 Select the statements about your two figures that are true.
@@ -153,19 +152,15 @@ Select the statements about your two figures that are true.
 [ ] Neither figure can show the two bad values.
 ```
 
----
-
-## Question 4 — title: `Interpreting Histograms` · 4 pts
-
-Description:
+## Q4: `Interpreting Histograms`
 
 ```
 The following data from the Better Life Index was collected from OECD countries using time-use surveys. This question is aimed at practicing the skill of analyzing continuous variables displayed visually.
+
+![Better Life Index: minutes of leisure and personal care per day, OECD countries](https://econ-0150.tayweid.io/parts/part-1-2/i/hw_01.png)
 ```
 
-*(Insert `parts/part-1-2/i/hw_01.png` into this Description with **Insert Image**.)*
-
-### Question 4.1 — title: `What is the most common 50 minute range of time spent on leisure?` · 1 pt
+### Q4.1: `What is the most common 50 minute range of time spent on leisure?`
 
 ```
 ( ) 750 - 800
@@ -175,7 +170,7 @@ The following data from the Better Life Index was collected from OECD countries 
 ( ) 950 - 1000
 ```
 
-### Question 4.2 — title: `In how many countries do people spend between 800 and 850 minutes on leisure and personal care?` · 1 pt
+### Q4.2: `In how many countries do people spend between 800 and 850 minutes on leisure and personal care?`
 
 ```
 ( ) 2
@@ -184,7 +179,7 @@ The following data from the Better Life Index was collected from OECD countries 
 ( ) 18
 ```
 
-### Question 4.3 — title: `How many countries spend more than 900 minutes on leisure and personal care?` · 1 pt
+### Q4.3: `How many countries spend more than 900 minutes on leisure and personal care?`
 
 ```
 ( ) 4
@@ -193,7 +188,7 @@ The following data from the Better Life Index was collected from OECD countries 
 ( ) 18
 ```
 
-### Question 4.4 — title: `What is the approximate difference in counts between the two most common ranges?` · 1 pt
+### Q4.4: `What is the approximate difference in counts between the two most common ranges?`
 
 ```
 ( ) 0 - 2 countries

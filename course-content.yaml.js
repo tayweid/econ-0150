@@ -136,6 +136,15 @@ parts:
         video: VYKmhv_yTQc
       - name: Homework 1.3
         kind: homework
+        links:
+        - label: Homework
+          file: parts/part-1-3/HW_1_3.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-3/Homework_1_3.ipynb
+        - label: US Real GDP
+          file: data/us_real_gdp.csv
+        - label: Monthly Prices
+          file: data/Monthly_Coffee_Prices_dated.csv
         video: C3QyJ6ORnoo
     - block: '1.4'
       nav: Panel (Long)
@@ -171,6 +180,15 @@ parts:
         video: EXJ4KGV3xnA
       - name: Homework 1.4
         kind: homework
+        links:
+        - label: Homework
+          file: parts/part-1-4/HW_1_4.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-4/Homework_1_4.ipynb
+        - label: Working Hours
+          file: data/working_north_america.csv
+        - label: Coffee Production
+          file: data/selected_coffee_prod_in_years.csv
     - block: '1.5'
       nav: Panel (Wide)
       title: Panel Data (Wide Format)
@@ -195,9 +213,29 @@ parts:
       - name: Exercise 1.5
         kind: exercise
         sub: Coffee Consumption Per Capita
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Exercise_1_5.ipynb
+        - label: Per Capita Consumption
+          file: data/Coffee_Per_Cap.csv
+        - label: Optional Reshaping
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Exercise_1_5_optional.ipynb
         video: ummv01FLpmk
       - name: Homework 1.5
         kind: homework
+        links:
+        - label: Homework
+          file: parts/part-1-5/HW_1_5.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5.ipynb
+        - label: Marriage Rates
+          file: data/marriage_rates.csv
+        - label: Optional Question
+          file: parts/part-1-5/HW_1_5_optional.pdf
+        - label: Optional Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5_optional.ipynb
+        - label: Coffee Production
+          file: data/coffee_prod_in_years.csv
     - checkpoint:
         description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts
           we've developed. If you understand the concepts and feel comfortable with the exercises and homework,
