@@ -236,6 +236,14 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5_optional.ipynb
         - label: Coffee Production
           file: data/coffee_prod_in_years.csv
+      - name: Part 1 Wrap Up
+        kind: exercise
+        sub: Data Dimensions and Visualizations
+        links:
+        - label: Slides
+          file: parts/part-1-wrapup/concept_wrapup_1.pdf
+        - label: Interactive
+          file: parts/part-1-wrapup/concept_wrapup_1.html
     - checkpoint:
         description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts
           we've developed. If you understand the concepts and feel comfortable with the exercises and homework,
