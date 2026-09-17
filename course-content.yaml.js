@@ -233,10 +233,9 @@ parts:
         description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts
           we've developed. If you understand the concepts and feel comfortable with the exercises and homework,
           you'll be well prepared.
-        steps:
+        extras:
         - name: Part 1 Wrap Up
-          kind: exercise
-          sub: Data Dimensions and Visualizations
+          description: Data Dimensions and Visualizations
           links:
           - label: Slides
             file: parts/part-1-wrapup/concept_wrapup_1.pdf
