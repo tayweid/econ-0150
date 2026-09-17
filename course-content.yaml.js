@@ -61,6 +61,8 @@ parts:
           file: data/Coffee_Shops.csv
       - name: Homework 1.1
         kind: homework
+        due: Friday, Sept. 4 at 5PM
+        date: '2026-09-04'
         links:
         - label: Homework
           file: parts/part-1-1/HW_1_1.pdf
@@ -96,6 +98,8 @@ parts:
         video: 9lcLcB6k4dk
       - name: Homework 1.2
         kind: homework
+        due: Friday, Sept. 4 at 5PM
+        date: '2026-09-04'
         links:
         - label: Homework
           file: parts/part-1-2/HW_1_2.pdf
@@ -136,6 +140,8 @@ parts:
         video: VYKmhv_yTQc
       - name: Homework 1.3
         kind: homework
+        due: Sunday, Sept. 20
+        date: '2026-09-20'
         links:
         - label: Homework
           file: parts/part-1-3/HW_1_3.pdf
@@ -180,6 +186,8 @@ parts:
         video: EXJ4KGV3xnA
       - name: Homework 1.4
         kind: homework
+        due: Sunday, Sept. 20
+        date: '2026-09-20'
         links:
         - label: Homework
           file: parts/part-1-4/HW_1_4.pdf
@@ -221,33 +229,19 @@ parts:
         - label: Optional Reshaping
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Exercise_1_5_optional.ipynb
         video: ummv01FLpmk
-      - name: Homework 1.5
-        kind: homework
-        links:
-        - label: Homework
-          file: parts/part-1-5/HW_1_5.pdf
-        - label: Notebook
-          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5.ipynb
-        - label: Marriage Rates
-          file: data/marriage_rates.csv
-        - label: Optional Question
-          file: parts/part-1-5/HW_1_5_optional.pdf
-        - label: Optional Notebook
-          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5_optional.ipynb
-        - label: Coffee Production
-          file: data/coffee_prod_in_years.csv
-      - name: Part 1 Wrap Up
-        kind: exercise
-        sub: Data Dimensions and Visualizations
-        links:
-        - label: Slides
-          file: parts/part-1-wrapup/concept_wrapup_1.pdf
-        - label: Interactive
-          file: parts/part-1-wrapup/concept_wrapup_1.html
     - checkpoint:
         description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts
           we've developed. If you understand the concepts and feel comfortable with the exercises and homework,
           you'll be well prepared.
+        steps:
+        - name: Part 1 Wrap Up
+          kind: exercise
+          sub: Data Dimensions and Visualizations
+          links:
+          - label: Slides
+            file: parts/part-1-wrapup/concept_wrapup_1.pdf
+          - label: Interactive
+            file: parts/part-1-wrapup/concept_wrapup_1.html
         demo:
           name: Demo 1 Walkthrough
           video: b4d8l4QMu8E
