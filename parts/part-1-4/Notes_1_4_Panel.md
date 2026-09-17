@@ -1,6 +1,6 @@
 ## Part 1.4 | Day 6 | Panel Data (Long Format)
 
-So far we've looked at cross-sectional data (many entities at one point in time) and time series data (one entity across many points in time). **Panel data** combines both — it tracks the same units (people, countries, stores) over time. This is also called longitudinal data or time series cross-sectional data. Examples include GDP by country by year, or sales by store by hour.
+So far we’ve looked at cross-sectional data (many entities at one point in time) and time series data (one entity across many points in time). **Panel data** combines both — it tracks the same units (people, countries, stores) over time. This is also called longitudinal data or time series cross-sectional data. Examples include GDP by country by year, or sales by store by hour.
 
 Panel data can be stored in two formats: **Long** or **Wide**. In this unit we focus on long format, where each observation is a separate row and a column identifies which group each row belongs to. Wide format, where each time period gets its own column, is covered in Part 1.5.
 
@@ -8,7 +8,7 @@ Panel data can be stored in two formats: **Long** or **Wide**. In this unit we f
 
 The owners of a chain of coffee shops is trying to respond to their staff feeling stressed and overworked by hiring one more barista, and are trying to use transaction data to decide where to assign the new staffmember. Lets start by visualizing the total number of transactions at each shop. What kind of visualization would be most useful?
 
-Well since this is categorical data, a histogram won't work. This isn't a great application for pie charts, since we'd like to understand how transations are spread across the three locations, not comparing one shop to the whole. A bar chart is a great place to start.
+Well since this is categorical data, a histogram won’t work. This isn’t a great application for pie charts, since we’d like to understand how transations are spread across the three locations, not comparing one shop to the whole. A bar chart is a great place to start.
 
 ![Transactions by Shop](i/i_01.png)
 
@@ -16,7 +16,7 @@ Well since this is categorical data, a histogram won't work. This isn't a great 
 
 ### The Busiest Time
 
-Simply looking at which shop is busiest, Shop A might benefit most from the extra hire. But since demand for coffee is not constant throughout the day, it might be most helpful to examine when demand spikes the most during the day. Looking at variation over time like this is a great application for a histogram to visualize transations, and since time is a continuous variable we can't use a pie chart or bar chart. Lets start by combining transations together across all three shops and group into equally sized bins.
+Simply looking at which shop is busiest, Shop A might benefit most from the extra hire. But since demand for coffee is not constant throughout the day, it might be most helpful to examine when demand spikes the most during the day. Looking at variation over time like this is a great application for a histogram to visualize transations, and since time is a continuous variable we can’t use a pie chart or bar chart. Lets start by combining transations together across all three shops and group into equally sized bins.
 
 ![Transactions by Hour](i/i_02.png)
 
@@ -26,13 +26,13 @@ This type of data can tell us which time of day we should be hiring for. From th
 
 ### The Busiest Shift
 
-So far we've found that Shop A is the busiest shop and that mornings are the busiest time. Does this mean we should hire an extra barista for the morning shift at Shop A?
+So far we’ve found that Shop A is the busiest shop and that mornings are the busiest time. Does this mean we should hire an extra barista for the morning shift at Shop A?
 
-It could be, but we don't yet know enough. To learn a little more, we could separate out demand throughout the day separately by shop. Then we can plot all three shops on the same graph.
+It could be, but we don’t yet know enough. To learn a little more, we could separate out demand throughout the day separately by shop. Then we can plot all three shops on the same graph.
 
 ![Transactions by Shop - Stacked Histogram](i/i_03.png)
 
-What do you think of this view? To me it looks a bit hard to read. It's hard to tell where one bar starts and another one ends. Stacking bars like this works sometimes but is typically too busy.
+What do you think of this view? To me it looks a bit hard to read. It’s hard to tell where one bar starts and another one ends. Stacking bars like this works sometimes but is typically too busy.
 
 ---
 
@@ -50,7 +50,7 @@ Faceting is a powerful tool when you want to compare distributions across groups
 
 ### Line Graphs: Another Approach
 
-Fortunately, there's another visualization tool, the **line graph**, which connects the top of each bar. By removing the fill under the lines, we get a clean view of traffic patterns across all three shops.
+Fortunately, there’s another visualization tool, the **line graph**, which connects the top of each bar. By removing the fill under the lines, we get a clean view of traffic patterns across all three shops.
 
 ![Transactions by Shop - Line Graph](i/i_05.png)
 
@@ -71,7 +71,7 @@ Categorical variables and continuous variables can give us different views of th
 ### S-T-E for Panel Data (Long Format)
 
 | Step | Action |
-|------|--------|
+| --- | --- |
 | SELECT | All transactions from three coffee shops |
 | TRANSFORM | Group by shop and hour; count transactions |
 | ENCODE | Hour → x-position; Count → y-position; Shop → color/facet |
@@ -98,7 +98,7 @@ Then we find how many transactions are in each group by getting the size:
 sales.groupby(['Shop', 'Hours']).size()
 ```
 
-This gives us a count by hour at each coffee shop, but it's not in the right shape. To turn it into a dataframe that seaborn can work with, we reset the index:
+This gives us a count by hour at each coffee shop, but it’s not in the right shape. To turn it into a dataframe that seaborn can work with, we reset the index:
 
 ```python
 counts = sales.groupby(['Shop', 'Hours']).size().reset_index(name='Count')
@@ -118,4 +118,4 @@ If all we care about is the figure, we can have seaborn do all the grouping work
 sns.histplot(sales, x='Hours', hue='Shop', bins=range(0,24,1), element='poly', fill=False)
 ```
 
-This saves us work if we aren't interested in the count table. Python is very good at saving us work.
+This saves us work if we aren’t interested in the count table. Python is very good at saving us work.
