@@ -229,6 +229,23 @@ parts:
         - label: Optional Reshaping
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Exercise_1_5_optional.ipynb
         video: ummv01FLpmk
+      - name: Homework 1.5
+        kind: homework
+        due: Tuesday, Sept. 29
+        date: '2026-09-29'
+        links:
+        - label: Homework
+          file: parts/part-1-5/HW_1_5.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5.ipynb
+        - label: Marriage Rates
+          file: data/marriage_rates.csv
+        - label: Optional Question
+          file: parts/part-1-5/HW_1_5_optional.pdf
+        - label: Optional Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-1-5/Homework_1_5_optional.ipynb
+        - label: Coffee Production
+          file: data/coffee_prod_in_years.csv
     - checkpoint:
         description: MiniExam 1 covers everything in Part 1. MiniExams focus on practical application of the concepts
           we've developed. If you understand the concepts and feel comfortable with the exercises and homework,
