@@ -22,15 +22,15 @@ Gradescope parses the code directly. Every input field must sit on its own line 
 ```
 Homework is designed to both test your knowledge and challenge you to apply familiar concepts in new applications. Work through the questions in your notebook first, building each figure and computing each number, then enter your answers here as selections. You are welcomed and encouraged to work in groups so long as your work is your own.
 
-The following questions are based on crude marriage rates in marriage_rates.csv — numbers of marriages per one thousand inhabitants — in 1990 and 2019. Each row represents a different European country.
+The following questions are based on crude marriage rates in marriage_rates.csv (numbers of marriages per one thousand inhabitants) in 1990 and 2019. Each row represents a different European country.
 ```
 
 ### Q1.1: `Create a multi-boxplot comparing marriage rates in 1990 vs 2019. Did marriage rates generally increase or decrease?`
 
 ```
-( ) Increased — the 2019 box sits above the 1990 box
-(x) Decreased — the 2019 box sits below the 1990 box, with the median falling from about 6.5 to about 4.9
-( ) Stayed about the same — the two boxes overlap almost completely
+( ) Increased: the 2019 box sits above the 1990 box
+(x) Decreased: the 2019 box sits below the 1990 box, with the median falling from about 6.5 to about 4.9
+( ) Stayed about the same: the two boxes overlap almost completely
 ( ) The boxplots cannot tell us
 ```
 
