@@ -305,6 +305,15 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Exercise_2_1.ipynb
       - name: Homework 2.1
         kind: homework
+        due: Friday, Oct. 2 at 5PM
+        date: '2026-10-02'
+        links:
+        - label: Homework
+          file: parts/part-2-1/HW_2_1.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Homework_2_1.ipynb
+        - label: Coffee & Agriculture
+          file: data/coffee_prod_agr.csv
     - block: '2.2'
       nav: N × C
       title: Numerical × Categorical
