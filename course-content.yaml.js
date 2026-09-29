@@ -300,6 +300,9 @@ parts:
       - name: Exercise 2.1
         kind: exercise
         sub: Bivariate Relationships
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-1/Exercise_2_1.ipynb
       - name: Homework 2.1
         kind: homework
     - block: '2.2'
