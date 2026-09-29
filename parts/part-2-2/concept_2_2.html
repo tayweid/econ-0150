@@ -225,8 +225,8 @@ How do buyers respond to different discount structures?
 <p class="subheader">
 Let’s load the data and take a look
 </p>
-<div id="545d10ec" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="372978c7" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -312,7 +312,7 @@ The distribution of revenue by offer type.
 </p>
 
 <img data-src="i/first_attempt_raw.png" class="r-stretch"><div class="fragment">
-<p><em>&gt; hard to see — why are so many values compressed at zero?</em></p>
+<p><em>&gt; hard to see. Why are so many values compressed at zero?</em></p>
 </div>
 </section>
 <section id="log-transformation-skewed-data" class="slide level2">
@@ -320,8 +320,8 @@ The distribution of revenue by offer type.
 <p class="subheader">
 Each unit = a doubling of spending
 </p>
-<div id="fa192fb2" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div id="7c1bf729" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -458,7 +458,7 @@ Where is revenue coming from?
 Only transactions have revenue
 </p>
 
-<img data-src="i/revenue_by_event.png" class="r-stretch"><p><em>&gt; offers and completions have zero revenue — that’s why we see so many zeros</em></p>
+<img data-src="i/revenue_by_event.png" class="r-stretch"><p><em>&gt; offers and completions have zero revenue, which is why we see so many zeros</em></p>
 </section>
 <section id="exercise-2.2-summarize-transactions" class="slide level2">
 <h2>Exercise 2.2 | Summarize Transactions</h2>
@@ -504,8 +504,8 @@ Calculate the mean, standard deviation, and count of log revenue by offer type.
 <p class="subheader">
 Average log spending by offer type
 </p>
-<div id="5eaa5e8c" class="cell" data-execution_count="3">
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="f745f7a2" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 <style scoped="">
     .dataframe tbody tr th:only-of-type {
@@ -591,10 +591,10 @@ Filter → Transform → Group → Visualize
 <p><br><br></p>
 <div>
 <ol type="1">
-<li class="fragment"><strong>Filter</strong> — keep only relevant rows</li>
-<li class="fragment"><strong>Transform</strong> — log scale for skewed data</li>
-<li class="fragment"><strong>Group</strong> — organize by a categorical variable</li>
-<li class="fragment"><strong>Summarize</strong> — compare distributions across groups</li>
+<li class="fragment"><strong>Filter</strong>: keep only relevant rows</li>
+<li class="fragment"><strong>Transform</strong>: log scale for skewed data</li>
+<li class="fragment"><strong>Group</strong>: organize by a categorical variable</li>
+<li class="fragment"><strong>Summarize</strong>: compare distributions across groups</li>
 </ol>
 </div>
 <div class="fragment">
@@ -630,7 +630,7 @@ BOGO 5 vs BOGO 10: Do buyers respond differently?
 </p>
 
 <img data-src="i/compare_01.png" class="r-stretch"><div class="fragment">
-<p><em>&gt; BOGO 10 has higher average spending — but look at the overlap</em></p>
+<p><em>&gt; BOGO 10 has higher average spending, but look at the overlap</em></p>
 </div>
 </section>
 <section id="the-overlap-problem" class="slide level2">
@@ -664,8 +664,8 @@ Is the difference real or just noise?
 <p><br><br></p>
 <div>
 <ul>
-<li class="fragment"><strong>Summary statistics can hide problems</strong> — always visualize</li>
-<li class="fragment"><strong>Filter your data</strong> — make sure you’re analyzing what you think</li>
+<li class="fragment"><strong>Summary statistics can hide problems</strong>: always visualize</li>
+<li class="fragment"><strong>Filter your data</strong>: make sure you’re analyzing what you think</li>
 <li class="fragment"><strong>Log transformation</strong> helps with skewed data</li>
 <li class="fragment"><strong>Boxplots by category</strong> show distributions, not just means</li>
 <li class="fragment"><strong>Overlapping distributions</strong> raise inference questions</li>

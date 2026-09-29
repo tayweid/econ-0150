@@ -73,7 +73,7 @@ sns.boxplot(data, x='Offer ID', y='Revenue', whis=(0,100))
 
 . . .
 
-*> hard to see — why are so many values compressed at zero?*
+*> hard to see. Why are so many values compressed at zero?*
 
 ---
 
@@ -194,7 +194,7 @@ sns.boxplot(data, x='Event', y='Revenue', whis=(0,100))
 
 ![](i/revenue_by_event.png)
 
-*> offers and completions have zero revenue — that's why we see so many zeros*
+*> offers and completions have zero revenue, which is why we see so many zeros*
 
 ---
 
@@ -275,10 +275,10 @@ transactions.groupby('Offer ID')['log2_Revenue'].agg(['mean', 'std', 'count']).r
 <br><br>
 
 ::: {.incremental}
-1. **Filter** — keep only relevant rows
-2. **Transform** — log scale for skewed data
-3. **Group** — organize by a categorical variable
-4. **Summarize** — compare distributions across groups
+1. **Filter**: keep only relevant rows
+2. **Transform**: log scale for skewed data
+3. **Group**: organize by a categorical variable
+4. **Summarize**: compare distributions across groups
 :::
 
 . . .
@@ -321,7 +321,7 @@ sns.boxplot(two_offers, x='Offer ID', y='log2_Revenue', whis=(0,100))
 
 . . .
 
-*> BOGO 10 has higher average spending — but look at the overlap*
+*> BOGO 10 has higher average spending, but look at the overlap*
 
 ---
 
@@ -358,8 +358,8 @@ sns.boxplot(two_offers, x='Offer ID', y='log2_Revenue', whis=(0,100))
 <br><br>
 
 ::: {.incremental}
-- **Summary statistics can hide problems** — always visualize
-- **Filter your data** — make sure you're analyzing what you think
+- **Summary statistics can hide problems**: always visualize
+- **Filter your data**: make sure you're analyzing what you think
 - **Log transformation** helps with skewed data
 - **Boxplots by category** show distributions, not just means
 - **Overlapping distributions** raise inference questions
