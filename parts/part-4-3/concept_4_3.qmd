@@ -434,7 +434,7 @@ from scipy import stats
 # Set seed for reproducibility
 np.random.seed(42)
 
-# Generate education data (years) — keep seed in sync with first slide
+# Generate education data (years); keep seed in sync with first slide
 education = np.concatenate([np.random.randint(10, 13, 50),
                            np.random.randint(13, 17, 70),
                            np.random.randint(17, 22, 30)])
@@ -866,7 +866,7 @@ X_cross = sm.add_constant(x_cross)
 model_cross = sm.OLS(y_cross, X_cross).fit()
 resid_cross = model_cross.resid
 
-# Shuffle to simulate no ordering — lag plot of random pairs
+# Shuffle to simulate no ordering: lag plot of random pairs
 lagged_cross = resid_cross[:-1]
 current_cross = resid_cross[1:]
 

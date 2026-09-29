@@ -303,7 +303,7 @@ sns.relplot(anscombe, x='x', y='y', col='dataset')
 ---
 
 ## Trivariate Relationships: Size
-<p class="subheader">Indonesia and Brazil stand out — large countries with high production</p>
+<p class="subheader">Indonesia and Brazil stand out as large countries with high production</p>
 
 ![](i/e_03.png)
 

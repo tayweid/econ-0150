@@ -300,7 +300,7 @@ format:
 
 . . .
 
-*> but in long format, this is hard — the data is spread across different rows*
+*> but in long format, this is hard because the data is spread across different rows*
 
 ---
 

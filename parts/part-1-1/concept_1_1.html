@@ -201,7 +201,22 @@
 The economist’s data analysis skillset.
 </p>
 <p><br></p>
-<h3 id="part-1.1-summarizing-categorical-variables"><em>Part 1.1 | Summarizing Categorical Variables</em></h3>
+<h3 id="part-1.1-cross-sectional-categorical-data"><em>Part 1.1 | Cross-Sectional (Categorical) Data</em></h3>
+</section>
+<section id="cross-sectional-categorical-data" class="slide level2">
+<h2>Cross-Sectional Categorical Data</h2>
+<p class="subheader">
+Comparing categorical values across entities
+</p>
+<div class="fragment">
+<p><em>&gt; Cross-sectional data: many entities, one point in time</em></p>
+</div>
+<div class="fragment">
+<p><em>&gt; Categorical variables: values that represent groups or categories (state, status, sector)</em></p>
+</div>
+<div class="fragment">
+<p><em>&gt; Key question: How are entities distributed across categories?</em></p>
+</div>
 </section>
 <section class="slide level2">
 
@@ -227,41 +242,41 @@ The economist’s data analysis skillset.
 Q. Which state has the most locations?
 </p>
 <div class="fragment">
-<div id="90840c93" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div id="1b881de4" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <style type="text/css">
-#T_a6849 th {
+#T_0c03b th {
   font-size: 0.8em;
 }
-#T_a6849_row0_col0, #T_a6849_row1_col0, #T_a6849_row2_col0, #T_a6849_row3_col0, #T_a6849_row4_col0, #T_a6849_row5_col0 {
+#T_0c03b_row0_col0, #T_0c03b_row1_col0, #T_0c03b_row2_col0, #T_0c03b_row3_col0, #T_0c03b_row4_col0, #T_0c03b_row5_col0 {
   font-size: 0.8em;
 }
 </style>
 
-<table id="T_a6849" class="caption-top" data-quarto-postprocess="true">
+<table id="T_0c03b" class="caption-top" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th id="T_a6849_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">STATE</th>
+<th id="T_0c03b_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">STATE</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_a6849_row0_col0" class="data row0 col0">CA</td>
+<td id="T_0c03b_row0_col0" class="data row0 col0">CA</td>
 </tr>
 <tr class="even">
-<td id="T_a6849_row1_col0" class="data row1 col0">NY</td>
+<td id="T_0c03b_row1_col0" class="data row1 col0">NY</td>
 </tr>
 <tr class="odd">
-<td id="T_a6849_row2_col0" class="data row2 col0">TX</td>
+<td id="T_0c03b_row2_col0" class="data row2 col0">WA</td>
 </tr>
 <tr class="even">
-<td id="T_a6849_row3_col0" class="data row3 col0">WA</td>
+<td id="T_0c03b_row3_col0" class="data row3 col0">WA</td>
 </tr>
 <tr class="odd">
-<td id="T_a6849_row4_col0" class="data row4 col0">FL</td>
+<td id="T_0c03b_row4_col0" class="data row4 col0">TX</td>
 </tr>
 <tr class="even">
-<td id="T_a6849_row5_col0" class="data row5 col0">...</td>
+<td id="T_0c03b_row5_col0" class="data row5 col0">...</td>
 </tr>
 </tbody>
 </table>
@@ -398,9 +413,9 @@ Every visualization follows three steps
 </p>
 <div>
 <ul>
-<li class="fragment"><strong>SELECT</strong> — Which rows are we looking at?</li>
-<li class="fragment"><strong>TRANSFORM</strong> — How do we summarize or reshape the data?</li>
-<li class="fragment"><strong>ENCODE</strong> — How do we map values to visual elements?</li>
+<li class="fragment"><strong>SELECT</strong>: Which rows are we looking at?</li>
+<li class="fragment"><strong>TRANSFORM</strong>: How do we summarize or reshape the data?</li>
+<li class="fragment"><strong>ENCODE</strong>: How do we map values to visual elements?</li>
 </ul>
 </div>
 </section>
@@ -456,7 +471,7 @@ Summarize <code>Coffee_Shops.csv</code> as a nominal categorical variable.
 </p>
 <div class="fragment">
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="co"># Load Dataset</span></span>
-<span id="cb1-2"><a href=""></a>shops <span class="op">=</span> pd.read_csv(file_path <span class="op">+</span> <span class="st">'Coffee_Shops.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href=""></a>shops <span class="op">=</span> pd.read_csv(<span class="st">'../../data/Coffee_Shops.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="co"># Summary Table</span></span>
@@ -476,7 +491,7 @@ Summarize <code>Coffee_Shops.csv</code> as a nominal categorical variable.
 Summarize <code>Coffee_Shops.csv</code> as a binary categorical variable.
 </p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># Load Dataset</span></span>
-<span id="cb4-2"><a href=""></a>shops <span class="op">=</span> pd.read_csv(file_path <span class="op">+</span> <span class="st">'Coffee_Shops.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-2"><a href=""></a>shops <span class="op">=</span> pd.read_csv(<span class="st">'../../data/Coffee_Shops.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># Create a binary categorical variable</span></span>
 <span id="cb5-2"><a href=""></a>shops[<span class="st">'CA'</span>] <span class="op">=</span> np.where(shops[<span class="st">'STATE'</span>] <span class="op">==</span> <span class="st">'CA'</span>, <span class="st">'CA'</span>, <span class="st">'Other'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">

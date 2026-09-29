@@ -21,7 +21,7 @@ format:
 
 . . .
 
-*> the US and China dominate — their economies are massive*
+*> the US and China dominate because their economies are massive*
 
 ---
 
@@ -30,7 +30,7 @@ format:
 
 ![](i/i_01.png)
 
-*> wait — is "largest economy" the same as "richest"?*
+*> wait, is "largest economy" the same as "richest"?*
 
 ---
 
@@ -50,7 +50,7 @@ format:
 
 ![](i/i_02.png)
 
-*> Luxembourg, Switzerland, Norway — small populations, high living standards*
+*> Luxembourg, Switzerland, Norway: small populations, high living standards*
 
 ---
 
@@ -86,7 +86,7 @@ Lets transform total GDP to GDP per capita.
 <br><br>
 
 ::: {.incremental}
-- **Per capita** means "per person" — divide by population
+- **Per capita** means "per person," so divide by population
 - Total values favor large countries
 - Per capita values show intensity or living standards
 - The same data tells different stories depending on the transformation

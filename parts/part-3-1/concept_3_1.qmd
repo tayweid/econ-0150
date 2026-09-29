@@ -363,7 +363,7 @@ plt.show()
 ---
 
 ## Cumulative Distribution Function (CDF)
-<p class="subheader">The area under $f(x)$ up to each value — $F(x) = P(X \leq x)$.</p>
+<p class="subheader">The area under $f(x)$ up to each value: $F(x) = P(X \leq x)$.</p>
 
 ```{python}
 #| echo: false

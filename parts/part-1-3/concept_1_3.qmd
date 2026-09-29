@@ -157,7 +157,7 @@ sns.lineplot(prices, y='price', x='date')
 
 . . .
 
-*> ENCODE uses position for both time and value — the line shows sequence*
+*> ENCODE uses position for both time and value, so the line shows sequence*
 
 ---
 

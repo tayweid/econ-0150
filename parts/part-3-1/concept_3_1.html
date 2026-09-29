@@ -252,10 +252,10 @@ Where is the “center” of each sample group?
 <span id="cb1-3"><a href=""></a>mean_B <span class="op">=</span> group_B.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div id="bcdcd059" class="cell" data-execution_count="1">
+<div id="7780a313" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-stdout">
-<pre><code>Group A mean: 7.20 hours
-Group B mean: 6.72 hours</code></pre>
+<pre><code>Group A mean: 7.41 hours
+Group B mean: 6.84 hours</code></pre>
 </div>
 </div>
 </div>
@@ -266,10 +266,10 @@ Group B mean: 6.72 hours</code></pre>
 Which sample group sleeps longer?
 </p>
 
-<img data-src="i/c_03.png" class="r-stretch"><div id="f559b79a" class="cell" data-execution_count="2">
+<img data-src="i/c_03.png" class="r-stretch"><div id="16caa8b3" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
-<pre><code>Sample Group A mean: 7.20 hours
-Sample Group B mean: 6.72 hours</code></pre>
+<pre><code>Sample Group A mean: 7.41 hours
+Sample Group B mean: 6.84 hours</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -361,16 +361,16 @@ How spread out is the data?
 </p>
 <p><br></p>
 <p><strong>Standard Deviation</strong>: A measure of spread <span class="math display">\[S_X = \sqrt{\sum \frac{(x_i - \bar{x})^2}{n}}\]</span></p>
-<div id="33b2fec9" class="cell" data-execution_count="3">
+<div id="6112030a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="co"># Calculate standard deviations</span></span>
 <span id="cb4-2"><a href=""></a>std_A <span class="op">=</span> group_A.std()</span>
 <span id="cb4-3"><a href=""></a>std_B <span class="op">=</span> group_B.std()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="fragment">
-<div id="2baaa46c" class="cell" data-execution_count="4">
+<div id="1376698d" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
-<pre><code>Group A std dev: 1.60 hours
-Group B std dev: 0.70 hours</code></pre>
+<pre><code>Group A std dev: 1.55 hours
+Group B std dev: 0.82 hours</code></pre>
 </div>
 </div>
 </div>
@@ -483,11 +483,11 @@ Random variables can have many kinds of probability functions.
 <p class="subheader">
 The height of <span class="math inline">\(f(x)\)</span> at each value.
 </p>
-<div id="ffb5a2a2" class="cell" data-execution_count="5">
+<div id="ff5b62ad" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="concept_3_1_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="853" height="228"></p>
+<p><img data-src="concept_3_1_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="854" height="230"></p>
 </figure>
 </div>
 </div>
@@ -502,13 +502,13 @@ The height of <span class="math inline">\(f(x)\)</span> at each value.
 <section id="cumulative-distribution-function-cdf" class="slide level2">
 <h2>Cumulative Distribution Function (CDF)</h2>
 <p class="subheader">
-The area under <span class="math inline">\(f(x)\)</span> up to each value — <span class="math inline">\(F(x) = P(X \leq x)\)</span>.
+The area under <span class="math inline">\(f(x)\)</span> up to each value: <span class="math inline">\(F(x) = P(X \leq x)\)</span>.
 </p>
-<div id="58699e0b" class="cell" data-execution_count="6">
+<div id="6707dffd" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="concept_3_1_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="853" height="228"></p>
+<p><img data-src="concept_3_1_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="854" height="230"></p>
 </figure>
 </div>
 </div>

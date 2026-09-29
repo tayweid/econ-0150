@@ -807,7 +807,7 @@ Compare the intercept coefficient to the sample mean from Question 1.
 
 . . .
 
-*> the intercept equals the sample mean — the model's best prediction is $\bar{y}$*
+*> the intercept equals the sample mean: the model's best prediction is $\bar{y}$*
 
 . . .
 

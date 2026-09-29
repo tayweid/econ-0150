@@ -831,7 +831,7 @@ Alan Krueger
 
 <br>
 
---- Card and Krueger (1994)
+Card and Krueger (1994)
 
 <br><br>
 
@@ -970,8 +970,8 @@ $$x \sim F$$
 
 **Two skills:**
 
-1. **Description** *(Parts 1 - 2)* — Summarize $x$.
-2. **Inference** *(Parts 3 - 5)*— Learn about $F$ from $x$.
+1. **Description** *(Parts 1 - 2)*: Summarize $x$.
+2. **Inference** *(Parts 3 - 5)*: Learn about $F$ from $x$.
 
 ---
 
@@ -1048,15 +1048,15 @@ This distinguishes **substantive variables** (what we measure) from **index vari
 
 <br>
 
-1. **SELECT** — What does our data contain?
+1. **SELECT**: What does our data contain?
 
 . . .
 
-2. **TRANSFORM** — How do we change the data to make it more useful?
+2. **TRANSFORM**: How do we change the data to make it more useful?
 
 . . .
 
-3. **ENCODE** — How do we turn values into visual elements?
+3. **ENCODE**: How do we turn values into visual elements?
 
 ---
 

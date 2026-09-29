@@ -842,11 +842,11 @@ A 95% confidence interval around $\mu_0$ would be: $[9.07, 10.93]$
 
 . . .
 
-*> our observed mean ($\bar{x} = 10.85$) is within this interval — not surprising if μ=10*
+*> our observed mean ($\bar{x} = 10.85$) is within this interval, which is not surprising if μ=10*
 
 . . .
 
-*> but if we observed $\bar{x} = 11.5$, that would be outside the interval — surprising!*
+*> but if we observed $\bar{x} = 11.5$, that would be outside the interval, which would be surprising!*
 
 ---
 

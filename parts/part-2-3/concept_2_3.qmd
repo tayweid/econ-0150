@@ -84,7 +84,7 @@ sns.stripplot(data_long.sample(400), x='Year', y='dem_share')
 
 . . .
 
-*> median dropped from 41% to 29% — but why were elections still close?*
+*> median dropped from 41% to 29%, but why were elections still close?*
 
 ---
 
@@ -106,7 +106,7 @@ sns.stripplot(data_long.sample(400), x='Year', y='dem_share')
 
 <br>
 
-This is a **Part 2.1 question** — a relationship between two numerical variables.
+This is a **Part 2.1 question**: a relationship between two numerical variables.
 
 ```{.python}
 # Use log votes
@@ -167,7 +167,7 @@ sns.lmplot(data, x='log_income', y='dem_share_2024')
 
 . . .
 
-*> correlation: 0.25 — but was it always this way?*
+*> correlation: 0.25, but was it always this way?*
 
 ---
 
@@ -262,7 +262,7 @@ data = pd.merge(income, elections, on='county_fips')
 
 <br>
 
-*> the merge matches 3,106 of ~3,200 counties — 97% success*
+*> the merge matches 3,106 of ~3,200 counties, a 97% success*
 
 ---
 
@@ -272,10 +272,10 @@ data = pd.merge(income, elections, on='county_fips')
 <br><br>
 
 ::: {.incremental}
-1. **Q1 (Part 2.2):** Boxplot by year — counties shifted Republican
-2. **Q2 (Part 2.1):** Scatter of size vs. voting — large counties vote Democratic
-3. **Q3 (Part 2.1):** Scatter of income vs. voting — richer counties vote Democratic
-4. **Q4 (Part 2.3):** Scatter by category — the relationship flipped
+1. **Q1 (Part 2.2):** Boxplot by year: counties shifted Republican
+2. **Q2 (Part 2.1):** Scatter of size vs. voting: large counties vote Democratic
+3. **Q3 (Part 2.1):** Scatter of income vs. voting: richer counties vote Democratic
+4. **Q4 (Part 2.3):** Scatter by category: the relationship flipped
 :::
 
 ---

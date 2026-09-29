@@ -130,11 +130,11 @@ format:
 
 . . .
 
-- **Mean** — the average value (center)
+- **Mean**: the average value (center)
 
 . . .
 
-- **Standard Deviation (SD)** — typical distance from the mean (spread)
+- **Standard Deviation (SD)**: typical distance from the mean (spread)
 
 ---
 

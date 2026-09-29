@@ -165,7 +165,7 @@ format:
 
 . . .
 
-*> Shop A — the distribution is relatively flat*
+*> Shop A: the distribution is relatively flat*
 
 ---
 
@@ -176,7 +176,7 @@ format:
 
 . . .
 
-*> Shop C — compare the 8-10am peaks across panels*
+*> Shop C: compare the 8-10am peaks across panels*
 
 *> but since the histograms are separated it's not as easy to make the comparison*
 
@@ -193,7 +193,7 @@ format:
 
 . . .
 
-*> Shop C — easier to see the 8-10am peak across shops*
+*> Shop C: easier to see the 8-10am peak across shops*
 
 ---
 

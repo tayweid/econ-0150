@@ -210,9 +210,9 @@ display_df.style.hide(axis="index").set_properties(**{'font-size': '0.8em'}).set
 <p class="subheader">Every visualization follows three steps</p>
 
 ::: {.incremental}
-- **SELECT** — Which rows are we looking at?
-- **TRANSFORM** — How do we summarize or reshape the data?
-- **ENCODE** — How do we map values to visual elements?
+- **SELECT**: Which rows are we looking at?
+- **TRANSFORM**: How do we summarize or reshape the data?
+- **ENCODE**: How do we map values to visual elements?
 :::
 
 ---

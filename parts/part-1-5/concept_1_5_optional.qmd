@@ -103,7 +103,7 @@ sns.lineplot(percap_long, x='Year', y='Consumption', hue='Code')
 
 ![](i/w_04.png)
 
-*> long format makes line plots natural — use `hue='Code'`*
+*> long format makes line plots natural; use `hue='Code'`*
 
 ---
 

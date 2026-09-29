@@ -720,10 +720,10 @@ $$\text{satisfaction} = \beta_0 + \beta_1 \text{commute} + \beta_2 \text{salary}
 <br>
 
 :::{.incremental}
-1. **Start with the question** — What is the causal story? What confounders exist?
-2. **Visualize** — Patterns reveal what model to use
-3. **Choose the right model** — Match the question to the framework
-4. **Add controls** — Remove potential confounders
-5. **Compare models** — Use R² and F-tests to evaluate
-6. **Interpret with caution** — Controls help, but don't prove causation
+1. **Start with the question**: What is the causal story? What confounders exist?
+2. **Visualize**: Patterns reveal what model to use
+3. **Choose the right model**: Match the question to the framework
+4. **Add controls**: Remove potential confounders
+5. **Compare models**: Use R² and F-tests to evaluate
+6. **Interpret with caution**: Controls help, but don't prove causation
 :::

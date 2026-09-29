@@ -583,7 +583,7 @@ plt.show()
 
 . . .
 
-2. **Width** comes from $S / \sqrt{n}$ — the sample standard error.
+2. **Width** comes from $S / \sqrt{n}$, the sample standard error.
 
 . . .
 

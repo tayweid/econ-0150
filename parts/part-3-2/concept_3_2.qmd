@@ -184,7 +184,7 @@ Next is something even less boring.
 
 ![](i/c_07.png)
 
-*> there's some curvature to the shape — the edges are rounding into a curve*
+*> there's some curvature to the shape, and the edges are rounding into a curve*
 
 ---
 
@@ -338,7 +338,7 @@ sns.histplot(sample_means, bins=30)
 ---
 
 ## Exercise 3.2 | Skewed Population (n=1)
-<p class="subheader">The distribution of sample means looks just like the population — very skewed.</p>
+<p class="subheader">The distribution of sample means looks just like the population: very skewed.</p>
 
 ```{python}
 #| echo: false
@@ -404,7 +404,7 @@ plt.show()
 ---
 
 ## Exercise 3.2 | Skewed Population (n=30)
-<p class="subheader">It looks normal — despite the skewed population.</p>
+<p class="subheader">It looks normal, despite the skewed population.</p>
 
 ```{python}
 #| echo: false
@@ -523,7 +523,7 @@ plt.show()
 ---
 
 ## Exercise 3.2 | Skewed Population
-<p class="subheader">The full picture — sample means converge to normal as n increases.</p>
+<p class="subheader">The full picture: sample means converge to normal as n increases.</p>
 
 ```{python}
 #| echo: false
@@ -623,4 +623,4 @@ plt.show()
 
 <br>
 
-*> the CLT gives us the distribution — Parts 3.3 and 3.4 show us how to use it*
+*> the CLT gives us the distribution; Parts 3.3 and 3.4 show us how to use it*
