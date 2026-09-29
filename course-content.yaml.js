@@ -337,6 +337,9 @@ parts:
       - name: Exercise 2.2
         kind: exercise
         sub: Grouped Comparisons
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Exercise_2_2.ipynb
       - name: Homework 2.2
         kind: homework
     - block: '2.3'
