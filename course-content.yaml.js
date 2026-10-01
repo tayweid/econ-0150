@@ -342,6 +342,17 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Exercise_2_2.ipynb
       - name: Homework 2.2
         kind: homework
+        due: Friday, Oct. 9 at 5PM
+        date: '2026-10-09'
+        links:
+        - label: Homework
+          file: parts/part-2-2/HW_2_2.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-2/Homework_2_2.ipynb
+        - label: Amazon Books
+          file: data/amazon_book_sales.csv
+        - label: Marriage Rates
+          file: data/marriage_rates_by_continent.csv
     - block: '2.3'
       nav: N × N × C
       title: Numerical × Numerical × Categorical
