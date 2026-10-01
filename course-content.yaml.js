@@ -376,6 +376,9 @@ parts:
       - name: Exercise 2.3
         kind: exercise
         sub: Conditional Analysis
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-3/Exercise_2_3.ipynb
       - name: Homework 2.3
         kind: homework
     - checkpoint:
