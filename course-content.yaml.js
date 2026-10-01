@@ -379,12 +379,19 @@ parts:
       - name: Homework 2.3
         kind: homework
     - checkpoint:
-        description: 'MiniExam 2 will be held on Februrary 24 and covers everything in Part 2: numerical relationships,
+        description: 'MiniExam 2 will be held on Tuesday, October 13 and covers everything in Part 2: numerical relationships,
           grouped comparisons, and conditional analysis. Practice with the exercises and homework to prepare.'
         demo:
           name: Demo 2 Walkthrough
           video: xIfuZpriojY
-          description: MiniExam 2 Demo covers all material from Parts 2.1 through 2.3.
+          description: MiniExam 2 Demo covers all material from Parts 2.1 through 2.3. Try solving the demo then check
+            your answers against the solutions and the video.
+          links:
+          - label: Demo
+            file: ME/ME_2/ME_2_Demo.pdf
+          - label: Solutions
+            file: ME/ME_2/ME_2_Demo_sols.pdf
+        date: '2026-10-13'
         next: 3
   '3':
     title: Univariate GLM
