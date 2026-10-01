@@ -379,8 +379,8 @@ parts:
       - name: Homework 2.3
         kind: homework
     - checkpoint:
-        description: 'MiniExam 2 will be held on Tuesday, October 13 and covers everything in Part 2: numerical relationships,
-          grouped comparisons, and conditional analysis. Practice with the exercises and homework to prepare.'
+        description: 'MiniExam 2 covers everything in Part 2: numerical relationships, grouped comparisons, and conditional
+          analysis. Practice with the exercises and homework to prepare.'
         demo:
           name: Demo 2 Walkthrough
           video: xIfuZpriojY
@@ -490,7 +490,13 @@ parts:
         demo:
           name: Demo 3 Walkthrough
           video: 8awMXVDFm-g
-          description: MiniExam 03 Demo covers all material from Parts 3.1 through 3.4.
+          description: MiniExam 3 Demo covers all material from Parts 3.1 through 3.4. Try solving the demo then check
+            your answers against the solutions and the video.
+          links:
+          - label: Demo
+            file: ME/ME_3/ME_3_Demo.pdf
+          - label: Solutions
+            file: ME/ME_3/ME_3_Demo_sols.pdf
         next: 4
   '4':
     title: Bivariate GLM
@@ -587,8 +593,12 @@ parts:
         demo:
           name: Demo 4 Walkthrough
           video: NgEffN3TOtw
-          description: Try solving the demo then check your answers against the video.
+          description: Try solving the demo then check your answers against the solutions and the video.
           links:
+          - label: Demo
+            file: ME/ME_4/ME_4_Demo.pdf
+          - label: Solutions
+            file: ME/ME_4/ME_4_Demo_sols.pdf
           - label: Slides
             file: parts/part-4-review/concept_4_review.pdf
           - label: Interactive
@@ -689,7 +699,12 @@ parts:
           name: Demo 5 Walkthrough
           video: T2okITdU5-c
           description: This Demo is more challenging than what you can expect on the actual MiniExam. Try solving
-            the demo then check your answers against the video.
+            the demo then check your answers against the solutions and the video.
+          links:
+          - label: Demo
+            file: ME/ME_5/ME_5_Demo.pdf
+          - label: Solutions
+            file: ME/ME_5/ME_5_Demo_sols.pdf
         next: 6
   '6':
     title: Communication
