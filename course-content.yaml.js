@@ -381,6 +381,15 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-3/Exercise_2_3.ipynb
       - name: Homework 2.3
         kind: homework
+        due: Friday, Oct. 9 at 5PM
+        date: '2026-10-09'
+        links:
+        - label: Homework
+          file: parts/part-2-3/HW_2_3.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-2-3/Homework_2_3.ipynb
+        - label: Amazon Books
+          file: data/amazon_book_sales.csv
     - checkpoint:
         description: 'MiniExam 2 covers everything in Part 2: numerical relationships, grouped comparisons, and conditional
           analysis. Practice with the exercises and homework to prepare.'
