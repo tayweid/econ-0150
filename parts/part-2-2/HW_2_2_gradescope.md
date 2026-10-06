@@ -22,7 +22,7 @@ Gradescope parses the code directly. Every input field must sit on its own line 
 ```
 Homework is designed to both test your knowledge and challenge you to apply familiar concepts in new applications. Work through the questions in your notebook first, building each figure and computing each number, then enter your answers here as selections. You are welcomed and encouraged to work in groups so long as your work is your own.
 
-The dataset amazon_book_sales.csv lists Amazon's 50 bestselling books each year from 2009 to 2021 (700 books). The column Genre marks each as Fiction or Non Fiction.
+The dataset amazon_book_sales.csv lists Amazon's 50 bestselling books each year from 2009 to 2022 (700 books). The column Genre marks each as Fiction or Non Fiction.
 ```
 
 ### Q1.1: `Create a boxplot showing the distribution of User Rating by Genre. Upload your figure.`
