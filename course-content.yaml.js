@@ -368,7 +368,7 @@ parts:
         - label: Interactive
           file: parts/part-2-3/concept_2_3.html
         - label: Notes
-          file: parts/part-2-filtering/Notes_2_3_Filtering.pdf
+          file: parts/part-2-3/Notes_2_3.pdf
       steps:
       - name: Livestream 2.3
         kind: livestream
