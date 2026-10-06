@@ -129,7 +129,7 @@ sns.lmplot(data, x='log_votes_2024', y='dem_share_2024')
 
 . . .
 
-*> Democratic-leaning counties are larger (correlation: 0.49)*
+*> Democratic-leaning counties are larger (correlation: 0.53)*
 
 ---
 
@@ -167,7 +167,7 @@ sns.lmplot(data, x='log_income', y='dem_share_2024')
 
 . . .
 
-*> correlation: 0.25, but was it always this way?*
+*> correlation: 0.26, but was it always this way?*
 
 ---
 
@@ -262,7 +262,7 @@ data = pd.merge(income, elections, on='county_fips')
 
 <br>
 
-*> the merge matches 3,106 of ~3,200 counties, a 97% success*
+*> the merge matches 3,104 of 3,115 counties, over 99% success*
 
 ---
 

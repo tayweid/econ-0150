@@ -49,7 +49,7 @@ sns.lmplot(data=data, x='log_votes', y='dem_share')
 
 ![](i/size_vs_dem_2024.png)
 
-Yes. Larger counties vote much more Democratic. The correlation is 0.49 — quite strong. This explains the paradox: small rural counties (numerous but small) shifted Republican, while large urban counties (fewer but populous) lean Democratic. The county average moved right, but most *people* live in places that vote Democratic.
+Yes. Larger counties vote much more Democratic. The correlation is 0.53 — quite strong. This explains the paradox: small rural counties (numerous but small) shifted Republican, while large urban counties (fewer but populous) lean Democratic. The county average moved right, but most *people* live in places that vote Democratic.
 
 ### Question 3: Is This Related to Income?
 
@@ -62,7 +62,7 @@ sns.lmplot(data=data, x='log_income', y='dem_share')
 
 ![](i/income_vs_dem_2024.png)
 
-Richer counties also vote more Democratic (correlation: 0.25). This fits what you hear in the news about wealthy suburbs shifting toward Democrats.
+Richer counties also vote more Democratic (correlation: 0.26). This fits what you hear in the news about wealthy suburbs shifting toward Democrats.
 
 But here's the puzzle: this relationship feels new. Did wealthy counties always vote Democratic?
 
@@ -76,7 +76,7 @@ sns.lmplot(data=data_long, x='log_income', y='dem_share', hue='Year')
 
 ![](i/income_vs_dem_by_year.png)
 
-Now we see the full story. In 2000, the relationship between income and Democratic voting was slightly *negative* (correlation: -0.11) — richer counties leaned slightly Republican. By 2024, the relationship is *positive* (correlation: +0.25) — richer counties now vote much more Democratic.
+Now we see the full story. In 2000, the relationship between income and Democratic voting was slightly *negative* (correlation: -0.11) — richer counties leaned slightly Republican. By 2024, the relationship is *positive* (correlation: +0.26) — richer counties now vote much more Democratic.
 
 The relationship completely flipped. This is economic realignment.
 
@@ -99,7 +99,7 @@ To answer Q2-Q4, we needed data from multiple sources: income from the Census, e
 data = pd.merge(income, elections, on='county_fips')
 ```
 
-The merge matches 3,106 of ~3,200 counties — about 97% success. Some counties don't match because of different coding schemes or missing data. This is typical when combining real-world datasets from different sources. For our analysis, 97% coverage is excellent.
+The merge matches 3,104 of 3,115 counties — over 99% success. Some counties don't match because of different coding schemes or missing data. This is typical when combining real-world datasets from different sources. For our analysis, 99% coverage is excellent.
 
 ### The Workflow
 
