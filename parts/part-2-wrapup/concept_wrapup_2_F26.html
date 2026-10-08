@@ -392,34 +392,46 @@ What are the variable types, and what figure would you draw?
 <img data-src="i/wrapup_09.png" class="r-stretch"><p>A <strong><em>Scatterplot</em></strong> works for timeseries too, like coffee and oil prices in Part 2.1. Labeling the points with years keeps the time order.</p>
 </section></section>
 <section>
-<section id="fix-the-figure" class="title-slide slide level1 center">
-<h1>Fix the Figure</h1>
+<section id="ask-a-specific-question" class="title-slide slide level1 center">
+<h1>Ask a Specific Question</h1>
 
 </section>
-<section id="fix-the-figure-1" class="slide level2">
-<h2>Fix the Figure</h2>
+<section id="ask-a-specific-question-1" class="slide level2">
+<h2>Ask a Specific Question</h2>
 <p class="subheader">
-Each figure hides the pattern. What’s the problem, and what’s the fix?
+Each figure shows the data accurately. Does it answer the question?
 </p>
 
 <img data-src="i/f26_fix_raw.png" class="r-stretch"><div class="fragment">
 <ul>
-<li><strong>(a)</strong> Both variables are skewed: most cities are crammed into the corner.</li>
-<li><strong>(b)</strong> Subscribers grow by a constant <em>percentage</em> each year: the early years look flat.</li>
-<li><strong>(c)</strong> Most visitors buy nothing: a row of zeros sits under the real relationship.</li>
+<li><strong>(a)</strong> How does the number of coffee shops change with city size, <em>for small cities as well as large ones</em>?</li>
+<li><strong>(b)</strong> Do subscribers grow at a <em>steady rate</em>, or does the growth rate change over time?</li>
+<li><strong>(c)</strong> <em>Among customers who buy something</em>, do longer visits lead to bigger purchases?</li>
 </ul>
 </div>
 </section>
-<section id="fix-the-figure-2" class="slide level2">
-<h2>Fix the Figure</h2>
+<section id="ask-a-specific-question-2" class="slide level2">
+<h2>Ask a Specific Question</h2>
+<p class="subheader">
+What does each figure show well, and what does it make hard to see?
+</p>
+
+<img data-src="i/f26_fix_raw.png" class="r-stretch"><ul>
+<li><strong>(a)</strong> Most cities clump in the bottom-left corner. We can’t see the small cities at all.</li>
+<li><strong>(b)</strong> The curve is accurate: growth is speeding up. But it’s hard to judge by eye whether a curve bends at a steady rate.</li>
+<li><strong>(c)</strong> The zeros are real and useful: most visitors buy nothing. But our question is only about the buyers.</li>
+</ul>
+</section>
+<section id="ask-a-specific-question-3" class="slide level2">
+<h2>Ask a Specific Question</h2>
 <p class="subheader">
 Log both axes, log one axis, or filter
 </p>
 
 <img data-src="i/f26_fix_fixed.png" class="r-stretch"><ul>
-<li><strong>(a)</strong> Log <strong>both</strong> axes: now each step is a multiple of the last.</li>
-<li><strong>(b)</strong> Log the <strong>y-axis only</strong>: steady percentage growth becomes a straight line.</li>
-<li><strong>(c)</strong> <strong>Filter</strong> to buyers: a log can’t help here, since log(0) doesn’t exist.</li>
+<li><strong>(a)</strong> Log <strong>both</strong> axes: small and large cities spread out, and each step is a multiple of the last.</li>
+<li><strong>(b)</strong> Log the <strong>y-axis only</strong>: a steady percentage growth rate becomes a straight line.</li>
+<li><strong>(c)</strong> <strong>Filter</strong> to buyers: among those who spend, longer visits go with bigger purchases.</li>
 </ul>
 </section></section>
 <section>

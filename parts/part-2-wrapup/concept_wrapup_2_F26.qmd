@@ -146,31 +146,42 @@ US unemployment and inflation rates each year since 2015.
 
 A ***Scatterplot*** works for timeseries too, like coffee and oil prices in Part 2.1. Labeling the points with years keeps the time order.
 
-# Fix the Figure
+# Ask a Specific Question
 
 ---
 
-## Fix the Figure
-<p class="subheader">Each figure hides the pattern. What's the problem, and what's the fix?</p>
+## Ask a Specific Question
+<p class="subheader">Each figure shows the data accurately. Does it answer the question?</p>
 
 ![](i/f26_fix_raw.png)
 
 . . .
 
-- **(a)** Both variables are skewed: most cities are crammed into the corner.
-- **(b)** Subscribers grow by a constant *percentage* each year: the early years look flat.
-- **(c)** Most visitors buy nothing: a row of zeros sits under the real relationship.
+- **(a)** How does the number of coffee shops change with city size, *for small cities as well as large ones*?
+- **(b)** Do subscribers grow at a *steady rate*, or does the growth rate change over time?
+- **(c)** *Among customers who buy something*, do longer visits lead to bigger purchases?
 
 ---
 
-## Fix the Figure
+## Ask a Specific Question
+<p class="subheader">What does each figure show well, and what does it make hard to see?</p>
+
+![](i/f26_fix_raw.png)
+
+- **(a)** Most cities clump in the bottom-left corner. We can't see the small cities at all.
+- **(b)** The curve is accurate: growth is speeding up. But it's hard to judge by eye whether a curve bends at a steady rate.
+- **(c)** The zeros are real and useful: most visitors buy nothing. But our question is only about the buyers.
+
+---
+
+## Ask a Specific Question
 <p class="subheader">Log both axes, log one axis, or filter</p>
 
 ![](i/f26_fix_fixed.png)
 
-- **(a)** Log **both** axes: now each step is a multiple of the last.
-- **(b)** Log the **y-axis only**: steady percentage growth becomes a straight line.
-- **(c)** **Filter** to buyers: a log can't help here, since log(0) doesn't exist.
+- **(a)** Log **both** axes: small and large cities spread out, and each step is a multiple of the last.
+- **(b)** Log the **y-axis only**: a steady percentage growth rate becomes a straight line.
+- **(c)** **Filter** to buyers: among those who spend, longer visits go with bigger purchases.
 
 # Log Scales
 
