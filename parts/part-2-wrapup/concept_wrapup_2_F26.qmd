@@ -146,12 +146,12 @@ US unemployment and inflation rates each year since 2015.
 
 A ***Scatterplot*** works for timeseries too, like coffee and oil prices in Part 2.1. Labeling the points with years keeps the time order.
 
-# Ask a Specific Question
+# Fix the Figure
 
 ---
 
-## Ask a Specific Question
-<p class="subheader">Each figure shows the data accurately. Does it answer the question?</p>
+## Fix the Figure
+<p class="subheader">Improve the figure for the question.</p>
 
 ![](i/f26_fix_raw.png)
 
@@ -163,7 +163,7 @@ A ***Scatterplot*** works for timeseries too, like coffee and oil prices in Part
 
 ---
 
-## Ask a Specific Question
+## Fix the Figure
 <p class="subheader">What does each figure show well, and what does it make hard to see?</p>
 
 ![](i/f26_fix_raw.png)
@@ -174,7 +174,7 @@ A ***Scatterplot*** works for timeseries too, like coffee and oil prices in Part
 
 ---
 
-## Ask a Specific Question
+## Fix the Figure
 <p class="subheader">Log both axes, log one axis, or filter</p>
 
 ![](i/f26_fix_fixed.png)
