@@ -393,6 +393,14 @@ parts:
     - checkpoint:
         description: 'MiniExam 2 covers everything in Part 2: numerical relationships, grouped comparisons, and conditional
           analysis. Practice with the exercises and homework to prepare.'
+        extras:
+        - name: Part 2 Wrap Up
+          description: Relationships, Grouped Comparisons, and Log Scales
+          links:
+          - label: Slides
+            file: parts/part-2-wrapup/concept_wrapup_2_F26.pdf
+          - label: Interactive
+            file: parts/part-2-wrapup/concept_wrapup_2_F26.html
         demo:
           name: Demo 2 Walkthrough
           video: xIfuZpriojY
