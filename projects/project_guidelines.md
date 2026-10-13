@@ -1,3 +1,7 @@
+---
+margin: {top: 1in, right: 1in, bottom: 1in, left: 1in}
+---
+
 # ECON 0150 | Final Project
 
 ### Guidelines
@@ -98,10 +102,10 @@ Submit a link to a folder with everything someone else would need to replicate y
 
 3. A short README
 
-   *A few sentences describing what's in the folder, where each dataset comes from (with links), and the order to run things in.*
+   *A few sentences describing what’s in the folder, where each dataset comes from (with links), and the order to run things in.*
 
 4. Other materials (optional)
 
    *Figures, your slides, and your report are welcome here too.*
 
-The format isn't strict. Most groups share a Google Drive folder. If you do, make sure I can open it: right click on your folder, click "Share", and switch "General access" from "Restricted" to "Anyone with the link". Submit one link per group on Gradescope with all group members included. If you'd prefer that I not use your name if your project is shared as an example for future classes, just let me know.
+The format isn’t strict. Most groups share a Google Drive folder. If you do, make sure I can open it: right click on your folder, click “Share”, and switch “General access” from “Restricted” to “Anyone with the link”. Submit one link per group on Gradescope with all group members included. If you’d prefer that I not use your name if your project is shared as an example for future classes, just let me know.
