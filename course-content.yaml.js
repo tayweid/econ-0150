@@ -794,6 +794,6 @@ parts:
           file: projects/data_sources.pdf
           icon: fa-file-pdf-o
         - label: Project Template Notebook
-          file: https://colab.research.google.com/drive/1eHmy9zJb-E1-zDmsFEhw7o5OA7o8FgDb?usp=sharing
+          file: https://drive.google.com/drive/folders/1YJWDidjBxd3CAwL_fGFFIcU-61wox9vG?usp=sharing
           icon: fa-external-link
 `;
