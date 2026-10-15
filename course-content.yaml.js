@@ -441,6 +441,9 @@ parts:
       - name: Exercise 3.1
         kind: exercise
         sub: Random Variables
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Exercise_3_1.ipynb
       - name: Homework 3.1
         kind: homework
     - block: '3.2'
