@@ -464,6 +464,9 @@ parts:
       - name: Exercise 3.2
         kind: exercise
         sub: CLT Demonstration
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-2/Exercise_3_2.ipynb
       - name: Homework 3.2
         kind: homework
     - block: '3.3'
