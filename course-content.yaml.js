@@ -486,6 +486,9 @@ parts:
       - name: Exercise 3.3
         kind: exercise
         sub: Interactive Confidence Intervals
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-3/Exercise_3_3.ipynb
       - name: Homework 3.3
         kind: homework
     - block: '3.4'
