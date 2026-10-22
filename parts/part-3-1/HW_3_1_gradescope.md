@@ -22,16 +22,16 @@ Gradescope parses the code directly. Every input field must sit on its own line 
 ```
 Homework is designed to both test your knowledge and challenge you to apply familiar concepts in new applications. Work through the questions in your notebook first, building each figure and computing each number, then enter your answers here as selections. You are welcomed and encouraged to work in groups so long as your work is your own.
 
-The wait times (in minutes) at a restaurant follow a normal distribution with mean 12 minutes and standard deviation 2.5 minutes. Use stats.norm.cdf() and stats.norm.ppf() for the questions marked "use python".
+The wait times (in minutes) at a restaurant follow a normal distribution with mean 12 minutes and standard deviation 2.5 minutes. Start each question with a rough sketch of your answer, then find the number using code. Two useful functions from Exercise 3.1: stats.norm.cdf() and stats.norm.ppf().
 ```
 
-### Q1.1: `What is the population mean wait time?`
+### Q1.1: `What is the population mean wait time? (warm up question)`
 
 ```
 [____](=12+-0)
 ```
 
-### Q1.2: `What is the population variance of the wait time?`
+### Q1.2: `What is the population variance of the wait time? (warm up question)`
 
 ```
 [____](=6.25+-0)
@@ -64,10 +64,10 @@ The wait times (in minutes) at a restaurant follow a normal distribution with me
 ## Q2: `Sample vs. Population`
 
 ```
-The restaurant's population parameters are a mean of 12 and a standard deviation of 2.5. Draw samples from this known population with np.random.normal(12, 2.5, n) and compare the sample statistics to the population parameters.
+We know the restaurant's population parameters: a mean of 12 and a standard deviation of 2.5. But in the real world, we don't know the population. We only have a sample. In this question, you'll draw samples from the known population and see how well sample statistics approximate population parameters.
 ```
 
-### Q2.1: `How do the sample mean and sample standard deviation of your n = 10 sample compare to the population mean and standard deviation?`
+### Q2.1: `Use np.random.normal(12, 2.5, 10) to draw a sample of n = 10 wait times. Compute the sample mean and sample standard deviation. How do they compare to the population mean and standard deviation?`
 
 ```
 (x) They are near 12 and 2.5 but not equal, and a different sample would give different values
@@ -75,7 +75,7 @@ The restaurant's population parameters are a mean of 12 and a standard deviation
 ( ) They have no connection to 12 and 2.5
 ```
 
-### Q2.2: `How do the sample statistics change as n increases from 10 to 100 to 1000?`
+### Q2.2: `Repeat Q2.1 for n = 100 and n = 1000. How do the sample statistics change as n increases?`
 
 ```
 (x) The sample mean and standard deviation tend to land closer to 12 and 2.5
@@ -84,21 +84,19 @@ The restaurant's population parameters are a mean of 12 and a standard deviation
 ( ) They do not change in any systematic way
 ```
 
-### Q2.3: `Plot a histogram of your n = 1000 sample with the population PDF overlaid. Upload your figure.`
+### Q2.3: `Plot a histogram of your n = 1000 sample with the population PDF overlaid. How well does the sample histogram approximate the population?`
 
 ```
+Upload your figure.
 |files|
-```
 
-### Q2.4: `How well does the sample histogram approximate the population?`
-
-```
-(x) Closely: it has the same center, spread, and bell shape, with bars wobbling a little above and below the curve
+How well does the sample histogram approximate the population?
+(x) Closely: it has the same center, spread, and bell shape, with bars a little above and below the curve
 ( ) Poorly: the histogram is skewed while the population curve is symmetric
 ( ) Perfectly: every bar touches the curve exactly
 ```
 
-### Q2.5: `In your own words, what is the relationship between a sample and a population? Why do larger samples give us more information about the population?`
+### Q2.4: `In your own words, what is the relationship between a sample and a population? Why do larger samples give us more information about the population?`
 
 ```
 |____|
@@ -106,4 +104,8 @@ The restaurant's population parameters are a mean of 12 and a standard deviation
 
 ## Answer check
 
-Computed with `scipy.stats.norm` for a mean of 12 and a standard deviation of 2.5. Q1.3: `norm.ppf(0.77, 12, 2.5)` = 13.847. Q1.4: 1 − `norm.cdf(10)` = 0.7881. Q1.5: `norm.cdf(14)` − `norm.cdf(10)` = 0.5763. Q1.6: `norm.cdf(7)` + 1 − `norm.cdf(17)` = 0.0455 (7 and 17 are exactly two standard deviations out). The tolerance on Q1.6 accepts 0.045 to 0.047, so 0.0455 rounded either way is accepted. Q2 is a simulation, so there is no fixed number to key. A sample of 10 has a sample mean between about 9.6 and 14.4 in 99.8 percent of draws, so Q2.1 keys "near but not equal." The Q2.2 distractor about the standard deviation shrinking toward 0 catches students confusing the sample standard deviation with the standard error, which is the topic of Homework 3.2.
+One sub-question per handout part, in the handout's order (Q1 a) to f) are Q1.1 to Q1.6, Q2 a) to d) are Q2.1 to Q2.4).
+
+Computed with `scipy.stats.norm` for a mean of 12 and a standard deviation of 2.5. Q1.3: `norm.ppf(0.77, 12, 2.5)` = 13.847. Q1.4: 1 − `norm.cdf(10)` = 0.7881. Q1.5: `norm.cdf(14)` − `norm.cdf(10)` = 0.5763. Q1.6: `norm.cdf(7)` + 1 − `norm.cdf(17)` = 0.0455 (7 and 17 are exactly two standard deviations out); the tolerance accepts 0.045 to 0.047, so either rounding of 0.0455 is accepted.
+
+Q2 is a simulation, so each student's numbers differ and Q2.1 and Q2.2 ask about the comparison instead of the values. A sample of 10 has a sample mean between 9.6 and 14.5 and a sample standard deviation between 0.9 and 4.4 in 99.8 percent of draws, too wide to grade a typed number. The Q2.2 distractor about the standard deviation shrinking toward 0 catches students confusing the sample standard deviation with the standard error, the topic of Homework 3.2.
