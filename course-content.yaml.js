@@ -540,6 +540,7 @@ parts:
             file: ME/ME_3/ME_3_Demo.pdf
           - label: Solutions
             file: ME/ME_3/ME_3_Demo_sols.pdf
+        date: '2026-11-03'
         next: 4
   '4':
     title: Bivariate GLM
