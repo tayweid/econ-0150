@@ -446,6 +446,13 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Exercise_3_1.ipynb
       - name: Homework 3.1
         kind: homework
+        due: Friday, Oct. 23 at 5PM
+        date: '2026-10-23'
+        links:
+        - label: Homework
+          file: parts/part-3-1/HW_3_1.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-1/Homework_3_1.ipynb
     - block: '3.2'
       nav: Sampling & CLT
       title: Sampling and Central Limit Theorem
@@ -469,6 +476,13 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-2/Exercise_3_2.ipynb
       - name: Homework 3.2
         kind: homework
+        due: Friday, Oct. 23 at 5PM
+        date: '2026-10-23'
+        links:
+        - label: Homework
+          file: parts/part-3-2/HW_3_2.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-2/Homework_3_2.ipynb
     - block: '3.3'
       nav: Uncertainty
       title: Quantifying Uncertainty
