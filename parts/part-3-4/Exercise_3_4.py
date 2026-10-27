@@ -97,12 +97,8 @@ data = pd.DataFrame({'wait_difference': wait_difference})
 
 # %% [markdown]
 # **Question 7.** Compare the intercept coefficient (`coef`) to the sample mean you calculated in Question 1. What do you notice?
-
-# %% [markdown]
 #
-
-# %% [markdown]
-# **Question 8.** Look at the p-value on the intercept. What null hypothesis is it testing? At the 5% significance level, what do you conclude about the population mean difference in wait times? A displayed p-value of `0.000` is rounded; it does not mean the probability is exactly zero.
+# What null hypothesis does the p-value on the intercept test?
 
 # %% [markdown]
 #
