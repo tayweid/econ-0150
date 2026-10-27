@@ -523,6 +523,9 @@ parts:
       - name: Exercise 3.4
         kind: exercise
         sub: The Simplest GLM
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-4/Exercise_3_4.ipynb
       - name: Homework 3.4
         kind: homework
     - checkpoint:
@@ -540,7 +543,7 @@ parts:
             file: ME/ME_3/ME_3_Demo.pdf
           - label: Solutions
             file: ME/ME_3/ME_3_Demo_sols.pdf
-        date: '2026-11-03'
+        date: '2026-11-05'
         next: 4
   '4':
     title: Bivariate GLM
