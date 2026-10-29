@@ -505,6 +505,13 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-3/Exercise_3_3.ipynb
       - name: Homework 3.3
         kind: homework
+        due: Friday, Oct. 30 at 5PM
+        date: '2026-10-30'
+        links:
+        - label: Homework
+          file: parts/part-3-3/HW_3_3.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-3/Homework_3_3.ipynb
     - block: '3.4'
       nav: Simplest GLM
       title: The Simplest Linear Model
@@ -528,6 +535,13 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-4/Exercise_3_4.ipynb
       - name: Homework 3.4
         kind: homework
+        due: Friday, Oct. 30 at 5PM
+        date: '2026-10-30'
+        links:
+        - label: Homework
+          file: parts/part-3-4/HW_3_4.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-3-4/Homework_3_4.ipynb
     - checkpoint:
         description: MiniExam 3 covers everything in Part 3, focussing on testing your understanding of statistical
           concepts including random variables, sampling theory, confidence intervals, and hypothesis testing. MiniExams
