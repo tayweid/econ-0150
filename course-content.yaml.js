@@ -800,6 +800,14 @@ parts:
         - label: Slides
           file: parts/part-6-2/concept_6_2.pdf
           icon: fa-file-powerpoint-o
+        - label: Example 1
+          file: parts/part-6-2/Examples_FALL_2024/03_Olga.pdf
+        - label: Example 2
+          file: parts/part-6-2/Examples_FALL_2024/07_Caitlyn.pdf
+        - label: Example 3
+          file: parts/part-6-2/Examples_FALL_2024/10_Devon.pdf
+        - label: Example 4
+          file: parts/part-6-2/Examples_FALL_2024/23_Tony.pdf
       steps:
       - name: Exercise 6.2
         kind: exercise
