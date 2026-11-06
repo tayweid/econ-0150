@@ -589,6 +589,9 @@ parts:
       - name: Exercise 4.1
         kind: exercise
         sub: Numerical Predictors
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Exercise_4_1.ipynb
       - name: Homework 4.1
         kind: homework
     - block: '4.2'
