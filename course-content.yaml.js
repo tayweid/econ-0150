@@ -611,6 +611,9 @@ parts:
       - name: Exercise 4.2
         kind: exercise
         sub: Categorical Predictors
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Exercise_4_2.ipynb
       - name: Homework 4.2
         kind: homework
     - block: '4.3'
