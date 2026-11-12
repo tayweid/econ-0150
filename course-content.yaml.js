@@ -647,6 +647,9 @@ parts:
       - name: Exercise 4.3
         kind: exercise
         sub: Model Assumptions
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Exercise_4_3.ipynb
       - name: Homework 4.3
         kind: homework
     - block: '4.4'
