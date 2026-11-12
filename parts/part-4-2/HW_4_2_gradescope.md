@@ -79,9 +79,6 @@ Their regression output is in the handout and the notebook: the Intercept row sh
 ( ) Workers with a college degree earn $9.65 per hour on average
 ( ) Each additional year of college raises the hourly wage by $9.65
 ( ) Workers with a college degree earn 9.65% more than workers without one
-
-Average hourly wage of workers with a college degree, in dollars (two decimal places)
-[____](=28.07+-0.01)
 ```
 
 ### Q2.3: `What is the null hypothesis being tested for the college coefficient?`
@@ -103,6 +100,5 @@ Average hourly wage of workers with a college degree, in dollars (two decimal pl
 
 Verified with a statsmodels OLS fit on data/BRFSS_cleaned.csv after dropping rows with a missing INCOME2 or MENTHLTH (206,739 of 243,402 rows remain):
 
-- Q1: intercept 3.1948 (standard error 0.017), the mean of the 195,920 respondents at $10,000 or more; slope 4.8339 (standard error 0.075, t = 64.596, p prints as 0.000); the 10,819 respondents under $10,000 average 8.0287 days.
+- Q1: intercept 3.1948 (standard error 0.017), the mean of the 195,920 respondents at \$10,000 or more; slope 4.8339 (standard error 0.075, t = 64.596, p prints as 0.000); the 10,819 respondents under \$10,000 average 8.0287 days.
 - Skipping the drop codes the 33,525 missing-income respondents as under_10k = 0 and gives an intercept of 3.1877 and a slope of 4.8410. Both fall outside the ±0.003 tolerances, so widen them to ±0.01 to accept either version.
-- Q2: 18.42 + 9.65 = 28.07.

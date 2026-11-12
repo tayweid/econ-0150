@@ -114,9 +114,6 @@ A researcher wants to test whether temperature (in °F) predicts daily ice cream
 ( ) It is the average daily sales across the 60 days
 ( ) It is the change in sales for each additional degree
 ( ) It is the predicted sales at the average temperature, so the shop loses money on a typical day
-
-Explain briefly.
-|____|
 ```
 
 ### Q3.3: `Interpret the slope coefficient (4.78) in context.`
