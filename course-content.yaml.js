@@ -669,6 +669,9 @@ parts:
       - name: Exercise 4.4
         kind: exercise
         sub: The Problem of Timeseries
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Exercise_4_4.ipynb
       - name: Homework 4.4
         kind: homework
     - checkpoint:
