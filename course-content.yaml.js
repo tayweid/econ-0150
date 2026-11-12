@@ -594,6 +594,13 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Exercise_4_1.ipynb
       - name: Homework 4.1
         kind: homework
+        due: Friday, Nov. 13 at 5PM
+        date: '2026-11-13'
+        links:
+        - label: Homework
+          file: parts/part-4-1/HW_4_1.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Homework_4_1.ipynb
     - block: '4.2'
       nav: Categorical
       title: Categorical Predictors
@@ -616,6 +623,13 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Exercise_4_2.ipynb
       - name: Homework 4.2
         kind: homework
+        due: Friday, Nov. 13 at 5PM
+        date: '2026-11-13'
+        links:
+        - label: Homework
+          file: parts/part-4-2/HW_4_2.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Homework_4_2.ipynb
     - block: '4.3'
       nav: Diagnostics
       title: Model Diagnostics
