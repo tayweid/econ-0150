@@ -652,6 +652,13 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Exercise_4_3.ipynb
       - name: Homework 4.3
         kind: homework
+        due: Friday, Nov. 20 at 5PM
+        date: '2026-11-20'
+        links:
+        - label: Homework
+          file: parts/part-4-3/HW_4_3.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Homework_4_3.ipynb
     - block: '4.4'
       nav: Timeseries
       title: The Problem of Timeseries
