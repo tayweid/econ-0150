@@ -601,6 +601,8 @@ parts:
           file: parts/part-4-1/HW_4_1.pdf
         - label: Notebook
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Homework_4_1.ipynb
+        - label: Solutions
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-1/Homework_4_1_sols.ipynb
     - block: '4.2'
       nav: Categorical
       title: Categorical Predictors
@@ -630,6 +632,8 @@ parts:
           file: parts/part-4-2/HW_4_2.pdf
         - label: Notebook
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Homework_4_2.ipynb
+        - label: Solutions
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-2/Homework_4_2_sols.ipynb
     - block: '4.3'
       nav: Diagnostics
       title: Model Diagnostics
@@ -659,6 +663,8 @@ parts:
           file: parts/part-4-3/HW_4_3.pdf
         - label: Notebook
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Homework_4_3.ipynb
+        - label: Solutions
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Homework_4_3_sols.ipynb
     - block: '4.4'
       nav: Timeseries
       title: The Problem of Timeseries
