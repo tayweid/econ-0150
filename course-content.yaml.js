@@ -743,6 +743,9 @@ parts:
       - name: Exercise 5.2
         kind: exercise
         sub: Gender Wage Gap
+        links:
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-5-2/Exercise_5_2.ipynb
       - name: Homework 5.2
         kind: homework
     - block: '5.3'
