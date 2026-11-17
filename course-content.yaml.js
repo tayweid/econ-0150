@@ -656,7 +656,7 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-3/Exercise_4_3.ipynb
       - name: Homework 4.3
         kind: homework
-        due: Friday, Nov. 20 at 5PM
+        due: Friday, Nov. 20 at 5PM. Solutions are posted as a study guide.
         date: '2026-11-20'
         links:
         - label: Homework
@@ -687,7 +687,7 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Exercise_4_4.ipynb
       - name: Homework 4.4
         kind: homework
-        due: Friday, Nov. 20 at 5PM
+        due: Friday, Nov. 20 at 5PM. Solutions are posted as a study guide.
         date: '2026-11-20'
         links:
         - label: Homework
