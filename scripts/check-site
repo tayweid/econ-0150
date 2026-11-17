@@ -12,10 +12,10 @@ require 'yaml'
 ROOT = Pathname.new(__dir__).parent.realpath
 PAGES = ['index.html', *(1..6).map { |number| "part-#{number}.html" }].freeze
 STATIC_HOME = 'econ-0150.html'
-EXPECTED_LOCAL_LINK_COUNT = 90
+EXPECTED_LOCAL_LINK_COUNT = 91
 EXPECTED_ME_LINKS = ((1..5).flat_map do |number|
   ["ME/ME_#{number}/ME_#{number}_Demo.pdf", "ME/ME_#{number}/ME_#{number}_Demo_sols.pdf"]
-end + ['ME/ME_4/ME_4_Demo_F25.pdf', 'ME/ME_4/ME_4_Demo_F25_sols.pdf']).to_set.freeze
+end + ['ME/ME_3/ME_3_sols.pdf', 'ME/ME_4/ME_4_Demo_F25.pdf', 'ME/ME_4/ME_4_Demo_F25_sols.pdf']).to_set.freeze
 EXPECTED_ME_FILES = Set.new([
   'ME/ME_1/ME_1_Demo.md',
   'ME/ME_1/ME_1_Demo.pdf',
@@ -30,6 +30,7 @@ EXPECTED_ME_FILES = Set.new([
   'ME/ME_3/ME_3_Demo.md',
   'ME/ME_3/ME_3_Demo.pdf',
   'ME/ME_3/ME_3_Demo_sols.pdf',
+  'ME/ME_3/ME_3_sols.pdf',
   'ME/ME_4/ME_4_Demo.md',
   'ME/ME_4/ME_4_Demo.pdf',
   'ME/ME_4/ME_4_Demo_F25.md',
