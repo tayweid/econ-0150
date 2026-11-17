@@ -681,6 +681,15 @@ parts:
           file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Exercise_4_4.ipynb
       - name: Homework 4.4
         kind: homework
+        due: Friday, Nov. 20 at 5PM
+        date: '2026-11-20'
+        links:
+        - label: Homework
+          file: parts/part-4-4/HW_4_4.pdf
+        - label: Notebook
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Homework_4_4.ipynb
+        - label: Solutions
+          file: https://colab.research.google.com/github/tayweid/econ-0150/blob/main/parts/part-4-4/Homework_4_4_sols.ipynb
     - checkpoint:
         description: 'MiniExam 4 will test your understanding of everything in Part 4: numerical predictors, categorical
           predictors, model diagnostics, and timeseries.'
