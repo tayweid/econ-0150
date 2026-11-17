@@ -712,6 +712,7 @@ parts:
             file: parts/part-4-review/concept_4_review.pdf
           - label: Interactive
             file: parts/part-4-review/concept_4_review.html
+        date: '2026-11-19'
         next: 5
   '5':
     title: Multivariate GLM
