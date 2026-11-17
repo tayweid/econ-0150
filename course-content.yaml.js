@@ -702,7 +702,9 @@ parts:
         demo:
           name: Demo 4 Walkthrough
           video: NgEffN3TOtw
-          description: Try solving the demo then check your answers against the solutions and the video.
+          description: Try solving the demo then check your answers against the solutions. The video walks through
+            an older version of the Demo, posted below as Demo 4 (Older Version), so its questions are similar
+            but not the same.
           links:
           - label: Demo
             file: ME/ME_4/ME_4_Demo.pdf
@@ -712,6 +714,14 @@ parts:
             file: parts/part-4-review/concept_4_review.pdf
           - label: Interactive
             file: parts/part-4-review/concept_4_review.html
+        extras:
+        - name: Demo 4 (Older Version)
+          description: The Demo the walkthrough video works through
+          links:
+          - label: Demo
+            file: ME/ME_4/ME_4_Demo_F25.pdf
+          - label: Solutions
+            file: ME/ME_4/ME_4_Demo_F25_sols.pdf
         date: '2026-11-19'
         next: 5
   '5':
