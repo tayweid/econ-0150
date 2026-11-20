@@ -1,28 +1,28 @@
-```typst
-#text(size: 20pt, weight: "bold")[Econ 0150 | Fall 2026] \
-#text(size: 18pt, style: "italic")[Introduction to the economist's data analysis skillset] \
-#text(size: 13pt)[Taylor J. Weidman, PhD · 4702 Posvar · taylorjweidman\@pitt.edu]
-#v(0.4em)
-#text(size: 13pt, weight: "bold")[Teaching Team & Office Hours] #h(0.5em) #text(size: 11pt, style: "italic")[(just drop in!)]
-#[
-  #set text(size: 11pt, hyphenate: false)
-  #set par(justify: false)
-  #table(
-    columns: (auto, 1fr, auto),
-    stroke: none,
-    inset: (x: 0pt, y: 3pt),
-    column-gutter: 1em,
-    [*Wed 10 AM–12 PM*], [Kayla Onyango (UTA)], [4923 Posvar],
-    [*Wed 2:30–3:30 PM*], [Taylor Weidman (Instructor)], [4702 Posvar],
-    [*Thu 2:30–3:30 PM*], [Taylor Weidman (Instructor)], [4702 Posvar],
-    [*Fri 1:30–3:30 PM*], [Jillian Zirnhelt & Arifah Hasanbasri (TAs)], [4911 Posvar],
-    [*Fri 1:30–3:30 PM*], [Olga Tseytlin (UTA)], [4923 Posvar],
-  )
-]
-#v(0.6em)
-#line(length: 20%)
-```
+---
+margin: {top: 0.5in, right: 0.5in, bottom: 0.5in, left: 0.5in}
+linestretch: 1.3
+---
 
+# Econ 0150 | Fall 2026
+
+*Introduction to the economist’s data analysis skillset*\
+Taylor J. Weidman, PhD · 4702 Posvar · taylorjweidman@pitt.edu
+
+**Teaching Team & Office Hours** *(just drop in!)*
+
+::: {.table style=plain density=compact columns="auto 1fr auto" font-size=0.85em}
+
+|   |   |   |
+| :--- | :--- | :--- |
+| **Wed 10 AM–12 PM** | Kayla Onyango (UTA) | 4923 Posvar |
+| **Wed 2:30–3:30 PM** | Taylor Weidman (Instructor) | 4702 Posvar |
+| **Thu 2:30–3:30 PM** | Taylor Weidman (Instructor) | 4702 Posvar |
+| **Fri 1:30–3:30 PM** | Jillian Zirnhelt & Arifah Hasanbasri (TAs) | 4911 Posvar |
+| **Fri 1:30–3:30 PM** | Olga Tseytlin (UTA) | 4923 Posvar |
+
+:::
+
+---
 
 Economists rely on data to build economic models of decision making. This course is designed to equip you with the skills to do this analysis, interpretation, and communication of economic data, and may be the most important class you take in college. We will focus on understanding statistical tools and applying them to data, rather than on either the theoretical foundation of the tools or on a simple use of formulas.
 
@@ -54,7 +54,7 @@ Topics include simple regression with numerical and categorical predictors.
 
 ### Part 5: Multivariate General Linear Model
 
-*Economic variables don't always play by simple rules. We often have relationships that differ by group or depend on multiple variables. We extend the core ideas of the General Linear Model in Part 3 and Part 4 to handle more complex cases by including control variables, and learn how to build the right model for each situation.*
+*Economic variables don’t always play by simple rules. We often have relationships that differ by group or depend on multiple variables. We extend the core ideas of the General Linear Model in Part 3 and Part 4 to handle more complex cases by including control variables, and learn how to build the right model for each situation.*
 
 Topics include fixed effects, control variables, interactions, and model selection.
 
@@ -66,15 +66,13 @@ Topics include fixed effects, control variables, interactions, and model selecti
 
 No matter your grade in the class, you belong in my classroom. All my assessments are designed to push you to do excellent work and convince both you and me of your critical thinking skills with as little unpleasentness as possible. I’ve deliberately designed the class with no busywork, trick questions, or high-stakes exams. And in return I expect you to work hard.
 
-MiniExams and the Final Project make up the largest part of your final grade. The best predictor of success on MiniExams and the Final Project is the quality of your practice along the way. The class is setup to give you this practice. We will start each topic by introducing a concept, working together with that concept in class in an ***Exercise***, then you will work more with the concept at home in ***Homework***. At the end of each of the first five parts we will come together for a ***MiniExam*** where you'll show me you understand the concepts and you'll submit a ***Project*** where you'll show me you can work with the concepts. At the end of the semester you will build on your five part Projects with a ***Final Project***. Together this gives you all the core concepts in order with structured practice in a way that should feel comfortable and intuitive.
+MiniExams and the Final Project make up the largest part of your final grade. The best predictor of success on MiniExams and the Final Project is the quality of your practice along the way. The class is setup to give you this practice. We will start each topic by introducing a concept, working together with that concept in class in an ***Exercise***, then you will work more with the concept at home in ***Homework***. At the end of each of the first five parts we will come together for a ***MiniExam*** where you’ll show me you understand the concepts and you’ll submit a ***Project*** where you’ll show me you can work with the concepts. At the end of the semester you will build on your five part Projects with a ***Final Project***. Together this gives you all the core concepts in order with structured practice in a way that should feel comfortable and intuitive.
 
 ***Exercises*** (10%) are done together in class, practicing the concepts covered in each topic. Three will be automatically dropped. Exercises are intended to give you guided practice, due the day of class, and are graded primarily for effort.
 
 ***Homeworks*** (10%) are due most Fridays at 5PM, one assignment per topic, with typically multiple topics per week. You may email me before the due date for a no-questions-asked extension through midnight on Sunday. Like Exercises, Homework is intended to give you a considerable amount of low-stakes guided practice and is graded primarily for effort. Group work is *strongly* encouraged, but your work should be your own. Three will be automatically dropped.
 
-***MiniExams*** (1 × 15% + 1 × 15% + 1 × 10% + 1 × 5%+ 1 × 5% = 50%) are designed for you to demonstrate competency and mastery. Five non-cumulative MiniExams will take place during the first part of Tuesday class (*nearly*) every other week. MiniExams will focus primarily on the material covered the current part, and may include a preview question on upcoming material for extra credit. Your top two Miniexam scores will each count as 15% of your grade. Your third highest MiniExam scores will each count as 10% of your grade. Your fourth and fifth highest Miniexam scores will each count as 5% of your grade. Your lowest Miniexam score will be dropped.
-
-Your highest grades will count for a relatively large portion of your grade. This has the effect of lowering the stakes but also means you cannot simply add up the point totals to see how you are doing in the class. Your final grade will be based on the weighted average of four (out of five) MiniExam scores.
+***MiniExams*** (1 × 15% + 1 × 15% + 1 × 10% + 1 × 5%+ 1 × 5% = 50%) are designed for you to demonstrate competency and mastery. Five non-cumulative MiniExams will take place during the first part of Tuesday class (*nearly*) every other week. MiniExams will focus primarily on the material covered the current part, and may include a preview question on upcoming material for extra credit. Your top two Miniexam scores will each count as 15% of your grade. Your third highest MiniExam scores will each count as 10% of your grade. Your fourth and fifth highest Miniexam scores will each count as 5% of your grade.
 
 During MiniExams:
 
@@ -90,20 +88,25 @@ Missed work cannot be made up post-hoc. Contact the me before the due date to ap
 
 There are many resources available to help you master the material. Some of your time should be spent on reviewing class material, some doing exercises, and some in discussion with me and your colleagues in class. Data analysis is best learned through practice, so put in the time and reps to master it. Class resources include:
 
-- The **Course Page** holds the course together, where you'll find:
+- The **Course Page** holds the course together, where you’ll find:
 
-    - Lecture notes and recordings
+  - Lecture notes and recordings
   - Exercises
   - Homework
   - Demos
   - MiniExam information
+
 - **Canvas** is used primarily for announcements.
+
 - **Gradescope** will be the portal to collect and return assignments.
+
 - **Office Hours** are a great resource, so come see me, the TAs, or the UTAs! Times and rooms are at the top of this syllabus and on the course page.
+
 - The **Teaching Assistants**, Jillian Zirnhelt and Arifah Hasanbasri, are highly trained economists in the graduate department. They hold office hours and grade some of your work. The **Undergraduate Teaching Assistants**, Olga Tseytlin and Kayla Onyango, hold additional office hours and are a great first stop for homework questions.
+
 - **Textbooks** (*optional*): These textbooks are not required but may prove helpful.
 
-    - *Data Visualization and Analysis in R*, by Dustin Fife, available freely online at https://datavisualizations.tech/. The book provides straightforward explanations of data analysis and visualization principles.
+  - *Data Visualization and Analysis in R*, by Dustin Fife, available freely online at https://datavisualizations.tech/. The book provides straightforward explanations of data analysis and visualization principles.
   - *How Charts Lie: Getting Smarter About Visual Information*, by Alberto Cairo, W. W. Norton & Company, 2019. The book provides a critical look at how data visualization can mislead and how to become a more informed consumer of visual information.
   - *Analysis of Economic Data, 2nd Edition*, by Gary Koop, it is very good and may serve you as an optional complement to lecture materials when reviewing course concepts. It is an older version of the text so it is easy to find using a simple search.
 
